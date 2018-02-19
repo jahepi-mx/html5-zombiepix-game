@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Zombie Pix</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="entities/entity.js"></script>
+        <script src="entities/tile.js"></script>
+        <script src="entities/map.js"></script>
+        <script src="entities/zombiekiller.js"></script>
+        <script src="controller.js"></script>
+        <script src="render.js"></script>
+        <script type="text/javascript">
+            var canvas = null;
+            var context = null;
+            var prevTime = 0;
+            var render = null;
+            window.onload = function() {
+                canvas = document.getElementById("canvas");
+                canvas.width = 800;
+                canvas.height = 800;
+                context = canvas.getContext("2d");
+                render = new Render(canvas, context);
+                var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+                window.requestAnimationFrame = requestAnimationFrame;
+                window.requestAnimationFrame(update);
+            };
+            
+            function update(currTime) {
+                var diff = currTime - prevTime;
+                var deltatime = diff / 1000;
+                prevTime = currTime;
+                render.update(deltatime);
+                window.requestAnimationFrame(update);
+            }
+        </script>
+    </head>
+    <body>
+        <canvas id="canvas"></canvas>
+    </body>
+</html>
