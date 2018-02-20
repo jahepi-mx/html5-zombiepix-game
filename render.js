@@ -16,6 +16,7 @@ class Render {
         
         this.controller.map.render(this.context);
         this.controller.zombieKiller.render(context);
+        this.controller.zombie.render(context);
     }
 }
 
