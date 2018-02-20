@@ -1,10 +1,30 @@
 class Controller {
     
     constructor() {
+        
+        var mapWidth = 800;
+        var mapHeight = 800;
+        var zombieKillerWidth = 50;
+        var zombieKillerHeight = 50;
+        var rows = 8;
+        var cols = 8;
+        var tileWidth = mapWidth / cols;
+        var tileHeight = mapHeight / rows;
+        
+        var xOffset = mapWidth / 2 - zombieKillerWidth / 2;
+        var yOffset = mapHeight / 2 - zombieKillerHeight / 2;
+        var origX = 6 * tileWidth;
+        var origY = 6 * tileHeight;
+        var newOffsetX = xOffset - origX - tileWidth / 2 + zombieKillerWidth / 2;
+        var newOffsetY = yOffset - origY - tileHeight / 2 + zombieKillerHeight / 2;
+        
         document.onkeydown = this.onKeyDown.bind(this);
         document.onkeyup = this.onKeyUp.bind(this);
-        this.map = new Map(8, 8, 800, 800);
-        this.zombieKiller = new ZombieKiller(200, 200, 50, 50, this.map);
+        this.map = new Map(rows, cols, mapWidth, mapHeight);
+        this.zombieKiller = new ZombieKiller(xOffset, yOffset, zombieKillerWidth, zombieKillerHeight, this.map);
+
+        this.camera = Camera.getInstance();
+        this.camera.init(newOffsetX, newOffsetY);
     }
     
     update(deltatime) {

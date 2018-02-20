@@ -3,6 +3,7 @@ class Tile extends Entity {
     constructor(x, y, width, height, type) {
         super(x, y, width, height);
         this.type = type;
+        this.camera = Camera.getInstance();
     }
     
     render(context) {
@@ -11,7 +12,8 @@ class Tile extends Entity {
         } else if (this.type === 1) {
             context.fillStyle = "#000000";
         }
-        context.fillRect(this.x * this.width, this.y * this.height, this.width, this.height);
+       
+        context.fillRect(this.x * this.width + this.camera.offsetX, this.y * this.height +  + this.camera.offsetY, this.width, this.height);
     }
     
     isWalkable() {
