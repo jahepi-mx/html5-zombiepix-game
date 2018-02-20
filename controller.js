@@ -32,7 +32,7 @@ class Controller {
     }
     
     onKeyDown(event) {
-        var evt = event || window.event;      
+        var evt = event || window.event;
         if (evt.keyCode === 37) {
             this.zombieKiller.moveRight(true);
         }

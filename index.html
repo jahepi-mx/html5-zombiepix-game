@@ -12,8 +12,10 @@ and open the template in the editor.
         <script src="entities/entity.js"></script>
         <script src="entities/tile.js"></script>
         <script src="entities/map.js"></script>
+        <script src="entities/cursor.js"></script>
         <script src="entities/camera.js"></script>
         <script src="entities/zombiekiller.js"></script>
+        <script src="entities/bullet.js"></script>
         <script src="controller.js"></script>
         <script src="render.js"></script>
         <script type="text/javascript">
@@ -21,11 +23,29 @@ and open the template in the editor.
             var context = null;
             var prevTime = 0;
             var render = null;
+            var cursor = Cursor.getInstance();
+            
             window.onload = function() {
                 canvas = document.getElementById("canvas");
                 canvas.width = 800;
                 canvas.height = 800;
                 context = canvas.getContext("2d");
+                
+                canvas.addEventListener("mousemove", function(evt) {
+                    var rect = canvas.getBoundingClientRect();
+                    var x = evt.clientX - rect.left;
+                    var y = evt.clientY - rect.top;
+                    cursor.update(x, y);
+                });
+                
+                canvas.addEventListener("mousedown", function(evt) {
+                    cursor.isPressed = true;
+                });
+
+                canvas.addEventListener("mouseup", function(evt) {
+                    cursor.isPressed = false;
+                });
+                
                 render = new Render(canvas, context);
                 var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
                 window.requestAnimationFrame = requestAnimationFrame;

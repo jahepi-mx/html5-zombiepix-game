@@ -13,9 +13,15 @@ class ZombieKiller extends Entity {
         this.speed = 200;
         this.camera = Camera.getInstance();
         this.vectors = [[0, 0], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1]];
+        this.bullets = [];
+        this.cursor = Cursor.getInstance();
+        this.shootTime = 0;
+        this.shootTimeLimit = 0.1;
     }
     
     update(deltatime) {
+        
+        this.shootTime += deltatime;
         
         if (this.isLeft) {
             this.xVelocity = -this.speed;
@@ -31,6 +37,17 @@ class ZombieKiller extends Entity {
         
         if (this.isUp) {
             this.yVelocity = this.speed;
+        }
+        
+        if (this.cursor.isPressed) {
+            if (this.shootTime >= this.shootTimeLimit) {
+                this.shootTime = 0;
+                var radians = Math.atan2(this.cursor.y - this.y, this.cursor.x - this.x);
+                var bulletSize = 20;
+                var bulletX = this.left() + this.width / 2 - bulletSize / 2;
+                var bulletY = this.top() + this.height / 2 - bulletSize / 2;
+                this.bullets.push(new Bullet(bulletX, bulletY, bulletSize, bulletSize, radians, this.map));
+            }
         }
         
         var tmpX = this.camera.offsetX;
@@ -61,6 +78,13 @@ class ZombieKiller extends Entity {
             }
         }
         
+        for (var a = 0; a < this.bullets.length; a++) {
+            this.bullets[a].update(deltatime);
+            if (this.bullets[a].collided) {
+                this.bullets.splice(a--, 1);
+            }
+        }
+        
         this.xVelocity *= this.friction;
         this.yVelocity *= this.friction;
     }
@@ -68,6 +92,9 @@ class ZombieKiller extends Entity {
     render(context) {
         context.fillStyle = "#ff0000";
         context.fillRect(this.x, this.y, this.width, this.height);
+        for (let bullet of this.bullets) {
+            bullet.render(context);
+        }
     }
     
     moveLeft(bool) {
