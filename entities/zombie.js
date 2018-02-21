@@ -63,8 +63,8 @@ class Zombie extends Entity {
         this.queue.clear();
         this.visited = [];
         this.parents = [];
-        var targetX = Math.floor(this.zombieKiller.left() / this.map.tileWidth);
-        var targetY = Math.floor(this.zombieKiller.top() / this.map.tileHeight);
+        var targetX = this.zombieKiller.currentX();
+        var targetY = this.zombieKiller.currentY();
         console.log("target: " + targetX + "," + targetY);
         
         var currentX = Math.floor(this.x / this.map.tileWidth);

@@ -14,7 +14,10 @@ class Render {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.context.imageSmoothingEnabled = false;
         
-        this.controller.map.render(this.context);
+        var xOrigin = this.controller.zombieKiller.currentX();
+        var yOrigin = this.controller.zombieKiller.currentY();
+        this.controller.map.render(this.context, xOrigin, yOrigin);
+        
         this.controller.zombieKiller.render(context);
         this.controller.zombie.render(context);
         this.controller.tower.render(context);

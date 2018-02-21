@@ -20,6 +20,7 @@ class Map {
         this.tileWidth = this.width / this.cols;
         this.tileHeight = this.height / this.rows;
         this.tileMap = [];
+        this.camera = Camera.getInstance();
         
         for (var a = 0; a < this.rows * this.cols; a++) {
             var x = a % this.cols;
@@ -28,10 +29,31 @@ class Map {
         }
     }
     
-    render(context) {    
+    render(context, xOrigin, yOrigin) {
+        // Render camera area
+        var xFrom = xOrigin - this.camera.width;
+        var xTo = xOrigin + this.camera.width;
+        
+        xFrom = xFrom < 0 ? 0 : xFrom;
+        xTo = xTo >= this.cols ? this.cols - 1 : xTo;
+        
+        var yFrom = yOrigin - this.camera.height;
+        var yTo = yOrigin + this.camera.height;
+        
+        yFrom = yFrom < 0 ? 0 : yFrom;
+        yTo = yTo >= this.rows ? this.rows - 1 : yTo;
+        
+        for (var x = xFrom; x <= xTo; x++) {
+            for (var y = yFrom; y <= yTo; y++) {
+                this.tileMap[y * this.cols + x].render(context);
+            }
+        }
+        
+        /*
         for (var a = 0; a < this.rows * this.cols; a++) {
             this.tileMap[a].render(context);
-        }   
+        }
+        */
     }
     
     getTile(x, y) {

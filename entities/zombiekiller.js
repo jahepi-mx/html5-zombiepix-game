@@ -52,8 +52,8 @@ class ZombieKiller extends Entity {
         
         var tmpX = this.camera.offsetX;
         this.camera.offsetX += this.xVelocity * deltatime;
-        var currentX = Math.floor(this.left() / this.map.tileWidth);
-        var currentY = Math.floor(this.top() / this.map.tileHeight);
+        var currentX = this.currentX();
+        var currentY = this.currentY();
         for (let vector of this.vectors) {
             var newX = vector[0] + currentX;
             var newY = vector[1] + currentY;
@@ -66,8 +66,8 @@ class ZombieKiller extends Entity {
         
         var tmpY = this.camera.offsetY;
         this.camera.offsetY += this.yVelocity * deltatime;
-        var currentX = Math.floor(this.left() / this.map.tileWidth);
-        var currentY = Math.floor(this.top() / this.map.tileHeight);
+        var currentX = this.currentX();
+        var currentY = this.currentY();
         for (let vector of this.vectors) {
             var newX = vector[0] + currentX;
             var newY = vector[1] + currentY;
@@ -127,6 +127,14 @@ class ZombieKiller extends Entity {
     
     bottom() {
         return this.top() + this.height;
+    }
+    
+    currentX() {
+        return Math.floor(this.left() / this.map.tileWidth);
+    }
+    
+    currentY() {
+        return Math.floor(this.top() / this.map.tileHeight);
     }
 }
 
