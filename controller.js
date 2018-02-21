@@ -26,12 +26,18 @@ class Controller {
         this.camera = Camera.getInstance();
         this.camera.init(newOffsetX, newOffsetY);
         
-        this.zombie = new Zombie(1 * tileWidth + tileWidth / 2 - 50, 1 * tileHeight + tileHeight / 2 - 50, 50, 50, this.map, this.zombieKiller);
+        var zombieSize = 50;
+        this.zombie = new Zombie(1 * tileWidth + tileWidth / 2 - zombieSize, 1 * tileHeight + tileHeight / 2 - zombieSize, zombieSize, zombieSize, this.map, this.zombieKiller);
+    
+        var towerSize = 80;
+        this.tower = new Tower(5 * tileWidth + tileWidth / 2 - towerSize / 2, 6 * tileHeight + tileHeight / 2 - towerSize / 2, towerSize, towerSize, this.map, this.zombieKiller);
+    
     }
     
     update(deltatime) {
         this.zombieKiller.update(deltatime);
         this.zombie.update(deltatime);
+        this.tower.update(deltatime);
     }
     
     onKeyDown(event) {
