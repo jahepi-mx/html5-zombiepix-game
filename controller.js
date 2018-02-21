@@ -26,7 +26,7 @@ class Controller {
         this.camera = Camera.getInstance();
         this.camera.init(newOffsetX, newOffsetY);
         
-        this.zombie = new Zombie(1 * tileWidth, 1 * tileHeight, 50, 50, this.map, this.zombieKiller);
+        this.zombie = new Zombie(1 * tileWidth + tileWidth / 2 - 50, 1 * tileHeight + tileHeight / 2 - 50, 50, 50, this.map, this.zombieKiller);
     }
     
     update(deltatime) {

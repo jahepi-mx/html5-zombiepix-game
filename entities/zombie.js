@@ -6,8 +6,8 @@ class Zombie extends Entity {
         this.zombieKiller = zombieKiller;
         this.camera = Camera.getInstance();
         
-        this.pathfindingTime = 20;
-        this.pathfindingTimeLimit = 20;
+        this.pathfindingTime = 0;
+        this.pathfindingTimeLimit = 10;
         this.visited = [];
         this.parents = [];
         this.vectors = [[1, 0], [0, 1], [-1, 0], [0, -1]];
@@ -39,8 +39,8 @@ class Zombie extends Entity {
             this.isNewPosition = false;
         }
         
-        var diffX = this.toX - this.x;
-        var diffY = this.toY - this.y;
+        var diffX = (this.toX + this.map.tileWidth / 2 - this.width / 2) - this.x;
+        var diffY = (this.toY + this.map.tileHeight / 2 - this.height / 2) - this.y;
         
         if (diffX >= 0) {
             this.x += this.speed * deltatime;
@@ -60,7 +60,7 @@ class Zombie extends Entity {
     }
     
     pathfinding() {
-        
+        this.queue.clear();
         this.visited = [];
         this.parents = [];
         var targetX = Math.floor(this.zombieKiller.left() / this.map.tileWidth);
@@ -104,13 +104,11 @@ class Zombie extends Entity {
     
     path(vector) {
         var stack = [];
-        var visited = [];
         stack.push(vector);
         var x = vector % this.map.cols;
         var y = Math.floor(vector / this.map.cols);
         //console.log(x + "," + y);
-        while (this.parents[vector] !== undefined && visited[this.parents[vector]] === undefined) {
-            visited[vector] = 1;
+        while (this.parents[vector] !== undefined) {
             vector = this.parents[vector];
             x = vector % this.map.cols;
             y = Math.floor(vector / this.map.cols);
