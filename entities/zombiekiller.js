@@ -19,11 +19,13 @@ class ZombieKiller extends Entity {
         this.shootTimeLimit = 0.1;
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
+        this.walkAnimation = new Animation(4, 2);
     }
     
     update(deltatime) {
         
         this.shootTime += deltatime;
+        this.walkAnimation.update(deltatime);
         
         if (this.isLeft) {
             this.xVelocity = -this.speed;
@@ -94,11 +96,17 @@ class ZombieKiller extends Entity {
     render(context) {
         //context.fillStyle = "#ff0000";
         //context.fillRect(this.x, this.y, this.width, this.height);
-        var image = "player";
+        
         context.save();
         context.translate(this.x + this.width / 2, this.y + this.height / 2);
-        context.rotate(Math.atan2(this.y - this.cursor.y, this.x - this.cursor.x) - Math.PI / 2);
-        context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, -this.width / 2, -this.height / 2, this.width, this.height);
+        context.rotate(Math.atan2(this.y - this.cursor.y, this.x - this.cursor.x) - Math.PI / 2);       
+        if (Math.abs(this.xVelocity) <= 15 && Math.abs(this.yVelocity) <= 15) { 
+            var image = "player";
+            context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, -this.width / 2, -this.height / 2, this.width, this.height);
+        } else {
+            var frame = "player_walk_" + (this.walkAnimation.getFrame() + 1);
+            context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[frame].x, this.atlas.sprites[frame].y, this.atlas.sprites[frame].width, this.atlas.sprites[frame].height, -this.width / 2, -this.height / 2, this.width, this.height);
+        }
         context.restore();
         
         for (let bullet of this.bullets) {
