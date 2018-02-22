@@ -16,6 +16,10 @@ class Zombie extends Entity {
         this.toY = this.y;
         this.speed = 50;
         this.isNewPosition = true;
+        this.atlas = Atlas.getInstance();
+        this.assets = Assets.getInstance();
+        this.walkAnimation = new Animation(4, 2);
+        this.attackAnimation = new Animation(6, 2);
                 
         this.queue = new PriorityQueue(function (a, b) {
             return a.priority > b.priority;
@@ -25,6 +29,8 @@ class Zombie extends Entity {
     update(deltatime) {
         
         this.pathfindingTime += deltatime;
+        this.walkAnimation.update(deltatime);
+        this.attackAnimation.update(deltatime);
         
         if (this.pathfindingTime >= this.pathfindingTimeLimit) {
             this.pathfindingTime = 0;
@@ -88,7 +94,6 @@ class Zombie extends Entity {
                     if (tile.isWalkable()) { 
                         this.parents[newY * this.map.cols + newX] = y * this.map.cols + x;
                         if (targetX === newX && targetY === newY) {
-                            this.debug();
                             return this.path(newY * this.map.cols + newX);
                             break out;
                         }
@@ -118,20 +123,23 @@ class Zombie extends Entity {
         return stack;
     }
     
-    debug() {
-        console.log("-----------------");
-        for (var a = 0; a < this.parents.length; a++) {
-            if (this.parents[a] !== undefined) {
-                var s1 = a % this.map.cols + ", " + Math.floor(a / this.map.cols);
-                var s2 = this.parents[a] % this.map.cols + ", " + Math.floor(this.parents[a] / this.map.cols);
-                console.log(s1 + " <-> " + s2);
-            }
-        }
-    }
-    
     render(context) {
-        context.fillStyle = "#0000ff";
-        context.fillRect(this.x + this.camera.offsetX, this.y  + this.camera.offsetY, this.width, this.height);
+        //context.fillStyle = "#0000ff";
+        //context.fillRect(this.x + this.camera.offsetX, this.y  + this.camera.offsetY, this.width, this.height);
+        context.save();
+        context.translate(this.x + this.width / 2 + this.camera.offsetX, this.y + this.height / 2 + this.camera.offsetY);
+        var diffX = (this.toX + this.map.tileWidth / 2 - this.width / 2) - this.x;
+        var diffY = (this.toY + this.map.tileHeight / 2 - this.height / 2) - this.y;
+        var range = 30;
+        if (Math.abs(diffY) <= range && Math.abs(diffX) >= range) {
+            context.rotate(diffX >= 0 ? Math.PI / 2 : -Math.PI / 2);
+        }
+        if (Math.abs(diffX) <= range && Math.abs(diffY) >= range) {
+            context.rotate(diffY >= 0 ? Math.PI : 0);
+        }
+        var frame = "zombie_walk_" + (this.walkAnimation.getFrame() + 1);
+        context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[frame].x, this.atlas.sprites[frame].y, this.atlas.sprites[frame].width, this.atlas.sprites[frame].height, -this.width / 2, -this.height / 2, this.width, this.height);
+        context.restore();
     }
 }
 

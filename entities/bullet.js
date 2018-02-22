@@ -9,6 +9,8 @@ class Bullet extends Entity {
         this.vectors = [[0, 0], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1]];
         this.map = map;
         this.collided = false;
+        this.atlas = Atlas.getInstance();
+        this.assets = Assets.getInstance();
     }
     
     update(deltatime) {
@@ -29,7 +31,9 @@ class Bullet extends Entity {
     }
     
     render(context) {
-        context.fillStyle = "#ff00ff";
-        context.fillRect(this.x + this.camera.offsetX, this.y  + this.camera.offsetY, this.width, this.height);
+        //context.fillStyle = "#ff00ff";
+        //context.fillRect(this.x + this.camera.offsetX, this.y  + this.camera.offsetY, this.width, this.height);
+        var image = "bullet";
+        context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.left() + this.camera.offsetX, this.top() + this.camera.offsetY, this.width, this.height);
     } 
 }
