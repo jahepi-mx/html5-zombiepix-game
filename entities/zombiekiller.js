@@ -17,6 +17,8 @@ class ZombieKiller extends Entity {
         this.cursor = Cursor.getInstance();
         this.shootTime = 0;
         this.shootTimeLimit = 0.1;
+        this.atlas = Atlas.getInstance();
+        this.assets = Assets.getInstance();
     }
     
     update(deltatime) {
@@ -90,8 +92,15 @@ class ZombieKiller extends Entity {
     }
     
     render(context) {
-        context.fillStyle = "#ff0000";
-        context.fillRect(this.x, this.y, this.width, this.height);
+        //context.fillStyle = "#ff0000";
+        //context.fillRect(this.x, this.y, this.width, this.height);
+        var image = "player";
+        context.save();
+        context.translate(this.x + this.width / 2, this.y + this.height / 2);
+        context.rotate(Math.atan2(this.y - this.cursor.y, this.x - this.cursor.x) - Math.PI / 2);
+        context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, -this.width / 2, -this.height / 2, this.width, this.height);
+        context.restore();
+        
         for (let bullet of this.bullets) {
             bullet.render(context);
         }

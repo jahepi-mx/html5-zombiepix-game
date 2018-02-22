@@ -19,6 +19,9 @@ and open the template in the editor.
         <script src="entities/bullet.js"></script>
         <script src="entities/tower.js"></script>
         <script src="utils/priorityqueue.js"></script>
+        <script src="utils/assets.js"></script>
+        <script src="utils/atlas.js"></script>
+        <script src="utils/animation.js"></script>
         <script src="controller.js"></script>
         <script src="render.js"></script>
         <script type="text/javascript">
@@ -33,7 +36,24 @@ and open the template in the editor.
                 canvas.width = 800;
                 canvas.height = 800;
                 context = canvas.getContext("2d");
-                
+                var assets = Assets.getInstance();
+                assets.loadAll(onLoadAssets);
+            };
+            
+            function update(currTime) {
+                var diff = currTime - prevTime;
+                var deltatime = diff / 1000;
+                prevTime = currTime;
+                render.update(deltatime);
+                window.requestAnimationFrame(update);
+            }
+            
+            function onLoadAssets() {
+                var atlas = Atlas.getInstance();
+                atlas.loadAll(onLoadAtlas);
+            }
+            
+            function onLoadAtlas() {
                 canvas.addEventListener("mousemove", function(evt) {
                     var rect = canvas.getBoundingClientRect();
                     var x = evt.clientX - rect.left;
@@ -52,14 +72,6 @@ and open the template in the editor.
                 render = new Render(canvas, context);
                 var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
                 window.requestAnimationFrame = requestAnimationFrame;
-                window.requestAnimationFrame(update);
-            };
-            
-            function update(currTime) {
-                var diff = currTime - prevTime;
-                var deltatime = diff / 1000;
-                prevTime = currTime;
-                render.update(deltatime);
                 window.requestAnimationFrame(update);
             }
         </script>
