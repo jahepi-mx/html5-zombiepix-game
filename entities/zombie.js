@@ -20,6 +20,7 @@ class Zombie extends Entity {
         this.assets = Assets.getInstance();
         this.walkAnimation = new Animation(4, 2);
         this.attackAnimation = new Animation(6, 2);
+        this.rotation = 0;
                 
         this.queue = new PriorityQueue(function (a, b) {
             return a.priority > b.priority;
@@ -132,11 +133,12 @@ class Zombie extends Entity {
         var diffY = (this.toY + this.map.tileHeight / 2 - this.height / 2) - this.y;
         var range = 30;
         if (Math.abs(diffY) <= range && Math.abs(diffX) >= range) {
-            context.rotate(diffX >= 0 ? Math.PI / 2 : -Math.PI / 2);
+            this.rotation = diffX >= 0 ? Math.PI / 2 : -Math.PI / 2;
         }
         if (Math.abs(diffX) <= range && Math.abs(diffY) >= range) {
-            context.rotate(diffY >= 0 ? Math.PI : 0);
+            this.rotation = diffY >= 0 ? Math.PI : 0;
         }
+        context.rotate(this.rotation);
         var frame = "zombie_walk_" + (this.walkAnimation.getFrame() + 1);
         context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[frame].x, this.atlas.sprites[frame].y, this.atlas.sprites[frame].width, this.atlas.sprites[frame].height, -this.width / 2, -this.height / 2, this.width, this.height);
         context.restore();
