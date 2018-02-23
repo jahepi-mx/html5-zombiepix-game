@@ -29,8 +29,8 @@ class Controller {
         var zombieSize = 50;
         this.zombies = [];
         
-        for (var a = 0; a < 2; a++) {
-            var speed = Math.round(Math.random() * 50 + 10);
+        for (var a = 0; a < 1000; a++) {
+            var speed = Math.round(Math.random() * 100 + 20);
             this.zombies.push(new Zombie(1 * tileWidth + tileWidth / 2 - zombieSize, 1 * tileHeight + tileHeight / 2 - zombieSize, zombieSize, zombieSize, this.map, this.zombieKiller, speed));
         }
     

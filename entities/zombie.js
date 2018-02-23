@@ -20,7 +20,7 @@ class Zombie extends Entity {
         this.assets = Assets.getInstance();
         this.walkAnimation = new Animation(4, 2);
         this.attackAnimation = new Animation(6, 2);
-        this.rotation = 0;
+        this.rotation = 90;
         this.health = 10;
         this.isDead = false;
         this.bodyparts = [];
@@ -71,7 +71,7 @@ class Zombie extends Entity {
             this.y -= this.speed * deltatime;
         }
         
-        if (Math.abs(diffX) <= 1 && Math.abs(diffY) <= 1) {
+        if (Math.abs(diffX) <= 5 && Math.abs(diffY) <= 5) {
             this.isNewPosition = true;
         }
         
@@ -158,33 +158,25 @@ class Zombie extends Entity {
         var diffY = (this.toY + this.map.tileHeight / 2 - this.height / 2) - this.y;
         var range = 30;
         var minRange = 10;
+        var image = "";
         if (Math.abs(diffY) <= range && Math.abs(diffX) >= range) {
-            this.rotation = diffX >= 0 ? Math.PI / 2 : -Math.PI / 2;
+            this.rotation = diffX >= 0 ? 0 : 180;
         }
         if (Math.abs(diffX) <= range && Math.abs(diffY) >= range) {
-            this.rotation = diffY >= 0 ? Math.PI : 0;
+            this.rotation = diffY >= 0 ? 270 : 90;
         }
-        context.save();
-        context.translate(this.x + this.width / 2 + this.camera.offsetX, this.y + this.height / 2 + this.camera.offsetY);
-        context.rotate(this.rotation);
-
         if (Math.abs(diffX) <= minRange && Math.abs(diffY) <= minRange) {
-
             var distance = Math.abs(this.left() - this.zombieKiller.left()) + Math.abs(this.top() - this.zombieKiller.top());
             var attackDistance = 90;
-            console.log(distance);
             if (distance <= attackDistance) {
-                var frame = "zombie_attack_" + (this.attackAnimation.getFrame() + 1);
-                context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[frame].x, this.atlas.sprites[frame].y, this.atlas.sprites[frame].width, this.atlas.sprites[frame].height, -this.width / 2, -this.height / 2, this.width, this.height);
+                image = "zombie_attack_" + this.rotation + "_" + (this.attackAnimation.getFrame() + 1);          
             } else {
-                var image = "zombie";
-                context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, -this.width / 2, -this.height / 2, this.width, this.height);
+                image = "zombie_" + this.rotation;
             }
         } else {         
-            var frame = "zombie_walk_" + (this.walkAnimation.getFrame() + 1);
-            context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[frame].x, this.atlas.sprites[frame].y, this.atlas.sprites[frame].width, this.atlas.sprites[frame].height, -this.width / 2, -this.height / 2, this.width, this.height);
+            image = "zombie_walk_" + this.rotation + "_" + (this.walkAnimation.getFrame() + 1);
         }      
-        context.restore();
+        context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.x + this.camera.offsetX, this.y + this.camera.offsetY, this.width, this.height);
     }
 }
 
