@@ -24,6 +24,7 @@ class Zombie extends Entity {
         this.health = 10;
         this.isDead = false;
         this.bodyparts = [];
+        this.blood = [];
                 
         this.queue = new PriorityQueue(function (a, b) {
             return a.priority > b.priority;
@@ -83,6 +84,9 @@ class Zombie extends Entity {
                     this.bodyparts.push(new ZombieBodyPart(this.left(), this.top(), 50, 50));
                     this.bodyparts.push(new ZombieBodyPart(this.left(), this.top(), 50, 50));
                     this.bodyparts.push(new ZombieBodyPart(this.left(), this.top(), 50, 50));
+                    if (this.health % 3 === 0) {
+                        this.blood.push(new Blood(this.left(), this.top(), 50, 50));
+                    }
                 }
             }
         }
@@ -147,6 +151,11 @@ class Zombie extends Entity {
     }
     
     render(context) {
+        
+        for (let blood of this.blood) {
+            blood.render(context);
+        }
+        
         if (this.isDead) {
             for (let bodypart of this.bodyparts) {
                 bodypart.render(context);
