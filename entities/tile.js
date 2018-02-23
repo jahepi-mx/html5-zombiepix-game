@@ -13,7 +13,7 @@ class Tile extends Entity {
             context.fillStyle = "#000000";
         }
        
-        context.fillRect(this.x * this.width + this.camera.offsetX, this.y * this.height +  + this.camera.offsetY, this.width, this.height);
+        context.fillRect(this.x * this.width + this.camera.offsetX, this.y * this.height + this.camera.offsetY, this.width, this.height);
     }
     
     isWalkable() {

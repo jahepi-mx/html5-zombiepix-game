@@ -27,7 +27,12 @@ class Controller {
         this.camera.init(4, 4, newOffsetX, newOffsetY);
         
         var zombieSize = 50;
-        this.zombie = new Zombie(1 * tileWidth + tileWidth / 2 - zombieSize, 1 * tileHeight + tileHeight / 2 - zombieSize, zombieSize, zombieSize, this.map, this.zombieKiller);
+        this.zombies = [];
+        
+        for (var a = 0; a < 2; a++) {
+            var speed = Math.round(Math.random() * 50 + 10);
+            this.zombies.push(new Zombie(1 * tileWidth + tileWidth / 2 - zombieSize, 1 * tileHeight + tileHeight / 2 - zombieSize, zombieSize, zombieSize, this.map, this.zombieKiller, speed));
+        }
     
         var towerSize = 80;
         this.tower = new Tower(5 * tileWidth + tileWidth / 2 - towerSize / 2, 6 * tileHeight + tileHeight / 2 - towerSize / 2, towerSize, towerSize, this.map, this.zombieKiller);
@@ -36,7 +41,9 @@ class Controller {
     
     update(deltatime) {
         this.zombieKiller.update(deltatime);
-        this.zombie.update(deltatime);
+        for (let zombie of this.zombies) {
+            zombie.update(deltatime);
+        }
         this.tower.update(deltatime);
     }
     

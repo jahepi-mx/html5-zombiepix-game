@@ -19,8 +19,15 @@ class Render {
         this.controller.map.render(this.context, xOrigin, yOrigin);
         
         this.controller.zombieKiller.render(context);
-        this.controller.zombie.render(context);
+        for (let zombie of this.controller.zombies) {
+            zombie.render(context);
+        }
         this.controller.tower.render(context);
+        
+        this.context.font = "65px joystix";
+        this.context.fillStyle = "rgba(255, 0, 255, 255)";
+        this.context.textAlign = "center";
+        this.context.fillText(Math.round(1 / deltatime), this.canvas.width - 50, 50);  
     }
 }
 

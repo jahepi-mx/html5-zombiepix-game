@@ -9,6 +9,9 @@ and open the template in the editor.
         <title>Zombie Pix</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style type="text/css">
+            @font-face { font-family: 'joystix'; src: url('assets/fonts/PixelMYZ.ttf'); }
+        </style>
         <script src="entities/entity.js"></script>
         <script src="entities/tile.js"></script>
         <script src="entities/map.js"></script>
@@ -18,6 +21,7 @@ and open the template in the editor.
         <script src="entities/zombie.js"></script>
         <script src="entities/bullet.js"></script>
         <script src="entities/tower.js"></script>
+        <script src="entities/zombiebodypart.js"></script>
         <script src="utils/priorityqueue.js"></script>
         <script src="utils/assets.js"></script>
         <script src="utils/atlas.js"></script>
@@ -78,5 +82,6 @@ and open the template in the editor.
     </head>
     <body>
         <canvas id="canvas"></canvas>
+        <span style="font-family: joystix; display: none">Hidden text just for loading font before canvas.</span>
     </body>
 </html>

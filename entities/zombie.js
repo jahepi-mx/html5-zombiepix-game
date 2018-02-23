@@ -1,6 +1,6 @@
 class Zombie extends Entity {  
     
-    constructor(x, y, width, height, map, zombieKiller) {
+    constructor(x, y, width, height, map, zombieKiller, speed) {
         super(x, y, width, height);
         this.map = map;
         this.zombieKiller = zombieKiller;
@@ -14,13 +14,16 @@ class Zombie extends Entity {
         this.vectorsPath = [];
         this.toX = this.x;
         this.toY = this.y;
-        this.speed = 50;
+        this.speed = speed;
         this.isNewPosition = true;
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
         this.walkAnimation = new Animation(4, 2);
         this.attackAnimation = new Animation(6, 2);
         this.rotation = 0;
+        this.health = 10;
+        this.isDead = false;
+        this.bodyparts = [];
                 
         this.queue = new PriorityQueue(function (a, b) {
             return a.priority > b.priority;
@@ -28,6 +31,13 @@ class Zombie extends Entity {
     }
     
     update(deltatime) {
+        
+        if (this.isDead) {
+            for (let bodypart of this.bodyparts) {
+                bodypart.update(deltatime);
+            }
+            return;
+        }
         
         this.pathfindingTime += deltatime;
         this.walkAnimation.update(deltatime);
@@ -64,6 +74,18 @@ class Zombie extends Entity {
         if (Math.abs(diffX) <= 1 && Math.abs(diffY) <= 1) {
             this.isNewPosition = true;
         }
+        
+        for (let bullet of this.zombieKiller.bullets) {
+            if (this.collide(bullet)) {
+                bullet.collided = true;
+                if (--this.health <= 0) {
+                    this.isDead = true;
+                    this.bodyparts.push(new ZombieBodyPart(this.left(), this.top(), 50, 50));
+                    this.bodyparts.push(new ZombieBodyPart(this.left(), this.top(), 50, 50));
+                    this.bodyparts.push(new ZombieBodyPart(this.left(), this.top(), 50, 50));
+                }
+            }
+        }
     }
     
     pathfinding() {
@@ -72,11 +94,11 @@ class Zombie extends Entity {
         this.parents = [];
         var targetX = this.zombieKiller.currentX();
         var targetY = this.zombieKiller.currentY();
-        console.log("target: " + targetX + "," + targetY);
+        //console.log("target: " + targetX + "," + targetY);
         
         var currentX = Math.floor(this.x / this.map.tileWidth);
         var currentY = Math.floor(this.y / this.map.tileHeight);
-        console.log("curr: " + currentX + "," + currentY);
+        //console.log("curr: " + currentX + "," + currentY);
         var startVector = currentY * this.map.cols + currentX;
         this.visited[startVector] = 1;
         var heuristic = Math.abs(this.zombieKiller.left() - this.x) + Math.abs(this.zombieKiller.top() - this.y);
@@ -125,22 +147,43 @@ class Zombie extends Entity {
     }
     
     render(context) {
-        //context.fillStyle = "#0000ff";
-        //context.fillRect(this.x + this.camera.offsetX, this.y  + this.camera.offsetY, this.width, this.height);
-        context.save();
-        context.translate(this.x + this.width / 2 + this.camera.offsetX, this.y + this.height / 2 + this.camera.offsetY);
+        if (this.isDead) {
+            for (let bodypart of this.bodyparts) {
+                bodypart.render(context);
+            }
+            return;
+        }
+        
         var diffX = (this.toX + this.map.tileWidth / 2 - this.width / 2) - this.x;
         var diffY = (this.toY + this.map.tileHeight / 2 - this.height / 2) - this.y;
         var range = 30;
+        var minRange = 10;
         if (Math.abs(diffY) <= range && Math.abs(diffX) >= range) {
             this.rotation = diffX >= 0 ? Math.PI / 2 : -Math.PI / 2;
         }
         if (Math.abs(diffX) <= range && Math.abs(diffY) >= range) {
             this.rotation = diffY >= 0 ? Math.PI : 0;
         }
+        context.save();
+        context.translate(this.x + this.width / 2 + this.camera.offsetX, this.y + this.height / 2 + this.camera.offsetY);
         context.rotate(this.rotation);
-        var frame = "zombie_walk_" + (this.walkAnimation.getFrame() + 1);
-        context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[frame].x, this.atlas.sprites[frame].y, this.atlas.sprites[frame].width, this.atlas.sprites[frame].height, -this.width / 2, -this.height / 2, this.width, this.height);
+
+        if (Math.abs(diffX) <= minRange && Math.abs(diffY) <= minRange) {
+
+            var distance = Math.abs(this.left() - this.zombieKiller.left()) + Math.abs(this.top() - this.zombieKiller.top());
+            var attackDistance = 90;
+            console.log(distance);
+            if (distance <= attackDistance) {
+                var frame = "zombie_attack_" + (this.attackAnimation.getFrame() + 1);
+                context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[frame].x, this.atlas.sprites[frame].y, this.atlas.sprites[frame].width, this.atlas.sprites[frame].height, -this.width / 2, -this.height / 2, this.width, this.height);
+            } else {
+                var image = "zombie";
+                context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, -this.width / 2, -this.height / 2, this.width, this.height);
+            }
+        } else {         
+            var frame = "zombie_walk_" + (this.walkAnimation.getFrame() + 1);
+            context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[frame].x, this.atlas.sprites[frame].y, this.atlas.sprites[frame].width, this.atlas.sprites[frame].height, -this.width / 2, -this.height / 2, this.width, this.height);
+        }      
         context.restore();
     }
 }
