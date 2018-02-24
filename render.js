@@ -23,6 +23,7 @@ class Render {
             zombie.render(context);
         }
         this.controller.tower.render(context);
+        this.controller.zombieKiller.render(context);
         
         this.context.font = "65px joystix";
         this.context.fillStyle = "rgba(255, 0, 255, 255)";
