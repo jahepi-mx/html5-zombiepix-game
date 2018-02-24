@@ -81,11 +81,11 @@ class Zombie extends Entity {
                 bullet.collided = true;
                 if (--this.health <= 0) {
                     this.isDead = true;
-                    this.bodyparts.push(new ZombieBodyPart(this.left(), this.top(), 50, 50));
-                    this.bodyparts.push(new ZombieBodyPart(this.left(), this.top(), 50, 50));
-                    this.bodyparts.push(new ZombieBodyPart(this.left(), this.top(), 50, 50));
+                    this.bodyparts.push(new ZombieBodyPart(this.left(), this.top(), this.width, this.height, this.map));
+                    this.bodyparts.push(new ZombieBodyPart(this.left(), this.top(), this.width, this.height, this.map));
+                    this.bodyparts.push(new ZombieBodyPart(this.left(), this.top(), this.width, this.height, this.map));
                     if (this.health % 3 === 0) {
-                        this.blood.push(new Blood(this.left(), this.top(), 50, 50));
+                        this.blood.push(new Blood(this.left(), this.top(), this.width, this.height));
                     }
                 }
             }

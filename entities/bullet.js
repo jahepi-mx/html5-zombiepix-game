@@ -6,7 +6,6 @@ class Bullet extends Entity {
         this.xRatio = Math.cos(radians);
         this.yRatio = Math.sin(radians);
         this.speed = 300;
-        this.vectors = [[0, 0], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1]];
         this.map = map;
         this.collided = false;
         this.atlas = Atlas.getInstance();
@@ -17,20 +16,14 @@ class Bullet extends Entity {
         this.x += this.speed * this.xRatio * deltatime;
         this.y += this.speed * this.yRatio * deltatime;
         
-        var currentX = Math.floor(this.left() / this.map.tileWidth);
-        var currentY = Math.floor(this.top() / this.map.tileHeight);
-        for (let vector of this.vectors) {
-            var newX = vector[0] + currentX;
-            var newY = vector[1] + currentY;
-            var tile = this.map.getTile(newX, newY);
-            if (tile !== null && !tile.isWalkable() && tile.collide(this) && (tile.type === CRATE_TYPE || tile.type === BARREL_TYPE)) {
-                tile.hits--;
-                this.collided = true;
-                break;
-            } else if (tile !== null && !tile.isWalkable() && tile.collide(this)) {
-                this.collided = true;
-                break;
-            }
+        var currentX = Math.floor((this.left() + this.width / 2) / this.map.tileWidth);
+        var currentY = Math.floor((this.top() + this.height / 2) / this.map.tileHeight);
+        var tile = this.map.getTile(currentX, currentY);
+        if (tile !== null && !tile.isWalkable() && tile.collide(this) && (tile.type === CRATE_TYPE || tile.type === BARREL_TYPE)) {
+            tile.hits--;
+            this.collided = true;
+        } else if (tile !== null && !tile.isWalkable() && tile.collide(this)) {
+            this.collided = true;
         }
     }
     

@@ -1,22 +1,41 @@
 class ZombieBodyPart extends Entity {
     
-    constructor(x, y, width, height) {
+    constructor(x, y, width, height, map) {
         super(x, y, width, height);
         var angle = Math.random() * Math.PI * 2;
         this.xRatio = Math.cos(angle);
         this.yRatio = Math.sin(angle);
         this.friction = Math.random();
-        this.speed = Math.random() * 200 + 300;
+        this.velocityX = Math.random() * 200 + 300;
+        this.velocityY = Math.random() * 200 + 300;
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
         this.type = Math.floor(Math.random() * 5) + 1;
         this.camera = Camera.getInstance();
+        this.map = map;
     }
     
     update(deltatime) {
-        this.x += this.xRatio * this.speed * deltatime;
-        this.y += this.yRatio * this.speed * deltatime;
-        this.speed *= this.friction;
+        var tmpX = this.x;
+        this.x += this.xRatio * this.velocityX * deltatime;
+        var x = Math.floor((this.left() + this.width / 2) / this.map.tileWidth);
+        var y = Math.floor((this.top() + this.height / 2) / this.map.tileHeight);
+        var tile = this.map.getTile(x, y);
+        if (tile !== null && !tile.isWalkable() && this.collide(tile)) {
+            this.velocityX *= -1;
+        }
+        
+        var tmpY = this.y;
+        this.y += this.yRatio * this.velocityY * deltatime;
+        var x = Math.floor((this.left() + this.width / 2) / this.map.tileWidth);
+        var y = Math.floor((this.top() + this.height / 2) / this.map.tileHeight);
+        var tile = this.map.getTile(x, y);
+        if (tile !== null && !tile.isWalkable() && this.collide(tile)) {
+            this.velocityY *= -1;
+        }
+        
+        this.velocityX *= this.friction;
+        this.velocityY *= this.friction;
     }
     
     render(context) {

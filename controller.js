@@ -4,12 +4,12 @@ class Controller {
         
         var mapWidth = 800;
         var mapHeight = 800;
-        var zombieKillerWidth = 50;
-        var zombieKillerHeight = 50;
         var rows = 8;
         var cols = 8;
         var tileWidth = mapWidth / cols;
         var tileHeight = mapHeight / rows;
+        var zombieKillerWidth = tileWidth * 0.8;
+        var zombieKillerHeight = tileHeight * 0.8;
         
         var xOffset = mapWidth / 2 - zombieKillerWidth / 2;
         var yOffset = mapHeight / 2 - zombieKillerHeight / 2;
@@ -26,12 +26,12 @@ class Controller {
         this.camera = Camera.getInstance();
         this.camera.init(4, 4, newOffsetX, newOffsetY);
         
-        var zombieSize = 50;
+        var zombieSize = tileWidth * 0.8;
         this.zombies = [];
         
         for (var a = 0; a < 1000; a++) {
             var speed = Math.round(Math.random() * 100 + 20);
-            this.zombies.push(new Zombie(1 * tileWidth + tileWidth / 2 - zombieSize, 1 * tileHeight + tileHeight / 2 - zombieSize, zombieSize, zombieSize, this.map, this.zombieKiller, speed));
+            this.zombies.push(new Zombie(1 * tileWidth + tileWidth / 2 - zombieSize / 2, 1 * tileHeight + tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this.map, this.zombieKiller, speed));
         }
     
         var towerSize = 80;
