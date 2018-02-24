@@ -25,9 +25,9 @@ class Map {
         for (var a = 0; a < this.rows * this.cols; a++) {
             var x = a % this.cols;
             var y = Math.floor(a / this.cols);
-            if (this.map[a] === 2) {
+            if (this.map[a] === CRATE_TYPE) {
                 this.tileMap[a] = new Crate(x, y, this.tileWidth, this.tileHeight, this.map[a]);
-            } else if (this.map[a] === 3) {
+            } else if (this.map[a] === BARREL_TYPE) {
                 this.tileMap[a] = new Barrel(x, y, this.tileWidth, this.tileHeight, this.map[a]);
             } else {
                 this.tileMap[a] = new Tile(x, y, this.tileWidth, this.tileHeight, this.map[a]);
