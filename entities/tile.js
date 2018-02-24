@@ -4,16 +4,13 @@ class Tile extends Entity {
         super(x, y, width, height);
         this.type = type;
         this.camera = Camera.getInstance();
+        this.atlas = Atlas.getInstance();
+        this.assets = Assets.getInstance();
     }
     
     render(context) {
-        if (this.type === 0) {
-            context.fillStyle = "#ffffff";
-        } else if (this.type === 1) {
-            context.fillStyle = "#000000";
-        }
-       
-        context.fillRect(this.x * this.width + this.camera.offsetX, this.y * this.height + this.camera.offsetY, this.width, this.height);
+        var image = this.type === 0 ? "floor" : "void";
+        context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.left() + this.camera.offsetX, this.top() + this.camera.offsetY, this.width, this.height);
     }
     
     isWalkable() {

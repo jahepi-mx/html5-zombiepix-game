@@ -23,7 +23,11 @@ class Bullet extends Entity {
             var newX = vector[0] + currentX;
             var newY = vector[1] + currentY;
             var tile = this.map.getTile(newX, newY);
-            if (tile !== null && !tile.isWalkable() && tile.collide(this)) {
+            if (tile !== null && !tile.isWalkable() && tile.collide(this) && (tile.type === CRATE_TYPE || tile.type === BARREL_TYPE)) {
+                tile.hits--;
+                this.collided = true;
+                break;
+            } else if (tile !== null && !tile.isWalkable() && tile.collide(this)) {
                 this.collided = true;
                 break;
             }
@@ -31,8 +35,6 @@ class Bullet extends Entity {
     }
     
     render(context) {
-        //context.fillStyle = "#ff00ff";
-        //context.fillRect(this.x + this.camera.offsetX, this.y  + this.camera.offsetY, this.width, this.height);
         var image = "bullet";
         context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.left() + this.camera.offsetX, this.top() + this.camera.offsetY, this.width, this.height);
     } 

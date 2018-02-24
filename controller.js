@@ -13,7 +13,7 @@ class Controller {
         
         var xOffset = mapWidth / 2 - zombieKillerWidth / 2;
         var yOffset = mapHeight / 2 - zombieKillerHeight / 2;
-        var origX = 6 * tileWidth;
+        var origX = 4 * tileWidth;
         var origY = 6 * tileHeight;
         var newOffsetX = xOffset - origX - tileWidth / 2 + zombieKillerWidth / 2;
         var newOffsetY = yOffset - origY - tileHeight / 2 + zombieKillerHeight / 2;
@@ -40,6 +40,7 @@ class Controller {
     }
     
     update(deltatime) {
+        this.map.update(deltatime, this.zombieKiller.currentX(), this.zombieKiller.currentY());
         this.zombieKiller.update(deltatime);
         for (let zombie of this.zombies) {
             zombie.update(deltatime);
