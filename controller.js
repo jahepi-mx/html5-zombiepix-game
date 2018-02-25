@@ -2,19 +2,21 @@ class Controller {
     
     constructor() {
         
-        var mapWidth = 800;
-        var mapHeight = 800;
-        var rows = 8;
-        var cols = 8;
+        var mapWidth = 2000; // 100 * 20
+        var mapHeight = 2000; // 100 * 20
+        var rows = 20;
+        var cols = 20;
         var tileWidth = mapWidth / cols;
         var tileHeight = mapHeight / rows;
         var zombieKillerWidth = tileWidth * 0.8;
         var zombieKillerHeight = tileHeight * 0.8;
         
-        var xOffset = mapWidth / 2 - zombieKillerWidth / 2;
-        var yOffset = mapHeight / 2 - zombieKillerHeight / 2;
+        var canvasWidth = 800;
+        var canvasHeight = 800;
+        var xOffset = canvasWidth / 2 - zombieKillerWidth / 2;
+        var yOffset = canvasHeight / 2 - zombieKillerHeight / 2;
         var origX = 4 * tileWidth;
-        var origY = 6 * tileHeight;
+        var origY = 16 * tileHeight;
         var newOffsetX = xOffset - origX - tileWidth / 2 + zombieKillerWidth / 2;
         var newOffsetY = yOffset - origY - tileHeight / 2 + zombieKillerHeight / 2;
         
@@ -24,27 +26,43 @@ class Controller {
         this.zombieKiller = new ZombieKiller(xOffset, yOffset, zombieKillerWidth, zombieKillerHeight, this.map);
 
         this.camera = Camera.getInstance();
-        this.camera.init(4, 4, newOffsetX, newOffsetY);
+        this.camera.init(5, 5, newOffsetX, newOffsetY);
         
         var zombieSize = tileWidth * 0.8;
         this.zombies = [];
+        this.deadZombies = [];
+        this.maxCorpses = 10;
         
-        for (var a = 0; a < 1000; a++) {
+        for (var a = 0; a < 20; a++) {
             var speed = Math.round(Math.random() * 100 + 20);
-            this.zombies.push(new Zombie(1 * tileWidth + tileWidth / 2 - zombieSize / 2, 1 * tileHeight + tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this.map, this.zombieKiller, speed));
+            this.zombies.push(new Zombie(9 * tileWidth + tileWidth / 2 - zombieSize / 2, 11 * tileHeight + tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this.map, this.zombieKiller, speed));
         }
     
         var towerSize = 80;
-        this.tower = new Tower(5 * tileWidth + tileWidth / 2 - towerSize / 2, 6 * tileHeight + tileHeight / 2 - towerSize / 2, towerSize, towerSize, this.map, this.zombieKiller);
+        this.tower = new Tower(9 * tileWidth + tileWidth / 2 - towerSize / 2, 6 * tileHeight + tileHeight / 2 - towerSize / 2, towerSize, towerSize, this.map, this.zombieKiller);
     
     }
     
     update(deltatime) {
         this.map.update(deltatime, this.zombieKiller.currentX(), this.zombieKiller.currentY());
         this.zombieKiller.update(deltatime);
-        for (let zombie of this.zombies) {
-            zombie.update(deltatime);
+
+        for (var a = 0; a < this.zombies.length; a++) {
+            this.zombies[a].update(deltatime);
+            if (this.zombies[a].isDead) {
+                this.deadZombies.push(this.zombies[a]);
+                this.zombies.splice(a--, 1);
+            }
         }
+        
+        for (let deadZombie of this.deadZombies) {
+            deadZombie.update(deltatime);
+        }
+        
+        if (this.deadZombies.length > this.maxCorpses) {
+            this.deadZombies.shift();
+        }
+        
         this.tower.update(deltatime);
     }
     

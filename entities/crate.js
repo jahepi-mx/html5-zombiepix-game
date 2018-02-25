@@ -1,4 +1,4 @@
-let CRATE_TYPE = 2;
+let CRATE_TYPE = 36;
 
 class Crate extends Tile {
     

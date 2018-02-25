@@ -19,6 +19,9 @@ class Render {
         this.controller.map.render(this.context, xOrigin, yOrigin);
         
         this.controller.zombieKiller.render(context);
+        for (let zombie of this.controller.deadZombies) {
+            zombie.render(context);
+        }
         for (let zombie of this.controller.zombies) {
             zombie.render(context);
         }

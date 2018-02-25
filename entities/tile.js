@@ -9,12 +9,12 @@ class Tile extends Entity {
     }
     
     render(context) {
-        var image = this.type === 0 ? "floor" : "void";
+        var image = "tile_" + this.type;
         context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.left() + this.camera.offsetX, this.top() + this.camera.offsetY, this.width, this.height);
     }
     
     isWalkable() {
-        return this.type === 0;
+        return this.type === 1;
     }
     
     left() {

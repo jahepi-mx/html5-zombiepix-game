@@ -1,4 +1,4 @@
-let BARREL_TYPE = 3;
+let BARREL_TYPE = 35;
 
 class Barrel extends Tile {
     
@@ -21,7 +21,7 @@ class Barrel extends Tile {
         } else {
             var image = "floor";
             context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.left() + this.camera.offsetX, this.top() + this.camera.offsetY, this.width, this.height);
-            image = "barrel";
+            image = "barrel_1";
             context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.left() + this.camera.offsetX, this.top() + this.camera.offsetY, this.width, this.height);
         }
     }

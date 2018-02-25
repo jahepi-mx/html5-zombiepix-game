@@ -22,6 +22,7 @@ class Zombie extends Entity {
         this.attackAnimation = new Animation(6, 2);
         this.rotation = 90;
         this.health = 10;
+        this.maxHealth = this.health;
         this.isDead = false;
         this.bodyparts = [];
         this.blood = [];
@@ -162,6 +163,10 @@ class Zombie extends Entity {
             }
             return;
         }
+        
+        context.fillStyle = "#ff0000";
+        var width = this.health / this.maxHealth * this.width * 0.7;
+        context.fillRect(this.left() + this.camera.offsetX + this.width / 2 - width / 2, this.top() + this.camera.offsetY - 10, width, 10);
         
         var diffX = (this.toX + this.map.tileWidth / 2 - this.width / 2) - this.x;
         var diffY = (this.toY + this.map.tileHeight / 2 - this.height / 2) - this.y;
