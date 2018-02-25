@@ -8,6 +8,7 @@ class Barrel extends Tile {
         this.walkable = false;
         this.animation = new Animation(12, 2);
         this.animation.stopAtSequenceNumber(1, null);
+        this.typeImage = Math.floor(Math.random() * 2) + 1;
     }
     
     render(context) {
@@ -21,7 +22,7 @@ class Barrel extends Tile {
         } else {
             var image = "floor";
             context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.left() + this.camera.offsetX, this.top() + this.camera.offsetY, this.width, this.height);
-            image = "barrel_1";
+            image = "barrel_" + this.typeImage;
             context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.left() + this.camera.offsetX, this.top() + this.camera.offsetY, this.width, this.height);
         }
     }
