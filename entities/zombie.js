@@ -20,7 +20,8 @@ class Zombie extends Entity {
         this.assets = Assets.getInstance();
         this.walkAnimation = new Animation(4, 2);
         this.attackAnimation = new Animation(6, 2);
-        this.rotation = 90;
+        this.rotations = [0, 90, 180, 270];
+        this.rotation = this.rotations[Math.floor(Math.random() * 4)];
         this.health = 10;
         this.maxHealth = this.health;
         this.isDead = false;

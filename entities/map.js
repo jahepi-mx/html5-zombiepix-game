@@ -3,7 +3,7 @@ class Map {
     constructor(rows, cols, width, height) {
         
         this.map = [
-            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 6, 1, 1, 1, 5, 17, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9, 10, 2, 2, 2, 9, 12, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 2, 2, 2, 35, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 17, 17, 6, 2, 1, 1, 5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7, 1, 1, 8, 2, 2, 2, 9, 10, 8, 5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 3, 12, 12, 4, 2, 1, 1, 1, 1, 8, 9, 10, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 14, 2, 2, 2, 1, 1, 1, 8, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 14, 2, 2, 2, 2, 5, 17, 6, 2, 5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 14, 2, 36, 36, 2, 9, 12, 10, 2, 9, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 14, 2, 2, 2, 2, 2, 2, 36, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 8, 5, 6, 2, 35, 2, 2, 36, 2, 2, 2, 35, 2, 1, 1, 1, 1, 1, 1, 1, 8, 9, 10, 2, 2, 35, 2, 5, 17, 6, 2, 35, 2, 2, 1, 1, 1, 1, 1, 1, 8, 2, 2, 2, 2, 2, 2, 9, 12, 10, 2, 5, 17, 6, 1, 1, 1, 1, 1, 1, 8, 2, 5, 17, 17, 17, 17, 17, 17, 6, 2, 9, 12, 10, 1, 1, 1, 1, 1, 1, 14, 2, 15, 1, 1, 1, 1, 1, 8, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 12, 15, 1, 1, 1, 1, 1, 14, 5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 14, 9, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+            1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 6, 1, 1, 1, 5, 17, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 9, 10, 2, 2, 2, 9, 12, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 2, 2, 2, 35, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 5, 17, 17, 6, 2, 1, 1, 5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 7, 1, 1, 8, 2, 2, 2, 9, 10, 8, 5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 3, 12, 12, 4, 2, 1, 1, 1, 1, 8, 9, 10, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 14, 2, 2, 2, 1, 1, 1, 8, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 14, 2, 2, 36, 2, 5, 17, 6, 2, 5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 14, 2, 36, 36, 2, 9, 12, 10, 2, 9, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 14, 36, 2, 2, 2, 2, 2, 36, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 8, 5, 6, 2, 35, 2, 2, 36, 2, 35, 2, 35, 2, 1, 1, 1, 1, 1, 1, 1, 8, 9, 10, 36, 36, 35, 36, 5, 17, 6, 2, 35, 2, 2, 1, 1, 1, 1, 1, 1, 8, 2, 2, 2, 2, 2, 2, 9, 12, 10, 2, 5, 17, 6, 1, 1, 1, 1, 1, 1, 8, 2, 5, 17, 17, 17, 17, 17, 17, 6, 2, 9, 12, 10, 1, 1, 1, 1, 1, 1, 14, 2, 15, 1, 1, 1, 1, 1, 8, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 8, 12, 15, 1, 1, 1, 1, 1, 14, 5, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 14, 9, 10, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
         ];
         
         this.rows = 20;
@@ -48,6 +48,24 @@ class Map {
         this.maxCorpses = 10;
         
         this.zombies.push(new Zombie(9 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 11 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 100));
+        this.zombies.push(new Zombie(7 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 11 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 120));
+        this.zombies.push(new Zombie(8 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 12 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 150));
+        this.zombies.push(new Zombie(9 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 12 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 140));
+        this.zombies.push(new Zombie(9 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 9 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 130));
+        
+        this.zombies.push(new Zombie(6 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 4 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 130));
+        this.zombies.push(new Zombie(7 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 7 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 170));
+        this.zombies.push(new Zombie(7 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 9 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 100));
+        
+        this.zombies.push(new Zombie(12 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 16 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 180));
+        this.zombies.push(new Zombie(13 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 16 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 190));
+        
+        this.zombies.push(new Zombie(14 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 11 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 150));
+        this.zombies.push(new Zombie(15 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 11 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 80));
+        this.zombies.push(new Zombie(15 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 12 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 130));
+        this.zombies.push(new Zombie(15 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 13 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 170));
+        this.zombies.push(new Zombie(16 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 13 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 150));
+        
         var towerSize = this.tileWidth;
         this.tower = new Tower(9 * this.tileWidth + this.tileWidth / 2 - towerSize / 2, 6 * this.tileHeight + this.tileHeight / 2 - towerSize / 2, towerSize, towerSize, this);
     
