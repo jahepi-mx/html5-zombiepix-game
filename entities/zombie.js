@@ -84,17 +84,22 @@ class Zombie extends Entity {
                     this.blood.push(new Blood(this.left(), this.top(), this.width, this.height));
                 }
                 if (--this.health <= 0) {
-                    this.kill();
+                    this.kill(false);
                 }
             }
         }
     }
     
-    kill() {
+    kill(fromExplosion) {
         this.health = 0;
         this.isDead = true;
         for (var a = 0; a < 3; a++) {
-            this.bodyparts.push(new ZombieBodyPart(this.left(), this.top(), this.width, this.height, this.map));
+            var bodypart = new ZombieBodyPart(this.left(), this.top(), this.width, this.height, this.map);
+            if (fromExplosion) {
+                bodypart.velocityX = 900;
+                bodypart.velocityY = 900;
+            }
+            this.bodyparts.push(bodypart);
         }
         this.blood.push(new Blood(this.left(), this.top(), this.width, this.height));
     }

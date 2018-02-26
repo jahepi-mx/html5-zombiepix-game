@@ -41,7 +41,7 @@ class Barrel extends Tile {
                     var diffY = Math.abs(zombie.top() - this.top());
                     console.log(diffX + diffY);
                     if (diffX + diffY <= this.hitRatio) {
-                        zombie.kill();
+                        zombie.kill(true);
                     }
                 }
             }

@@ -5,7 +5,7 @@ class ZombieBodyPart extends Entity {
         var angle = Math.random() * Math.PI * 2;
         this.xRatio = Math.cos(angle);
         this.yRatio = Math.sin(angle);
-        this.friction = Math.random();
+        this.friction = 0.8 + (0.12 * Math.random());
         this.velocityX = Math.random() * 200 + 300;
         this.velocityY = Math.random() * 200 + 300;
         this.atlas = Atlas.getInstance();
