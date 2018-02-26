@@ -1,9 +1,9 @@
 class Zombie extends Entity {  
     
-    constructor(x, y, width, height, map, zombieKiller, speed) {
+    constructor(x, y, width, height, map, speed) {
         super(x, y, width, height);
         this.map = map;
-        this.zombieKiller = zombieKiller;
+        this.zombieKiller = this.map.zombieKiller;
         this.camera = Camera.getInstance();
         
         this.pathfindingTime = 0;
@@ -80,17 +80,23 @@ class Zombie extends Entity {
         for (let bullet of this.zombieKiller.bullets) {
             if (this.collide(bullet)) {
                 bullet.collided = true;
+                if (this.health % 3 === 0) {
+                    this.blood.push(new Blood(this.left(), this.top(), this.width, this.height));
+                }
                 if (--this.health <= 0) {
-                    this.isDead = true;
-                    this.bodyparts.push(new ZombieBodyPart(this.left(), this.top(), this.width, this.height, this.map));
-                    this.bodyparts.push(new ZombieBodyPart(this.left(), this.top(), this.width, this.height, this.map));
-                    this.bodyparts.push(new ZombieBodyPart(this.left(), this.top(), this.width, this.height, this.map));
-                    if (this.health % 3 === 0) {
-                        this.blood.push(new Blood(this.left(), this.top(), this.width, this.height));
-                    }
+                    this.kill();
                 }
             }
         }
+    }
+    
+    kill() {
+        this.health = 0;
+        this.isDead = true;
+        for (var a = 0; a < 3; a++) {
+            this.bodyparts.push(new ZombieBodyPart(this.left(), this.top(), this.width, this.height, this.map));
+        }
+        this.blood.push(new Blood(this.left(), this.top(), this.width, this.height));
     }
     
     pathfinding() {

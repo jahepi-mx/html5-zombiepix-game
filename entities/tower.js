@@ -1,9 +1,9 @@
 class Tower extends Entity {
     
-    constructor(x, y, width, height, map, zombieKiller) {
+    constructor(x, y, width, height, map) {
         super(x, y, width, height);
-        this.zombieKiller = zombieKiller;
         this.map = map;
+        this.zombieKiller = this.map.zombieKiller;
         this.shootTime = 0;
         this.shootTimeLimit = 0.5;
         this.bullets = [];
