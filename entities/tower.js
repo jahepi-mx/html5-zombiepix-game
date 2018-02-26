@@ -8,6 +8,8 @@ class Tower extends Entity {
         this.shootTimeLimit = 0.5;
         this.bullets = [];
         this.camera = Camera.getInstance();
+        this.atlas = Atlas.getInstance();
+        this.assets = Assets.getInstance();
     }
     
     update(deltatime) {
@@ -33,8 +35,17 @@ class Tower extends Entity {
     
     render(context) {
         
-        context.fillStyle = "#a12300";
-        context.fillRect(this.x + this.camera.offsetX, this.y  + this.camera.offsetY, this.width, this.height);
+        var image = "eye";
+        context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.left() + this.camera.offsetX, this.top() + this.camera.offsetY, this.width, this.height);
+        
+        var radians = Math.atan2(this.zombieKiller.top() - this.top(), this.zombieKiller.left() - this.left());
+        image = "eye_pupil";
+        var width = this.width * 0.3;
+        var height = this.height * 0.3;
+        var x = this.left() + this.width / 2 - width / 2 + (20 * Math.cos(radians));
+        var y = this.top() + this.height / 2 - height / 2 + (20 * Math.sin(radians));
+        
+        context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, x + this.camera.offsetX, y + this.camera.offsetY, width, height);
         
         for (let bullet of this.bullets) {
             bullet.render(context);

@@ -48,7 +48,7 @@ class Map {
         this.maxCorpses = 10;
         
         this.zombies.push(new Zombie(9 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 11 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 100));
-        var towerSize = 80;
+        var towerSize = this.tileWidth;
         this.tower = new Tower(9 * this.tileWidth + this.tileWidth / 2 - towerSize / 2, 6 * this.tileHeight + this.tileHeight / 2 - towerSize / 2, towerSize, towerSize, this);
     
     }
