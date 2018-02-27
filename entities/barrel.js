@@ -10,7 +10,7 @@ class Barrel extends Tile {
         this.animation = new Animation(12, 2);
         this.animation.stopAtSequenceNumber(1, null);
         this.typeImage = Math.floor(Math.random() * 2) + 1;
-        this.hitRatio = 200;
+        this.hitRatio = 10000;
     }
     
     render(context) {
@@ -37,10 +37,10 @@ class Barrel extends Tile {
         if (this.hits <= 0) {
             if (!this.walkable) {
                 for (let zombie of this.map.zombies) {
-                    var diffX = Math.abs(zombie.left() - this.left());
-                    var diffY = Math.abs(zombie.top() - this.top());
-                    console.log(diffX + diffY);
-                    if (diffX + diffY <= this.hitRatio) {
+                    var diffX = zombie.left() - this.left();
+                    var diffY = zombie.top() - this.top();
+                    //console.log(diffX * diffX + diffY * diffY);
+                    if (diffX * diffX + diffY * diffY <= this.hitRatio) {
                         zombie.kill(true);
                     }
                 }

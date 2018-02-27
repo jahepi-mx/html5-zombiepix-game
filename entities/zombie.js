@@ -183,7 +183,7 @@ class Zombie extends Entity {
         var diffX = (this.toX + this.map.tileWidth / 2 - this.width / 2) - this.x;
         var diffY = (this.toY + this.map.tileHeight / 2 - this.height / 2) - this.y;
         var range = 30;
-        var minRange = 10;
+        var minRange = 10000;
         var image = "";
         if (Math.abs(diffY) <= range && Math.abs(diffX) >= range) {
             this.rotation = diffX >= 0 ? 0 : 180;
@@ -191,7 +191,7 @@ class Zombie extends Entity {
         if (Math.abs(diffX) <= range && Math.abs(diffY) >= range) {
             this.rotation = diffY >= 0 ? 270 : 90;
         }
-        if (Math.abs(diffX) <= minRange && Math.abs(diffY) <= minRange) {
+        if (diffX * diffX + diffY * diffY <= minRange) {
             var distance = Math.abs(this.left() - this.zombieKiller.left()) + Math.abs(this.top() - this.zombieKiller.top());
             var attackDistance = 90;
             if (distance <= attackDistance) {
