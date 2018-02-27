@@ -10,7 +10,7 @@ class Barrel extends Tile {
         this.animation = new Animation(12, 2);
         this.animation.stopAtSequenceNumber(1, null);
         this.typeImage = Math.floor(Math.random() * 2) + 1;
-        this.hitRatio = 10000;
+        this.hitRatio = 11000;
     }
     
     render(context) {

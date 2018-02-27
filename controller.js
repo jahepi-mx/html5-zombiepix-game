@@ -13,32 +13,33 @@ class Controller {
     
     onKeyDown(event) {
         var evt = event || window.event;
-        if (evt.keyCode === 37) {
+        //console.log(evt.keyCode);
+        if (evt.keyCode === 65) {
             this.zombieKiller.moveRight(true);
         }
-        if (evt.keyCode === 39) {
+        if (evt.keyCode === 68) {
             this.zombieKiller.moveLeft(true);
         }
-        if (evt.keyCode === 38) {
+        if (evt.keyCode === 87) {
             this.zombieKiller.moveUp(true);
         }
-        if (evt.keyCode === 40) {
+        if (evt.keyCode === 83) {
             this.zombieKiller.moveDown(true);
         }
     }
     
     onKeyUp(event) {
         var evt = event || window.event;
-        if (evt.keyCode === 37) {
+        if (evt.keyCode === 65) {
             this.zombieKiller.moveRight(false);
         }
-        if (evt.keyCode === 39) {
+        if (evt.keyCode === 68) {
             this.zombieKiller.moveLeft(false);
         }
-        if (evt.keyCode === 38) {
+        if (evt.keyCode === 87) {
             this.zombieKiller.moveUp(false);
         }
-        if (evt.keyCode === 40) {
+        if (evt.keyCode === 83) {
             this.zombieKiller.moveDown(false);
         }
     }
