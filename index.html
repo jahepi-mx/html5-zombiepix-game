@@ -37,6 +37,8 @@ and open the template in the editor.
             var prevTime = 0;
             var render = null;
             var cursor = Cursor.getInstance();
+            var targetFps = 1 / 60;
+            var targetDeltatime = 0;
             
             window.onload = function() {
                 canvas = document.getElementById("canvas");
@@ -50,8 +52,13 @@ and open the template in the editor.
             function update(currTime) {
                 var diff = currTime - prevTime;
                 var deltatime = diff / 1000;
+                targetDeltatime += deltatime;
                 prevTime = currTime;
-                render.update(deltatime);
+                if (targetDeltatime >= targetFps) {
+                    deltatime = targetDeltatime;
+                    targetDeltatime = 0;
+                    render.update(deltatime);
+                }
                 window.requestAnimationFrame(update);
             }
             

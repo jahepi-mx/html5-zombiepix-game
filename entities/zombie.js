@@ -7,7 +7,7 @@ class Zombie extends Entity {
         this.camera = Camera.getInstance();
         
         this.pathfindingTime = 0;
-        this.pathfindingTimeLimit = 10;
+        this.pathfindingTimeLimit = 5;
         this.visited = [];
         this.parents = [];
         this.vectors = [[1, 0], [0, 1], [-1, 0], [0, -1]];
@@ -20,14 +20,16 @@ class Zombie extends Entity {
         this.assets = Assets.getInstance();
         this.walkAnimation = new Animation(4, 2);
         this.attackAnimation = new Animation(6, 2);
-        this.rotations = [0, 90, 180, 270];
-        this.rotation = this.rotations[Math.floor(Math.random() * 4)];
+        this.rotation = 0;
         this.health = 10;
         this.maxHealth = this.health;
         this.isDead = false;
         this.bodyparts = [];
         this.blood = [];
-                
+        this.availableVectors = new Set();
+        this.foundZombieKiller = true;
+        this.searchAvailableVectors(Math.floor(this.x / this.map.tileWidth), Math.floor(this.y / this.map.tileHeight));
+        
         this.queue = new PriorityQueue(function (a, b) {
             return a.priority > b.priority;
         });
@@ -116,8 +118,20 @@ class Zombie extends Entity {
         this.parents = [];
         var targetX = this.zombieKiller.currentX();
         var targetY = this.zombieKiller.currentY();
-        //console.log("target: " + targetX + "," + targetY);
         
+        if (!this.foundZombieKiller) {
+            var rand = Math.floor(this.availableVectors.size * Math.random());
+            var index = 0;
+            for (let vector of this.availableVectors){
+                if (index++ >= rand) {
+                    targetX = vector % this.map.cols;
+                    targetY = Math.floor(vector / this.map.cols);
+                    break;
+                }
+            }
+        }
+        
+        this.foundZombieKiller = false;
         var currentX = Math.floor(this.x / this.map.tileWidth);
         var currentY = Math.floor(this.y / this.map.tileHeight);
         //console.log("curr: " + currentX + "," + currentY);
@@ -126,7 +140,7 @@ class Zombie extends Entity {
         var heuristic = Math.abs(this.zombieKiller.left() - this.x) + Math.abs(this.zombieKiller.top() - this.y);
         this.queue.add(startVector, heuristic);
         
-        out: while (!this.queue.isEmpty()) {
+        while (!this.queue.isEmpty()) {
             var vector = this.queue.remove().object;
             var x = vector % this.map.cols;
             var y = Math.floor(vector / this.map.cols);
@@ -139,8 +153,8 @@ class Zombie extends Entity {
                     if (tile.isWalkable()) { 
                         this.parents[newY * this.map.cols + newX] = y * this.map.cols + x;
                         if (targetX === newX && targetY === newY) {
+                            this.foundZombieKiller = true;
                             return this.path(newY * this.map.cols + newX);
-                            break out;
                         }
                         heuristic = Math.abs(this.zombieKiller.left() - newX * this.map.tileWidth) + Math.abs(this.zombieKiller.top() - newY * this.map.tileHeight);
                         this.queue.add(newY * this.map.cols + newX, heuristic);
@@ -166,6 +180,18 @@ class Zombie extends Entity {
             //console.log(x + "," + y);
         }
         return stack;
+    }
+    
+    searchAvailableVectors(x, y) {
+        this.availableVectors.add(y * this.map.cols + x);
+        for (let vector of this.vectors) {
+            var newX = x + vector[0];
+            var newY = y + vector[1];
+            var tile = this.map.getTile(newX, newY);
+            if (tile !== null && tile.isWalkable() && !this.availableVectors.has(newY * this.map.cols + newX)) {
+                this.searchAvailableVectors(newX, newY);
+            }
+        }
     }
     
     render(context) {
