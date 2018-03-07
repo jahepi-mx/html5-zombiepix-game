@@ -94,17 +94,20 @@ class ZombieKiller extends Entity {
     }
     
     render(context) {
-        //context.fillStyle = "#ff0000";
-        //context.fillRect(this.x, this.y, this.width, this.height);
-        
         context.save();
         context.translate(this.x + this.width / 2, this.y + this.height / 2);
-        context.rotate(Math.atan2(this.y - this.cursor.y, this.x - this.cursor.x) - Math.PI / 2);       
+        context.rotate(Math.atan2(this.y - this.cursor.y, this.x - this.cursor.x) + Math.PI);       
         if (Math.abs(this.xVelocity) <= 15 && Math.abs(this.yVelocity) <= 15) { 
-            var image = "player";
+            var image = "new_zk";
+            if (this.cursor.isPressed) {
+                image = "new_zk_walk_shoot_1";
+            }
             context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, -this.width / 2, -this.height / 2, this.width, this.height);
         } else {
-            var frame = "player_walk_" + (this.walkAnimation.getFrame() + 1);
+            var frame = "new_zk_walk_" + (this.walkAnimation.getFrame() + 1);
+            if (this.cursor.isPressed) {
+                frame = "new_zk_walk_shoot_" + (this.walkAnimation.getFrame() + 1);
+            }
             context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[frame].x, this.atlas.sprites[frame].y, this.atlas.sprites[frame].width, this.atlas.sprites[frame].height, -this.width / 2, -this.height / 2, this.width, this.height);
         }
         context.restore();
