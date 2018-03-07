@@ -46,7 +46,7 @@ class ZombieKiller extends Entity {
         if (this.cursor.isPressed) {
             if (this.shootTime >= this.shootTimeLimit) {
                 this.shootTime = 0;
-                var radians = Math.atan2(this.cursor.y - this.y, this.cursor.x - this.x);
+                var radians = Math.atan2(this.cursor.y - (this.y + this.height / 2), this.cursor.x - (this.x + this.width / 2));
                 var bulletSize = 20;
                 var bulletX = this.left() + this.width / 2 - bulletSize / 2;
                 var bulletY = this.top() + this.height / 2 - bulletSize / 2;
@@ -96,7 +96,7 @@ class ZombieKiller extends Entity {
     render(context) {
         context.save();
         context.translate(this.x + this.width / 2, this.y + this.height / 2);
-        context.rotate(Math.atan2(this.y - this.cursor.y, this.x - this.cursor.x) + Math.PI);       
+        context.rotate(Math.atan2(this.y + this.height / 2 - this.cursor.y, this.x + this.width / 2 - this.cursor.x) + Math.PI);       
         if (Math.abs(this.xVelocity) <= 15 && Math.abs(this.yVelocity) <= 15) { 
             var image = "new_zk";
             if (this.cursor.isPressed) {
