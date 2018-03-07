@@ -1,36 +1,48 @@
 <TextureAtlas imagePath="sprites.png">
-	<SubTexture name="barrel_1.png" x="102" y="408" width="32" height="32"/>
-	<SubTexture name="barrel_2.png" x="204" y="340" width="32" height="32"/>
-	<SubTexture name="barrel_3.png" x="238" y="272" width="32" height="32"/>
-	<SubTexture name="blood_1.png" x="238" y="238" width="32" height="32"/>
-	<SubTexture name="blood_2.png" x="238" y="204" width="32" height="32"/>
-	<SubTexture name="blood_3.png" x="238" y="170" width="32" height="32"/>
-	<SubTexture name="blood_4.png" x="238" y="136" width="32" height="32"/>
-	<SubTexture name="blood_5.png" x="238" y="102" width="32" height="32"/>
-	<SubTexture name="blood_6.png" x="238" y="68" width="32" height="32"/>
-	<SubTexture name="bodypart_1.png" x="238" y="34" width="32" height="32"/>
-	<SubTexture name="bodypart_2.png" x="238" y="0" width="32" height="32"/>
-	<SubTexture name="bodypart_3.png" x="204" y="476" width="32" height="32"/>
-	<SubTexture name="bodypart_4.png" x="204" y="442" width="32" height="32"/>
-	<SubTexture name="bodypart_5.png" x="204" y="408" width="32" height="32"/>
-	<SubTexture name="bullet.png" x="238" y="315" width="5" height="5"/>
-	<SubTexture name="crate.png" x="204" y="306" width="32" height="32"/>
-	<SubTexture name="crate_destroyed.png" x="204" y="374" width="32" height="32"/>
-	<SubTexture name="explosion_1.png" x="204" y="272" width="32" height="32"/>
-	<SubTexture name="explosion_10.png" x="170" y="476" width="32" height="32"/>
-	<SubTexture name="explosion_11.png" x="170" y="442" width="32" height="32"/>
-	<SubTexture name="explosion_12.png" x="170" y="408" width="32" height="32"/>
-	<SubTexture name="explosion_2.png" x="204" y="238" width="32" height="32"/>
-	<SubTexture name="explosion_3.png" x="204" y="204" width="32" height="32"/>
-	<SubTexture name="explosion_4.png" x="204" y="170" width="32" height="32"/>
-	<SubTexture name="explosion_5.png" x="204" y="136" width="32" height="32"/>
-	<SubTexture name="explosion_6.png" x="204" y="102" width="32" height="32"/>
-	<SubTexture name="explosion_7.png" x="204" y="68" width="32" height="32"/>
-	<SubTexture name="explosion_8.png" x="204" y="34" width="32" height="32"/>
-	<SubTexture name="explosion_9.png" x="204" y="0" width="32" height="32"/>
-	<SubTexture name="eye.png" x="170" y="340" width="32" height="32"/>
-	<SubTexture name="eye_pupil.png" x="238" y="306" width="7" height="7"/>
-	<SubTexture name="floor.png" x="170" y="306" width="32" height="32"/>
+	<SubTexture name="barrel_1.png" x="136" y="68" width="32" height="32"/>
+	<SubTexture name="barrel_2.png" x="238" y="68" width="32" height="32"/>
+	<SubTexture name="barrel_3.png" x="238" y="136" width="32" height="32"/>
+	<SubTexture name="blood_1.png" x="272" y="34" width="32" height="32"/>
+	<SubTexture name="blood_2.png" x="272" y="0" width="32" height="32"/>
+	<SubTexture name="blood_3.png" x="238" y="476" width="32" height="32"/>
+	<SubTexture name="blood_4.png" x="238" y="442" width="32" height="32"/>
+	<SubTexture name="blood_5.png" x="238" y="408" width="32" height="32"/>
+	<SubTexture name="blood_6.png" x="238" y="374" width="32" height="32"/>
+	<SubTexture name="bodypart_1.png" x="238" y="340" width="32" height="32"/>
+	<SubTexture name="bodypart_2.png" x="238" y="306" width="32" height="32"/>
+	<SubTexture name="bodypart_3.png" x="238" y="272" width="32" height="32"/>
+	<SubTexture name="bodypart_4.png" x="238" y="238" width="32" height="32"/>
+	<SubTexture name="bodypart_5.png" x="238" y="204" width="32" height="32"/>
+	<SubTexture name="bullet.png" x="272" y="77" width="5" height="5"/>
+	<SubTexture name="crate.png" x="238" y="102" width="32" height="32"/>
+	<SubTexture name="crate_destroyed.png" x="238" y="170" width="32" height="32"/>
+	<SubTexture name="explosion_1.png" x="204" y="170" width="32" height="32"/>
+	<SubTexture name="explosion_10.png" x="204" y="272" width="32" height="32"/>
+	<SubTexture name="explosion_11.png" x="204" y="238" width="32" height="32"/>
+	<SubTexture name="explosion_12.png" x="204" y="204" width="32" height="32"/>
+	<SubTexture name="explosion_2.png" x="238" y="34" width="32" height="32"/>
+	<SubTexture name="explosion_3.png" x="238" y="0" width="32" height="32"/>
+	<SubTexture name="explosion_4.png" x="204" y="476" width="32" height="32"/>
+	<SubTexture name="explosion_5.png" x="204" y="442" width="32" height="32"/>
+	<SubTexture name="explosion_6.png" x="204" y="408" width="32" height="32"/>
+	<SubTexture name="explosion_7.png" x="204" y="374" width="32" height="32"/>
+	<SubTexture name="explosion_8.png" x="204" y="340" width="32" height="32"/>
+	<SubTexture name="explosion_9.png" x="204" y="306" width="32" height="32"/>
+	<SubTexture name="eye.png" x="204" y="136" width="32" height="32"/>
+	<SubTexture name="eye_pupil.png" x="272" y="68" width="7" height="7"/>
+	<SubTexture name="floor.png" x="204" y="102" width="32" height="32"/>
+	<SubTexture name="new_bullet.png" x="272" y="84" width="4" height="4"/>
+	<SubTexture name="new_bullet_explo_1.png" x="204" y="68" width="32" height="32"/>
+	<SubTexture name="new_bullet_explo_2.png" x="204" y="34" width="32" height="32"/>
+	<SubTexture name="new_zk.png" x="170" y="476" width="32" height="32"/>
+	<SubTexture name="new_zk_walk_1.png" x="170" y="476" width="32" height="32"/>
+	<SubTexture name="new_zk_walk_2.png" x="170" y="442" width="32" height="32"/>
+	<SubTexture name="new_zk_walk_3.png" x="170" y="476" width="32" height="32"/>
+	<SubTexture name="new_zk_walk_4.png" x="170" y="408" width="32" height="32"/>
+	<SubTexture name="new_zk_walk_shoot_1.png" x="170" y="374" width="32" height="32"/>
+	<SubTexture name="new_zk_walk_shoot_2.png" x="170" y="340" width="32" height="32"/>
+	<SubTexture name="new_zk_walk_shoot_3.png" x="170" y="374" width="32" height="32"/>
+	<SubTexture name="new_zk_walk_shoot_4.png" x="170" y="306" width="32" height="32"/>
 	<SubTexture name="player.png" x="170" y="136" width="32" height="32"/>
 	<SubTexture name="player_walk_1.png" x="170" y="272" width="32" height="32"/>
 	<SubTexture name="player_walk_2.png" x="170" y="238" width="32" height="32"/>
@@ -41,17 +53,17 @@
 	<SubTexture name="splinter_3.png" x="170" y="34" width="32" height="32"/>
 	<SubTexture name="splinter_4.png" x="170" y="0" width="32" height="32"/>
 	<SubTexture name="tile_0.png" x="136" y="476" width="32" height="32"/>
-	<SubTexture name="tile_1.png" x="170" y="306" width="32" height="32"/>
+	<SubTexture name="tile_1.png" x="204" y="102" width="32" height="32"/>
 	<SubTexture name="tile_10.png" x="136" y="170" width="32" height="32"/>
 	<SubTexture name="tile_11.png" x="136" y="136" width="32" height="32"/>
 	<SubTexture name="tile_12.png" x="136" y="102" width="32" height="32"/>
-	<SubTexture name="tile_13.png" x="136" y="68" width="32" height="32"/>
+	<SubTexture name="tile_13.png" x="204" y="0" width="32" height="32"/>
 	<SubTexture name="tile_14.png" x="136" y="306" width="32" height="32"/>
 	<SubTexture name="tile_15.png" x="136" y="34" width="32" height="32"/>
 	<SubTexture name="tile_16.png" x="136" y="0" width="32" height="32"/>
 	<SubTexture name="tile_17.png" x="102" y="476" width="32" height="32"/>
 	<SubTexture name="tile_18.png" x="102" y="442" width="32" height="32"/>
-	<SubTexture name="tile_19.png" x="170" y="374" width="32" height="32"/>
+	<SubTexture name="tile_19.png" x="102" y="408" width="32" height="32"/>
 	<SubTexture name="tile_2.png" x="136" y="442" width="32" height="32"/>
 	<SubTexture name="tile_20.png" x="102" y="374" width="32" height="32"/>
 	<SubTexture name="tile_21.png" x="102" y="340" width="32" height="32"/>

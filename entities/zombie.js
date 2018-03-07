@@ -86,7 +86,7 @@ class Zombie extends Entity {
         }
         
         for (let bullet of this.zombieKiller.bullets) {
-            if (this.collide(bullet)) {
+            if (!bullet.collided && this.collide(bullet)) {
                 bullet.collided = true;
                 if (this.health % 3 === 0) {
                     this.blood.push(new Blood(this.left(), this.top(), this.width, this.height));

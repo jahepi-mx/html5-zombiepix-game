@@ -84,7 +84,7 @@ class ZombieKiller extends Entity {
         
         for (var a = 0; a < this.bullets.length; a++) {
             this.bullets[a].update(deltatime);
-            if (this.bullets[a].collided) {
+            if (this.bullets[a].dispose) {
                 this.bullets.splice(a--, 1);
             }
         }
