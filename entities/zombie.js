@@ -18,8 +18,8 @@ class Zombie extends Entity {
         this.isNewPosition = true;
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
-        this.walkAnimation = new Animation(4, 2);
-        this.attackAnimation = new Animation(6, 2);
+        this.walkAnimation = new Animation(8, 2);
+        this.attackAnimation = new Animation(5, 2);
         this.rotation = 0;
         this.health = 10;
         this.maxHealth = this.health;
@@ -227,12 +227,12 @@ class Zombie extends Entity {
             diffY = this.top() - this.zombieKiller.top();
             var attackDistance = 8000;
             if (diffX * diffX + diffY * diffY <= attackDistance) {
-                image = "zombie_attack_" + this.rotation + "_" + (this.attackAnimation.getFrame() + 1);          
+                image = "new_zombie_attack_" + this.rotation + "_" + (this.attackAnimation.getFrame() + 1);          
             } else {
-                image = "zombie_" + this.rotation;
+                image = "new_zombie_" + this.rotation;
             }
         } else {         
-            image = "zombie_walk_" + this.rotation + "_" + (this.walkAnimation.getFrame() + 1);
+            image = "new_zombie_walk_" + this.rotation + "_" + (this.walkAnimation.getFrame() + 1);
         }      
         context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.x + this.camera.offsetX, this.y + this.camera.offsetY, this.width, this.height);
     }
