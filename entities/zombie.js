@@ -101,7 +101,7 @@ class Zombie extends Entity {
     kill(fromExplosion) {
         this.health = 0;
         this.isDead = true;
-        for (var a = 0; a < 3; a++) {
+        for (var a = 0; a < 4; a++) {
             var bodypart = new ZombieBodyPart(this.left(), this.top(), this.width, this.height, this.map);
             if (fromExplosion) {
                 bodypart.velocityX = 900;

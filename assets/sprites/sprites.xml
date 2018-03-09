@@ -1,16 +1,27 @@
 <TextureAtlas imagePath="sprites.png">
-	<SubTexture name="blood_1.png" x="136" y="170" width="32" height="32"/>
-	<SubTexture name="blood_2.png" x="272" y="272" width="32" height="32"/>
-	<SubTexture name="blood_3.png" x="272" y="238" width="32" height="32"/>
-	<SubTexture name="blood_4.png" x="272" y="170" width="32" height="32"/>
-	<SubTexture name="blood_5.png" x="272" y="306" width="32" height="32"/>
-	<SubTexture name="blood_6.png" x="272" y="204" width="32" height="32"/>
-	<SubTexture name="bodypart_1.png" x="272" y="136" width="32" height="32"/>
-	<SubTexture name="bodypart_2.png" x="238" y="442" width="32" height="32"/>
-	<SubTexture name="bodypart_3.png" x="272" y="102" width="32" height="32"/>
-	<SubTexture name="bodypart_4.png" x="272" y="68" width="32" height="32"/>
-	<SubTexture name="bodypart_5.png" x="272" y="34" width="32" height="32"/>
-	<SubTexture name="new_bullet.png" x="272" y="340" width="4" height="4"/>
+	<SubTexture name="metal_background.png" x="136" y="374" width="32" height="32"/>
+	<SubTexture name="new_blood_1.png" x="306" y="170" width="32" height="32"/>
+	<SubTexture name="new_blood_2.png" x="306" y="136" width="32" height="32"/>
+	<SubTexture name="new_blood_3.png" x="306" y="68" width="32" height="32"/>
+	<SubTexture name="new_blood_4.png" x="306" y="102" width="32" height="32"/>
+	<SubTexture name="new_bodypart_1.png" x="306" y="34" width="32" height="32"/>
+	<SubTexture name="new_bodypart_10.png" x="272" y="272" width="32" height="32"/>
+	<SubTexture name="new_bodypart_11.png" x="272" y="238" width="32" height="32"/>
+	<SubTexture name="new_bodypart_12.png" x="272" y="204" width="32" height="32"/>
+	<SubTexture name="new_bodypart_13.png" x="272" y="170" width="32" height="32"/>
+	<SubTexture name="new_bodypart_14.png" x="272" y="136" width="32" height="32"/>
+	<SubTexture name="new_bodypart_15.png" x="272" y="102" width="32" height="32"/>
+	<SubTexture name="new_bodypart_16.png" x="272" y="68" width="32" height="32"/>
+	<SubTexture name="new_bodypart_17.png" x="238" y="442" width="32" height="32"/>
+	<SubTexture name="new_bodypart_2.png" x="272" y="408" width="32" height="32"/>
+	<SubTexture name="new_bodypart_3.png" x="306" y="0" width="32" height="32"/>
+	<SubTexture name="new_bodypart_4.png" x="272" y="476" width="32" height="32"/>
+	<SubTexture name="new_bodypart_5.png" x="272" y="442" width="32" height="32"/>
+	<SubTexture name="new_bodypart_6.png" x="272" y="340" width="32" height="32"/>
+	<SubTexture name="new_bodypart_7.png" x="272" y="374" width="32" height="32"/>
+	<SubTexture name="new_bodypart_8.png" x="272" y="34" width="32" height="32"/>
+	<SubTexture name="new_bodypart_9.png" x="272" y="306" width="32" height="32"/>
+	<SubTexture name="new_bullet.png" x="306" y="204" width="4" height="4"/>
 	<SubTexture name="new_bullet_explo_1.png" x="272" y="0" width="32" height="32"/>
 	<SubTexture name="new_bullet_explo_2.png" x="238" y="476" width="32" height="32"/>
 	<SubTexture name="new_crate_0.png" x="238" y="408" width="32" height="32"/>
@@ -34,7 +45,7 @@
 	<SubTexture name="new_eye_8.png" x="204" y="476" width="32" height="32"/>
 	<SubTexture name="new_eye_9.png" x="238" y="34" width="32" height="32"/>
 	<SubTexture name="new_eye_back.png" x="204" y="374" width="32" height="32"/>
-	<SubTexture name="new_eye_pupil.png" x="272" y="346" width="2" height="2"/>
+	<SubTexture name="new_eye_pupil.png" x="306" y="210" width="2" height="2"/>
 	<SubTexture name="new_fuel.png" x="204" y="68" width="32" height="32"/>
 	<SubTexture name="new_fuel_explo_1.png" x="204" y="306" width="32" height="32"/>
 	<SubTexture name="new_fuel_explo_2.png" x="204" y="272" width="32" height="32"/>
@@ -61,13 +72,13 @@
 	<SubTexture name="new_zombie_attack_0_3.png" x="170" y="136" width="32" height="32"/>
 	<SubTexture name="new_zombie_attack_0_4.png" x="170" y="102" width="32" height="32"/>
 	<SubTexture name="new_zombie_attack_0_5.png" x="170" y="68" width="32" height="32"/>
-	<SubTexture name="new_zombie_attack_180_1.png" x="136" y="374" width="32" height="32"/>
+	<SubTexture name="new_zombie_attack_180_1.png" x="204" y="340" width="32" height="32"/>
 	<SubTexture name="new_zombie_attack_180_2.png" x="136" y="340" width="32" height="32"/>
 	<SubTexture name="new_zombie_attack_180_3.png" x="136" y="306" width="32" height="32"/>
 	<SubTexture name="new_zombie_attack_180_4.png" x="136" y="272" width="32" height="32"/>
 	<SubTexture name="new_zombie_attack_180_5.png" x="136" y="238" width="32" height="32"/>
 	<SubTexture name="new_zombie_attack_270_1.png" x="136" y="204" width="32" height="32"/>
-	<SubTexture name="new_zombie_attack_270_2.png" x="204" y="340" width="32" height="32"/>
+	<SubTexture name="new_zombie_attack_270_2.png" x="136" y="170" width="32" height="32"/>
 	<SubTexture name="new_zombie_attack_270_3.png" x="136" y="136" width="32" height="32"/>
 	<SubTexture name="new_zombie_attack_270_4.png" x="136" y="102" width="32" height="32"/>
 	<SubTexture name="new_zombie_attack_270_5.png" x="136" y="68" width="32" height="32"/>

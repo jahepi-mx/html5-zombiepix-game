@@ -10,7 +10,7 @@ class ZombieBodyPart extends Entity {
         this.velocityY = Math.random() * 200 + 300;
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
-        this.type = Math.floor(Math.random() * 5) + 1;
+        this.type = Math.floor(Math.random() * 17) + 1;
         this.camera = Camera.getInstance();
         this.map = map;
     }
@@ -39,7 +39,7 @@ class ZombieBodyPart extends Entity {
     }
     
     render(context) {
-        var image = "bodypart_" + this.type;
+        var image = "new_bodypart_" + this.type;
         context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.x + this.camera.offsetX, this.y + this.camera.offsetY, this.width, this.height);
     }
 }
