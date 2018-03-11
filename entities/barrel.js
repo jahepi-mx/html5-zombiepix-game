@@ -7,7 +7,7 @@ class Barrel extends Tile {
         this.hits = 5;
         this.map = map;
         this.walkable = false;
-        this.animation = new Animation(7, 2);
+        this.animation = new Animation(6, 2);
         this.animation.stopAtSequenceNumber(1, null);
         //this.typeImage = Math.floor(Math.random() * 2) + 1;
         this.hitRatio = 11000;
@@ -19,9 +19,6 @@ class Barrel extends Tile {
             context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.left() + this.camera.offsetX, this.top() + this.camera.offsetY, this.width, this.height);
             if (!this.animation.isStopped()) {
                 image = "new_fuel_explo_" + (this.animation.getFrame() + 1); 
-                context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.left() + this.camera.offsetX, this.top() + this.camera.offsetY, this.width, this.height);
-            } else {
-                image = "new_fuel_explo_7"; 
                 context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.left() + this.camera.offsetX, this.top() + this.camera.offsetY, this.width, this.height);
             }
         } else {
