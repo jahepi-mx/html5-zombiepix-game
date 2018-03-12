@@ -14,7 +14,7 @@ and open the template in the editor.
         </style>
         <script src="entities/entity.js"></script>
         <script src="entities/tile.js"></script>
-        <script src="entities/map.js"></script>
+        <script src="maps/map.js"></script>
         <script src="entities/cursor.js"></script>
         <script src="entities/camera.js"></script>
         <script src="entities/zombiekiller.js"></script>
@@ -30,20 +30,24 @@ and open the template in the editor.
         <script src="utils/atlas.js"></script>
         <script src="utils/animation.js"></script>
         <script src="controller.js"></script>
-        <script src="render.js"></script>
+        <script src="config/config.js"></script>
+        <script src="scenes/scene.js"></script>
+        <script src="scenes/gamescene.js"></script>
+        <script src="scenes/mainscene.js"></script>
+        <script src="ui/button.js"></script>
         <script type="text/javascript">
             var canvas = null;
             var context = null;
             var prevTime = 0;
-            var render = null;
+            var scene = null;
             var cursor = Cursor.getInstance();
             var targetFps = 1 / 60;
             var targetDeltatime = 0;
             
             window.onload = function() {
                 canvas = document.getElementById("canvas");
-                canvas.width = 800;
-                canvas.height = 800;
+                canvas.width = Config.getInstance().canvasWidth;
+                canvas.height = Config.getInstance().canvasHeight;
                 context = canvas.getContext("2d");
                 var assets = Assets.getInstance();
                 assets.loadAll(onLoadAssets);
@@ -57,7 +61,8 @@ and open the template in the editor.
                 if (targetDeltatime >= targetFps) {
                     deltatime = targetDeltatime;
                     targetDeltatime = 0;
-                    render.update(deltatime);
+                    scene.update(deltatime);
+                    scene.render();
                 }
                 window.requestAnimationFrame(update);
             }
@@ -83,14 +88,22 @@ and open the template in the editor.
                     cursor.isPressed = false;
                 });
                 
-                render = new Render(canvas, context);
+                scene = new MainScene(canvas, context, changeScene);
                 var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
                 window.requestAnimationFrame = requestAnimationFrame;
                 window.requestAnimationFrame(update);
             }
+            
+            function changeScene(sceneName) {
+                if (sceneName === "mainscene") {
+                    scene = new MainScene(canvas, context, changeScene);
+                } else if (sceneName === "gamescene") {
+                    scene = new GameScene(canvas, context, changeScene);
+                }
+            }
         </script>
     </head>
-    <body style="background-color: #262626">
+    <body style="background-color: #0f082e">
         <div style="margin: 0 auto; text-align: center">
             <canvas id="canvas"></canvas>
             <span style="font-family: joystix; display: none">Hidden text just for loading font before canvas.</span>

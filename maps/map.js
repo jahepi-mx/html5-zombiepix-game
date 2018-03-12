@@ -8,8 +8,8 @@ class Map {
         
         this.rows = 20;
         this.cols = 20;
-        this.tileWidth = 100;
-        this.tileHeight = 100;
+        this.tileWidth = Config.getInstance().tileWidth;
+        this.tileHeight = Config.getInstance().tileHeight;
         this.width = this.tileWidth * this.cols;
         this.height = this.tileHeight * this.rows;
         this.tileMap = [];
@@ -30,8 +30,8 @@ class Map {
         var zombieKillerWidth = this.tileWidth * 0.8;
         var zombieKillerHeight = this.tileHeight * 0.8;
         
-        var canvasWidth = 800;
-        var canvasHeight = 800;
+        var canvasWidth = Config.getInstance().canvasWidth;
+        var canvasHeight = Config.getInstance().canvasHeight;
         var xOffset = canvasWidth / 2 - zombieKillerWidth / 2;
         var yOffset = canvasHeight / 2 - zombieKillerHeight / 2;
         var origX = 4 * this.tileWidth;

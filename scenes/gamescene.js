@@ -1,23 +1,25 @@
-class Render {
+class GameScene extends Scene {
     
-    constructor(canvas, context) {
+    constructor(canvas, context, onChangeSceneCallback) {
+        super(canvas, context, onChangeSceneCallback);
         this.controller = new Controller();
-        this.context = context;
-        this.canvas = canvas;
+        this.fps = 0;
     }
     
+    
     update(deltatime) {
-        // update game state
         this.controller.update(deltatime);
-        
-        // draw game state
+        this.fps = Math.round(1 / deltatime);
+    }
+    
+    render() {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.context.imageSmoothingEnabled = false;
         this.controller.map.render(this.context);
         this.context.font = "65px joystix";
         this.context.fillStyle = "rgba(255, 0, 255, 255)";
         this.context.textAlign = "center";
-        this.context.fillText(Math.round(1 / deltatime), this.canvas.width - 50, 50);  
+        this.context.fillText(this.fps, this.canvas.width - 50, 50);
     }
 }
 
