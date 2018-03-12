@@ -13,8 +13,8 @@ class GameScene extends Scene {
         this.popUpX = Config.getInstance().canvasWidth / 2 - this.popUpWidth / 2;
         this.popUpY = Config.getInstance().canvasHeight / 2 - this.popUpHeight / 2;
         
-        this.exitButton = new Button(200, 50, "exit", this.popUpX + 50, this.popUpY + this.popUpHeight * 0.6, 60, "#fff", "#ff0000", "#ff00ff");
-        this.tryAgainButton = new Button(200, 50, "try again", this.popUpX + this.popUpWidth - 50, this.popUpY + this.popUpHeight * 0.6, 60, "#fff", "#ff0000", "#ff00ff");
+        this.exitButton = new Button(200, 50, "exit", this.popUpX + 60, this.popUpY + this.popUpHeight * 0.6, 60, "#fff", "#ff0000", "#ff00ff");
+        this.tryAgainButton = new Button(200, 50, "try again", this.popUpX + this.popUpWidth - 250, this.popUpY + this.popUpHeight * 0.6, 60, "#fff", "#ff0000", "#ff00ff");
     }
     
     
@@ -55,10 +55,14 @@ class GameScene extends Scene {
         
         if (this.controller.map.zombieKiller.isDeadForAWhile()) {
             var image = "popup_dead";
+            this.exitButton.visible = this.tryAgainButton.visible = true;
             this.context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.popUpX, this.popUpY, this.popUpWidth, this.popUpHeight);
-            this.exitButton.render(this.context);
-            this.tryAgainButton.render(this.context);
+        } else {
+            this.exitButton.visible = this.tryAgainButton.visible = false;
         }
+        
+        this.exitButton.render(this.context);
+        this.tryAgainButton.render(this.context);
     }
 }
 

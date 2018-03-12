@@ -15,9 +15,20 @@ class Button {
         this.blinkTimeLimit = 0.1;
         this.blink = 0;
         this.isClicked = false;
+        this.visible = true;
     }
     
     update(deltatime) {
+        this.isClicked = false;
+        
+        if (!this.visible) {
+            return;
+        }
+        
+        if (this.isCursorOnButton()) {
+            this.isClicked = this.cursor.isPressed;
+        }
+        
         this.blinkTime += deltatime;
         if (this.blinkTime >= this.blinkTimeLimit) {
             this.blink ^= 1;
@@ -26,18 +37,16 @@ class Button {
     }
     
     render(context) {
-        this.isClicked = false;
+        if (!this.visible) {
+            return;
+        }
         if (this.isCursorOnButton()) {
-            
-            if (this.cursor.isPressed) {
-                this.isClicked = true;
-            } else {
+            if (!this.isClicked) {
                 context.font = this.fontSize + "px joystix";
                 context.fillStyle = this.onColor;
                 context.textAlign = "left";
                 context.fillText(this.text, this.x, this.y);
-            }
-            
+            }         
         } else {
             context.font = this.fontSize + "px joystix";
             context.fillStyle = this.blink === 1 ? this.blinkColor1 : this.blinkColor2;

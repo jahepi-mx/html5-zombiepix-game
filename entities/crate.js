@@ -31,8 +31,10 @@ class Crate extends Tile {
     update(deltatime) {
         if (!this.walkable && this.hits <= 0) {
             this.walkable = true;
-            this.animation.update(deltatime);
             this.map.items.push(new Life(this.left(), this.top(), Config.getInstance().tileWidth * 0.6, Config.getInstance().tileHeight * 0.6, this.map));
+        }
+        if (this.walkable) {
+            this.animation.update(deltatime);
         }
     }  
 }

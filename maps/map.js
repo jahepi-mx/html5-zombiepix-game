@@ -54,7 +54,7 @@ class Map {
         this.zombies.push(new Zombie(9 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 9 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 130));
         
         this.zombies.push(new Zombie(6 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 4 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 130));
-        this.zombies.push(new Zombie(7 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 7 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 170));
+        this.zombies.push(new Zombie(7 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 8 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 170));
         this.zombies.push(new Zombie(7 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 9 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 100));
         
         this.zombies.push(new Zombie(12 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 16 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 180));
