@@ -40,6 +40,10 @@ class Eye extends Entity {
         
         for (var a = 0; a < this.bullets.length; a++) {
             this.bullets[a].update(deltatime);
+            if (this.bullets[a].collide(this.zombieKiller)) {
+                this.bullets[a].collided = true;
+                this.zombieKiller.damage();
+            }
             if (this.bullets[a].dispose) {
                 this.bullets.splice(a--, 1);
             }

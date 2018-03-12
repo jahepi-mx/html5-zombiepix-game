@@ -1,6 +1,6 @@
 class ZombieBodyPart extends Entity {
     
-    constructor(x, y, width, height, map) {
+    constructor(x, y, width, height, map, image) {
         super(x, y, width, height);
         var angle = Math.random() * Math.PI * 2;
         this.xRatio = Math.cos(angle);
@@ -13,6 +13,7 @@ class ZombieBodyPart extends Entity {
         this.type = Math.floor(Math.random() * 17) + 1;
         this.camera = Camera.getInstance();
         this.map = map;
+        this.image = image;
     }
     
     update(deltatime) {
@@ -40,6 +41,9 @@ class ZombieBodyPart extends Entity {
     
     render(context) {
         var image = "new_bodypart_" + this.type;
+        if (this.image !== null) {
+            image = this.image;
+        }
         context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.x + this.camera.offsetX, this.y + this.camera.offsetY, this.width, this.height);
     }
 }

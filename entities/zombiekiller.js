@@ -20,10 +20,23 @@ class ZombieKiller extends Entity {
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
         this.walkAnimation = new Animation(4, 2);
+        this.life = 4;
+        this.isDead = false;
+        this.damageTime = 0;
+        this.damageTimeLimit = 1;
+        this.bodyparts = [];
     }
     
     update(deltatime) {
         
+        if (this.isDead) {
+            for (let bodypart of this.bodyparts) {
+                bodypart.update(deltatime);
+            }
+            return;
+        }
+        
+        this.damageTime += deltatime;
         this.shootTime += deltatime;
         this.walkAnimation.update(deltatime);
         
@@ -94,6 +107,14 @@ class ZombieKiller extends Entity {
     }
     
     render(context) {
+        
+        if (this.isDead) {
+            for (let bodypart of this.bodyparts) {
+                bodypart.render(context);
+            }
+            return;
+        }
+        
         context.save();
         context.translate(this.x + this.width / 2, this.y + this.height / 2);
         context.rotate(Math.atan2(this.y + this.height / 2 - this.cursor.y, this.x + this.width / 2 - this.cursor.x) + Math.PI);       
@@ -155,6 +176,25 @@ class ZombieKiller extends Entity {
     
     currentY() {
         return Math.floor(this.top() / this.map.tileHeight);
+    }
+    
+    damage() {
+        if (this.damageTime >= this.damageTimeLimit) {
+            this.damageTime = 0;
+            this.life--;
+            if (this.life <= 0) {
+                if (!this.isDead) {
+                    for (var a = 1; a <= 4; a++) {
+                        var bodypart = new ZombieBodyPart(this.left(), this.top(), this.width, this.height, this.map, "human_bodypart_" + a);
+                        bodypart.velocityX = 900;
+                        bodypart.velocityY = 900;
+                        this.bodyparts.push(bodypart);
+                    }
+                }
+                this.life = 0;
+                this.isDead = true;
+            }
+        }
     }
 }
 
