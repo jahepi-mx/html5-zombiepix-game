@@ -147,7 +147,6 @@ class Map {
         
         this.eye.update(deltatime);
         
-        console.log(this.items.length);
         for (var a = 0; a < this.items.length; a++) {
             this.items[a].update(deltatime);
             if (this.items[a].dispose) {

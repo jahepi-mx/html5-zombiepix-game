@@ -14,13 +14,23 @@ class GameScene extends Scene {
         this.popUpY = Config.getInstance().canvasHeight / 2 - this.popUpHeight / 2;
         
         this.exitButton = new Button(200, 50, "exit", this.popUpX + 50, this.popUpY + this.popUpHeight * 0.6, 60, "#fff", "#ff0000", "#ff00ff");
+        this.tryAgainButton = new Button(200, 50, "try again", this.popUpX + this.popUpWidth - 50, this.popUpY + this.popUpHeight * 0.6, 60, "#fff", "#ff0000", "#ff00ff");
     }
     
     
     update(deltatime) {
         this.controller.update(deltatime);
         this.exitButton.update(deltatime);
+        this.tryAgainButton.update(deltatime);
         this.fps = Math.round(1 / deltatime);
+        
+        if (this.exitButton.isClicked) {
+            this.onChangeSceneCallback("mainscene");
+        }
+        
+        if (this.tryAgainButton.isClicked) {
+            this.controller.reset();
+        }
     }
     
     render() {
@@ -47,6 +57,7 @@ class GameScene extends Scene {
             var image = "popup_dead";
             this.context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.popUpX, this.popUpY, this.popUpWidth, this.popUpHeight);
             this.exitButton.render(this.context);
+            this.tryAgainButton.render(this.context);
         }
     }
 }
