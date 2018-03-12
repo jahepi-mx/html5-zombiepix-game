@@ -57,7 +57,7 @@ class Zombie extends Entity {
             var vector = this.vectorsPath.pop();
             this.toX = (vector % this.map.cols) * this.map.tileWidth;
             this.toY = Math.floor(vector / this.map.cols) * this.map.tileHeight;
-            console.log((vector % this.map.cols) + ", " + Math.floor(vector / this.map.cols));
+            //console.log((vector % this.map.cols) + ", " + Math.floor(vector / this.map.cols));
             this.isNewPosition = false;
         }
         

@@ -2,12 +2,13 @@ let CRATE_TYPE = 44;
 
 class Crate extends Tile {
     
-    constructor(x, y, width, height, type) {
+    constructor(x, y, width, height, type, map) {
         super(x, y, width, height, type);
         this.hits = 5;
         this.walkable = false;
         this.animation = new Animation(3, 6);
         this.animation.stopAtSequenceNumber(1, null);
+        this.map = map;
     }
     
     render(context) {
@@ -28,9 +29,10 @@ class Crate extends Tile {
     }
     
     update(deltatime) {
-        if (this.hits <= 0) {
+        if (!this.walkable && this.hits <= 0) {
             this.walkable = true;
             this.animation.update(deltatime);
+            this.map.items.push(new Life(this.left(), this.top(), Config.getInstance().tileWidth * 0.6, Config.getInstance().tileHeight * 0.6, this.map));
         }
     }  
 }

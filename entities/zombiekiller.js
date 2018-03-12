@@ -179,17 +179,15 @@ class ZombieKiller extends Entity {
     }
     
     damage() {
-        if (this.damageTime >= this.damageTimeLimit) {
+        if (!this.isDead && this.damageTime >= this.damageTimeLimit) {
             this.damageTime = 0;
             this.life--;
             if (this.life <= 0) {
-                if (!this.isDead) {
-                    for (var a = 1; a <= 4; a++) {
-                        var bodypart = new ZombieBodyPart(this.left(), this.top(), this.width, this.height, this.map, "human_bodypart_" + a);
-                        bodypart.velocityX = 900;
-                        bodypart.velocityY = 900;
-                        this.bodyparts.push(bodypart);
-                    }
+                for (var a = 1; a <= 4; a++) {
+                    var bodypart = new ZombieBodyPart(this.left(), this.top(), this.width, this.height, this.map, "human_bodypart_" + a);
+                    bodypart.velocityX = 900;
+                    bodypart.velocityY = 900;
+                    this.bodyparts.push(bodypart);
                 }
                 this.life = 0;
                 this.isDead = true;

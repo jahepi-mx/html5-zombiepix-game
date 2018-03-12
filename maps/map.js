@@ -19,7 +19,7 @@ class Map {
             var x = a % this.cols;
             var y = Math.floor(a / this.cols);
             if (this.map[a] === CRATE_TYPE) {
-                this.tileMap[a] = new Crate(x, y, this.tileWidth, this.tileHeight, this.map[a]);
+                this.tileMap[a] = new Crate(x, y, this.tileWidth, this.tileHeight, this.map[a], this);
             } else if (this.map[a] === BARREL_TYPE) {
                 this.tileMap[a] = new Barrel(x, y, this.tileWidth, this.tileHeight, this.map[a], this);
             } else {
@@ -68,7 +68,8 @@ class Map {
         
         var eyeSize = this.tileWidth * 1.2;
         this.eye = new Eye(9 * this.tileWidth + this.tileWidth / 2 - eyeSize / 2, 13 * this.tileHeight + this.tileHeight / 2 - eyeSize / 2, eyeSize, eyeSize, this);
-    
+        
+        this.items = [];
     }
     
     render(context) {
@@ -100,6 +101,10 @@ class Map {
         }
         this.eye.render(context);
         this.zombieKiller.render(context);
+        
+        for (let item of this.items) {
+            item.render(context);
+        }
     }
     
     update(deltatime) {
@@ -141,6 +146,14 @@ class Map {
         }
         
         this.eye.update(deltatime);
+        
+        console.log(this.items.length);
+        for (var a = 0; a < this.items.length; a++) {
+            this.items[a].update(deltatime);
+            if (this.items[a].dispose) {
+                this.items.splice(a--, 1);
+            }
+        }
     }
     
     getTile(x, y) {

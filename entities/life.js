@@ -1,22 +1,27 @@
-class ZombieBodyPart extends Entity {
+class Life extends Entity {
     
-    constructor(x, y, width, height, map, image) {
+    constructor(x, y, width, height, map) {
         super(x, y, width, height);
-        var angle = Math.random() * Math.PI * 2;
-        this.xRatio = Math.cos(angle);
-        this.yRatio = Math.sin(angle);
-        this.friction = 0.8 + (0.12 * Math.random());
-        this.velocityX = Math.random() * 200 + 300;
-        this.velocityY = Math.random() * 200 + 300;
+        this.radians = Math.PI * 2 * Math.random();
+        this.xRatio = Math.cos(this.radians);
+        this.yRatio = Math.sin(this.radians);
+        this.velocityX = 600;
+        this.velocityY = 600;
+        this.friction = 0.91;
+        this.dispose = false;
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
-        this.type = Math.floor(Math.random() * 17) + 1;
         this.camera = Camera.getInstance();
         this.map = map;
-        this.image = image;
     }
     
     update(deltatime) {
+        
+        if (this.map.zombieKiller.collide(this)) {
+            this.dispose = true;
+            this.map.zombieKiller.life++;
+        }
+        
         var tmpX = this.x;
         this.x += this.xRatio * this.velocityX * deltatime;
         var x = Math.floor((this.left() + this.width / 2) / this.map.tileWidth);
@@ -42,11 +47,9 @@ class ZombieBodyPart extends Entity {
     }
     
     render(context) {
-        var image = "new_bodypart_" + this.type;
-        if (this.image !== null) {
-            image = this.image;
-        }
+        var image = "life";
         context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.x + this.camera.offsetX, this.y + this.camera.offsetY, this.width, this.height);
     }
 }
+
 
