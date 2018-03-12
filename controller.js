@@ -43,4 +43,9 @@ class Controller {
             this.zombieKiller.moveDown(false);
         }
     }
+    
+    reset() {
+        this.map = new Map();
+        this.zombieKiller = this.map.zombieKiller;
+    }
 }

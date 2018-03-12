@@ -24,12 +24,14 @@ class ZombieKiller extends Entity {
         this.isDead = false;
         this.damageTime = 0;
         this.damageTimeLimit = 1;
+        this.deadTime = 0;
         this.bodyparts = [];
     }
     
     update(deltatime) {
         
         if (this.isDead) {
+            this.deadTime += deltatime;
             for (let bodypart of this.bodyparts) {
                 bodypart.update(deltatime);
             }
@@ -193,6 +195,10 @@ class ZombieKiller extends Entity {
                 this.isDead = true;
             }
         }
+    }
+    
+    isDeadForAWhile() {
+        return this.deadTime >= 2;
     }
 }
 
