@@ -75,4 +75,10 @@ class MovingEye extends Entity {
         width = this.health / this.maxHealth * this.width * 0.7;
         context.fillRect(this.left() + this.camera.offsetX + this.width / 2 - width / 2, this.top() + this.camera.offsetY - 10, width, 10);
     }
+    
+    damage() {
+        if (--this.health <= 0) {
+            this.isDead = true;
+        }
+    }
 }

@@ -87,20 +87,17 @@ class Zombie extends Entity {
             this.isNewPosition = true;
         }
         
-        for (let bullet of this.zombieKiller.bullets) {
-            if (!bullet.collided && this.collide(bullet)) {
-                bullet.collided = true;
-                if (this.health % 3 === 0) {
-                    this.blood.push(new Blood(this.left(), this.top(), this.width, this.height));
-                }
-                if (--this.health <= 0) {
-                    this.kill(false);
-                }
-            }
-        }
-        
         if (this.collide(this.zombieKiller)) {
             this.zombieKiller.damage();
+        }
+    }
+    
+    damage() {
+        if (this.health % 3 === 0) {
+            this.blood.push(new Blood(this.left(), this.top(), this.width, this.height));
+        }
+        if (--this.health <= 0) {
+            this.kill(false);
         }
     }
     

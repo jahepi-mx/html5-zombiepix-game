@@ -132,6 +132,15 @@ class Map {
         
         this.zombieKiller.update(deltatime);
 
+        for (let bullet of this.zombieKiller.bullets) {
+            for (let enemy of this.enemies) {
+                if (!bullet.collided && enemy.collide(bullet)) {
+                    bullet.collided = true;
+                    enemy.damage();
+                }
+            }
+        }
+        
         for (var a = 0; a < this.enemies.length; a++) {
             this.enemies[a].update(deltatime);
             if (this.enemies[a].isDead) {

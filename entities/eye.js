@@ -79,6 +79,10 @@ class Eye extends Entity {
             bullet.render(context);
         }
     }
+    
+    damage() {
+        
+    }
 }
 
 
