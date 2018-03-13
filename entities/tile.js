@@ -1,8 +1,7 @@
 class Tile extends Entity {
     
     constructor(x, y, width, height, type) {
-        super(x, y, width, height);
-        this.type = type;
+        super(x, y, width, height, type);
         this.camera = Camera.getInstance();
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();

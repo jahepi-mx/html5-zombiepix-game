@@ -2,8 +2,8 @@ let BARREL_TYPE = 45;
 
 class Barrel extends Tile {
     
-    constructor(x, y, width, height, type, map) {
-        super(x, y, width, height, type);
+    constructor(x, y, width, height, map) {
+        super(x, y, width, height, BARREL_TYPE);
         this.hits = 5;
         this.map = map;
         this.walkable = false;
@@ -36,12 +36,14 @@ class Barrel extends Tile {
     update(deltatime) {
         if (this.hits <= 0) {
             if (!this.walkable) {
-                for (let zombie of this.map.zombies) {
-                    var diffX = zombie.left() - this.left();
-                    var diffY = zombie.top() - this.top();
-                    //console.log(diffX * diffX + diffY * diffY);
-                    if (diffX * diffX + diffY * diffY <= this.hitRatio) {
-                        zombie.kill(true);
+                for (let enemy of this.map.enemies) {
+                    if (enemy.type === ZOMBYE_TYPE) {
+                        var diffX = enemy.left() - this.left();
+                        var diffY = enemy.top() - this.top();
+                        //console.log(diffX * diffX + diffY * diffY);
+                        if (diffX * diffX + diffY * diffY <= this.hitRatio) {
+                            enemy.kill(true);
+                        }
                     }
                 }
             }

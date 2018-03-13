@@ -1,7 +1,9 @@
+let BLOOD_TYPE = 2;
+
 class Blood extends Entity {
     
     constructor(x, y, width, height) {
-        super(x, y, width, height);
+        super(x, y, width, height, BLOOD_TYPE);
         var angle = Math.random() * Math.PI * 2;
         this.xRatio = Math.cos(angle) * (Math.random() * 40 + 40);
         this.yRatio = Math.sin(angle) * (Math.random() * 40 + 40);

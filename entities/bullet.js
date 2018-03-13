@@ -1,7 +1,9 @@
+let BULLET_TYPE = 4;
+
 class Bullet extends Entity {
     
     constructor(x, y, width, height, radians, map) {
-        super(x, y, width, height);
+        super(x, y, width, height, BULLET_TYPE);
         this.camera = Camera.getInstance();
         this.xRatio = Math.cos(radians);
         this.yRatio = Math.sin(radians);

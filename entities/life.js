@@ -1,7 +1,9 @@
+let LIFE_TYPE = 16;
+
 class Life extends Entity {
     
     constructor(x, y, width, height, map) {
-        super(x, y, width, height);
+        super(x, y, width, height, LIFE_TYPE);
         this.radians = Math.PI * 2 * Math.random();
         this.xRatio = Math.cos(this.radians);
         this.yRatio = Math.sin(this.radians);

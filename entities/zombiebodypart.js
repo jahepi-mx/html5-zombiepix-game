@@ -1,7 +1,9 @@
+let BODYPART_TYPE = 64;
+
 class ZombieBodyPart extends Entity {
     
     constructor(x, y, width, height, map, image) {
-        super(x, y, width, height);
+        super(x, y, width, height, BODYPART_TYPE);
         var angle = Math.random() * Math.PI * 2;
         this.xRatio = Math.cos(angle);
         this.yRatio = Math.sin(angle);

@@ -1,7 +1,9 @@
+let ZOMBIEKILLER_TYPE = 128;
+
 class ZombieKiller extends Entity {
     
     constructor(x, y, width, height, map) {
-        super(x, y, width, height);    
+        super(x, y, width, height, ZOMBIEKILLER_TYPE);    
         this.map = map;
         this.isLeft = false;
         this.isRight = false;

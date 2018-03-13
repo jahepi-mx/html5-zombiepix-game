@@ -2,8 +2,8 @@ let CRATE_TYPE = 44;
 
 class Crate extends Tile {
     
-    constructor(x, y, width, height, type, map) {
-        super(x, y, width, height, type);
+    constructor(x, y, width, height, map) {
+        super(x, y, width, height, CRATE_TYPE);
         this.hits = 5;
         this.walkable = false;
         this.animation = new Animation(3, 6);

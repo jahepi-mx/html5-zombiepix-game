@@ -1,7 +1,9 @@
+let ZOMBYE_TYPE = 1;
+
 class Zombie extends Entity {  
     
     constructor(x, y, width, height, map, speed) {
-        super(x, y, width, height);
+        super(x, y, width, height, ZOMBYE_TYPE);
         this.map = map;
         this.zombieKiller = this.map.zombieKiller;
         this.camera = Camera.getInstance();
