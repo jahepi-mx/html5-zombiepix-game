@@ -10,7 +10,7 @@ class MovingEye extends Entity {
         this.xRatio = Math.cos(radians);
         this.yRatio = Math.sin(radians);
         this.velocity = 200;
-        this.vectorMoves = [[0, 0], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1]];
+        this.vectors = [[0, 0], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1]];
         this.health = 10;
         this.maxHealth = this.health;
         this.camera = Camera.getInstance();
@@ -25,7 +25,7 @@ class MovingEye extends Entity {
         this.x += this.velocity * this.xRatio * deltatime;
         var currentX = Math.floor(this.x / this.map.tileWidth);
         var currentY = Math.floor(this.y / this.map.tileHeight);
-        for (let vector of this.vectorMoves) {
+        for (let vector of this.vectors) {
             var newX = currentX + vector[0];
             var newY = currentY + vector[1];
             var tile = this.map.getTile(newX, newY);
@@ -39,7 +39,7 @@ class MovingEye extends Entity {
         this.y += this.velocity * this.yRatio * deltatime;
         currentX = Math.floor(this.x / this.map.tileWidth);
         currentY = Math.floor(this.y / this.map.tileHeight);
-        for (let vector of this.vectorMoves) {
+        for (let vector of this.vectors) {
             var newX = currentX + vector[0];
             var newY = currentY + vector[1];
             var tile = this.map.getTile(newX, newY);
