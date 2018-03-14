@@ -15,12 +15,34 @@ class ZombieSnake extends Entity {
         this.assets = Assets.getInstance();
         this.changeLengthTime = 0;
         this.changeLengthTimeLimit = 3;
-        for (var a = 0; a < 4; a++) {
-            this.bodyParts.push(new ZombieSnakePart(x, y, width, height, map));
+        this.maxHealth = 0;
+        this.health = 0;
+        this.shootTime = 0;
+        this.shootTimeLimit = 0.5;
+        this.bullets = [];
+        
+        for (var a = 0; a < 7; a++) {
+            var bodyPart = new ZombieSnakePart(x, y, width, height, map);
+            this.bodyParts.push(bodyPart);
+            this.maxHealth += bodyPart.health;
         }
     }
     
     update(deltatime) {
+        
+        this.shootTime += deltatime;
+        
+        if (this.shootTime >= this.shootTimeLimit) {
+            this.shootTime = 0;
+            var bulletSize = 40;
+            if (this.bodyParts.length > 0) {
+                var bodyPart = this.bodyParts[this.bodyParts.length - 1];
+                var x = bodyPart.left() + bodyPart.width / 2 - bulletSize / 2;
+                var y = bodyPart.top() + bodyPart.height / 2 - bulletSize / 2;
+                var radians = Math.atan2(this.zombieKiller.top() - y, this.zombieKiller.left() - x);
+                this.bullets.push(new EyeBullet(x, y, bulletSize, bulletSize, radians, this.map));
+            }
+        }
         
         this.changeLengthTime += deltatime;
         if (this.changeLengthTime >= this.changeLengthTimeLimit) {
@@ -42,24 +64,66 @@ class ZombieSnake extends Entity {
                 
         this.radians += (radians - this.radians) * deltatime;
        
+        this.health = 0;
         var cos = Math.cos(this.radians);
         var sin = Math.sin(this.radians);
         var n = 1;
         var delta = deltatime;
-        for (let bodyPart of this.bodyParts) {
-            bodyPart.xRatio = cos;
-            bodyPart.yRatio = sin;
-            bodyPart.lengthMovementSpeed = delta;
-            bodyPart.toLength = this.length / this.bodyParts.length * n++;
+        
+        for (var a = 0; a < this.bodyParts.length; a++) {
+            var bodyPart = this.bodyParts[a];
+            this.health += bodyPart.health;
             bodyPart.update(deltatime);
-            delta *= 1.1;
+            if (bodyPart.isDead) {
+                this.bodyParts.splice(a--, 1);
+            } else {
+                bodyPart.xRatio = cos;
+                bodyPart.yRatio = sin;
+                bodyPart.lengthMovementSpeed = delta;
+                bodyPart.toLength = this.length / this.bodyParts.length * n++;
+                bodyPart.update(deltatime);
+                delta *= 1.1;
+                if (bodyPart.collide(this.zombieKiller)) {
+                    this.zombieKiller.damage();
+                }
+            }
+        }
+        
+        for (var a = 0; a < this.bullets.length; a++) {
+            this.bullets[a].update(deltatime);
+            if (this.bullets[a].collide(this.zombieKiller)) {
+                this.bullets[a].collided = true;
+                this.zombieKiller.damage();
+            }
+            if (this.bullets[a].dispose) {
+                this.bullets.splice(a--, 1);
+            }
         }
     }
     
     render(context) {
+        context.fillStyle = "#ff0000";
+        var width = this.health / this.maxHealth * this.width * 0.7;
+        context.fillRect(this.left() + this.camera.offsetX + this.width / 2 - width / 2, this.top() + this.camera.offsetY - 10, width, 10);
+        
         for (let bodyPart of this.bodyParts) {
             bodyPart.render(context);
-        } 
+        }
+        
+        for (let bullet of this.bullets) {
+            bullet.render(context);
+        }
+    }
+    
+    collide(entity) {
+        var collided = false;
+        for (let bodyPart of this.bodyParts) {
+            if (bodyPart.collide(entity)) {
+                collided = true;
+                bodyPart.damage();
+            }
+        }
+        return collided;
     }
     
     damage() {
@@ -84,6 +148,8 @@ class ZombieSnakePart extends Entity {
         this.lengthMovementTo = this.map.tileWidth * 0.5;
         this.lengthMovementFrom = 0;
         this.lengthMovementSpeed = 0;
+        this.health = 4;
+        this.isDead = false;
     }
     
     update(deltatime) {
@@ -104,7 +170,18 @@ class ZombieSnakePart extends Entity {
         context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, x + this.camera.offsetX, y + this.camera.offsetY, this.width, this.height);
     }
     
+    left() {
+        return this.x + this.length * this.xRatio;
+    }
+    
+    top() {
+        return this.y + this.length * this.yRatio + this.lengthMovementFrom;
+    }
+    
     damage() {
-        
+        this.health--;
+        if (this.health <= 0) {
+            this.isDead = true;
+        }
     }
 }
