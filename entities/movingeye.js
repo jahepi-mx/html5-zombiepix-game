@@ -57,7 +57,7 @@ class MovingEye extends Entity {
         if (this.collide(this.zombieKiller)) {
             this.zombieKiller.damage();
         }
-        console.log("->" + this.bullets);
+        
         if (this.shootTime >= this.shootTimeLimit) {
             this.shootTime = 0;
             var bulletSize = 40;
