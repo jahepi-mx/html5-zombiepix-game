@@ -45,11 +45,14 @@ class ZombieSnake extends Entity {
         var cos = Math.cos(this.radians);
         var sin = Math.sin(this.radians);
         var n = 1;
+        var delta = deltatime;
         for (let bodyPart of this.bodyParts) {
             bodyPart.xRatio = cos;
             bodyPart.yRatio = sin;
+            bodyPart.lengthMovementSpeed = delta;
             bodyPart.toLength = this.length / this.bodyParts.length * n++;
             bodyPart.update(deltatime);
+            delta *= 1.1;
         }
     }
     
@@ -78,16 +81,25 @@ class ZombieSnakePart extends Entity {
         this.camera = Camera.getInstance();
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
+        this.lengthMovementTo = this.map.tileWidth * 0.5;
+        this.lengthMovementFrom = 0;
+        this.lengthMovementSpeed = 0;
     }
     
     update(deltatime) {
-        var diff = this.toLength - this.length;
-        this.length += diff * deltatime;
+
+        this.length += (this.toLength - this.length) * deltatime;
+        
+        if (Math.abs(this.lengthMovementTo - this.lengthMovementFrom) <= 5) {
+            this.lengthMovementTo *= -1;
+        }
+        
+        this.lengthMovementFrom += (this.lengthMovementTo - this.lengthMovementFrom) * this.lengthMovementSpeed;
     }
     
     render(context) {
         var x = this.x + this.length * this.xRatio;
-        var y = this.y + this.length * this.yRatio;
+        var y = this.y + this.length * this.yRatio + this.lengthMovementFrom;
         var image = "new_bullet";
         context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, x + this.camera.offsetX, y + this.camera.offsetY, this.width, this.height);
     }
