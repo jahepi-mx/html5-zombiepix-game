@@ -72,6 +72,8 @@ class Map {
         eyeSize = this.tileWidth;
         this.enemies.push(new MovingEye(16 * this.tileWidth + this.tileWidth / 2 - eyeSize / 2, 16 * this.tileHeight + this.tileHeight / 2 - eyeSize / 2, eyeSize, eyeSize, this));
         
+        this.enemies.push(new ZombieSnake(16 * this.tileWidth + this.tileWidth / 2 - eyeSize / 2, 16 * this.tileHeight + this.tileHeight / 2 - eyeSize / 2, eyeSize, eyeSize, this));
+        
         this.items = [];
     }
     
