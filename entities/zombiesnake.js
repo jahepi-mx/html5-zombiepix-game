@@ -89,6 +89,10 @@ class ZombieSnake extends Entity {
             }
         }
         
+        for (var a = this.bodyParts.length - 1, b = 1; a >= 0 ; a--, b++) {
+            this.bodyParts[a].image = "snake_" + b;
+        }
+        
         for (var a = 0; a < this.bullets.length; a++) {
             this.bullets[a].update(deltatime);
             if (this.bullets[a].collide(this.zombieKiller)) {
@@ -150,6 +154,7 @@ class ZombieSnakePart extends Entity {
         this.lengthMovementSpeed = 0;
         this.health = 4;
         this.isDead = false;
+        this.image = null;
     }
     
     update(deltatime) {
@@ -166,8 +171,10 @@ class ZombieSnakePart extends Entity {
     render(context) {
         var x = this.x + this.length * this.xRatio;
         var y = this.y + this.length * this.yRatio + this.lengthMovementFrom;
-        var image = "new_bullet";
-        context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, x + this.camera.offsetX, y + this.camera.offsetY, this.width, this.height);
+        var image = this.image;
+        if (image !== null) {
+            context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, x + this.camera.offsetX, y + this.camera.offsetY, this.width, this.height);
+        }
     }
     
     left() {
