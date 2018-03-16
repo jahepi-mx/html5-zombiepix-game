@@ -40,13 +40,13 @@ class GameScene extends Scene {
         this.context.font = "65px joystix";
         this.context.fillStyle = "rgba(255, 0, 255, 255)";
         this.context.textAlign = "center";
-        this.context.fillText(this.fps, Config.getInstance().canvasWidth - 50, 50);
+        this.context.fillText(this.fps, this.canvas.width - 50, 50);
         
         var life = this.controller.map.zombieKiller.life;
         var y = 60;
-        var size = 48;
+        var size = this.canvas.height * 0.1;
         var margin = 10;
-        var x = Config.getInstance().canvasWidth - size - margin;
+        var x = this.canvas.width - size - margin;
         for (var a = 0; a < life; a++) {
             var image = "lifebar";
             this.context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, x, y, size, size);

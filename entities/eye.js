@@ -34,7 +34,7 @@ class Eye extends Entity {
         
         if (this.shootTime >= this.shootTimeLimit) {
             this.shootTime = 0;
-            var bulletSize = 40;
+            var bulletSize = this.width * 0.33;
             var x = this.left() + this.width / 2 - bulletSize / 2;
             var y = this.top() + this.height / 2 - bulletSize / 2;
             var radians = Math.atan2(this.zombieKiller.top() - y, this.zombieKiller.left() - x);

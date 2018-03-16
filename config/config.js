@@ -3,10 +3,10 @@ let configInstance = null;
 class Config {
     
     constructor() {
-        this.tileWidth = 100;
-        this.tileHeight = 100;
+        this.tileWidth = 80;
+        this.tileHeight = 80;
         this.canvasWidth = 800;
-        this.canvasHeight = 800;
+        this.canvasHeight = 450;
     }
     
     static getInstance() {

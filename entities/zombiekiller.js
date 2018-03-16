@@ -64,7 +64,7 @@ class ZombieKiller extends Entity {
             if (this.shootTime >= this.shootTimeLimit) {
                 this.shootTime = 0;
                 var radians = Math.atan2(this.cursor.y - (this.y + this.height / 2), this.cursor.x - (this.x + this.width / 2));
-                var bulletSize = 20;
+                var bulletSize = this.width * 0.25;
                 var bulletX = this.left() + this.width / 2 - bulletSize / 2;
                 var bulletY = this.top() + this.height / 2 - bulletSize / 2;
                 this.bullets.push(new Bullet(bulletX, bulletY, bulletSize, bulletSize, radians, this.map));
