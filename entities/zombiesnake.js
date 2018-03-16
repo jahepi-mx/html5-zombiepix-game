@@ -7,7 +7,7 @@ class ZombieSnake extends Entity {
         this.map = map;
         this.zombieKiller = this.map.zombieKiller;
         this.bodyParts = [];
-        this.length = 200;
+        this.length = 400;
         this.maxLength = this.length;
         this.radians = Math.PI * 2 * Math.random();
         this.camera = Camera.getInstance();
@@ -68,8 +68,9 @@ class ZombieSnake extends Entity {
         var cos = Math.cos(this.radians);
         var sin = Math.sin(this.radians);
         var n = 1;
-        var delta = deltatime;
+        var delta = deltatime / 3;
         
+        var reachLengthMovement = true;
         for (var a = 0; a < this.bodyParts.length; a++) {
             var bodyPart = this.bodyParts[a];
             this.health += bodyPart.health;
@@ -82,15 +83,23 @@ class ZombieSnake extends Entity {
                 bodyPart.lengthMovementSpeed = delta;
                 bodyPart.toLength = this.length / this.bodyParts.length * n++;
                 bodyPart.update(deltatime);
-                delta *= 1.1;
+                delta *= 1.5;
                 if (bodyPart.collide(this.zombieKiller)) {
                     this.zombieKiller.damage();
+                }
+                if (bodyPart.reachLengthMovement === false) {
+                    reachLengthMovement = false;
                 }
             }
         }
         
+        
         for (var a = this.bodyParts.length - 1, b = 1; a >= 0 ; a--, b++) {
             this.bodyParts[a].image = "snake_" + b;
+            if (reachLengthMovement) {
+                this.bodyParts[a].lengthMovementTo *= -1;
+                this.bodyParts[a].reachLengthMovement = false;
+            }
         }
         
         for (var a = 0; a < this.bullets.length; a++) {
@@ -149,20 +158,21 @@ class ZombieSnakePart extends Entity {
         this.camera = Camera.getInstance();
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
-        this.lengthMovementTo = this.map.tileWidth * 0.5;
+        this.lengthMovementTo = this.map.tileWidth;
         this.lengthMovementFrom = 0;
         this.lengthMovementSpeed = 0;
         this.health = 4;
         this.isDead = false;
         this.image = null;
+        this.reachLengthMovement = false;
     }
     
     update(deltatime) {
 
         this.length += (this.toLength - this.length) * deltatime;
         
-        if (Math.abs(this.lengthMovementTo - this.lengthMovementFrom) <= 5) {
-            this.lengthMovementTo *= -1;
+        if (Math.abs(this.lengthMovementTo - this.lengthMovementFrom) <= 1) {
+            this.reachLengthMovement = true;
         }
         
         this.lengthMovementFrom += (this.lengthMovementTo - this.lengthMovementFrom) * this.lengthMovementSpeed;

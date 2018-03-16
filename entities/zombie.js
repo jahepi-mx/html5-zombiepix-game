@@ -65,7 +65,7 @@ class Zombie extends Entity {
         
         var diffX = (this.toX + this.map.tileWidth / 2 - this.width / 2) - this.x;
         var diffY = (this.toY + this.map.tileHeight / 2 - this.height / 2) - this.y;
-        var minDistance = 5;
+        var minDistance = 10;
         
         if (Math.abs(diffX) > minDistance) {
             if (diffX >= 0) {
