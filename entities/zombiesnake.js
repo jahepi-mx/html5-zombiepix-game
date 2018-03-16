@@ -94,7 +94,6 @@ class ZombieSnake extends Entity {
             }
         }
         
-        
         for (var a = this.bodyParts.length - 1, b = 1; a >= 0 ; a--, b++) {
             this.bodyParts[a].image = "snake_" + b;
             if (reachLengthMovement) {
@@ -174,16 +173,32 @@ class ZombieSnakePart extends Entity {
         this.dispose = false;
         this.image = null;
         this.reachLengthMovement = false;
+        this.friction = 0;
+        
+        // Friction of 0.95 if the game runs at 60 fps
+        var friction = 0.95;
+        this.frictionRatio = Math.pow(friction, 60);
+        
+        /* 
+         x^30 = 0.95^60 -- If the game runs at 30fps, the correct friction is the value of x
+         x^20 = 0.95^60 -- If the game runs at 20fps, the correct friction is the value of x
+        */
     }
     
     update(deltatime) {
         
         if (this.isDead) {
-            this.width *= 0.95;
-            this.height *= 0.95;
-            this.x += this.xDeadRatio * this.lengthMovementFrom * deltatime;
-            this.y += this.yDeadRatio * this.lengthMovementFrom * deltatime;
-            if (this.width <= this.lengthMovementTo * 0.2) {
+            
+            if (this.friction === 0) {
+                var fps = 1 / deltatime;
+                this.friction = Math.pow(this.frictionRatio, 1 / fps);
+            }
+            
+            this.width *= this.friction;
+            this.height *= this.friction;
+            this.x += this.xDeadRatio * this.lengthMovementTo * deltatime;
+            this.y += this.yDeadRatio * this.lengthMovementTo * deltatime;
+            if (this.width <= Math.abs(this.lengthMovementTo) * 0.2) {
                 this.dispose = true;
             }
             return;

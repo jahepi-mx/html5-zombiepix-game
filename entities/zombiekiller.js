@@ -9,7 +9,7 @@ class ZombieKiller extends Entity {
         this.isRight = false;
         this.isDown = false;
         this.isUp = false;
-        this.friction = 0.95;
+        this.friction = 0;
         this.xVelocity = 0;
         this.yVelocity = 0;
         this.speed = 200;
@@ -28,6 +28,15 @@ class ZombieKiller extends Entity {
         this.damageTimeLimit = 1;
         this.deadTime = 0;
         this.bodyparts = [];
+        
+        // Friction of 0.95 if the game runs at 60 fps
+        var friction = 0.95;
+        this.frictionRatio = Math.pow(friction, 60);
+        
+        /* 
+         x^30 = 0.95^60 -- If the game runs at 30fps, the correct friction is the value of x
+         x^20 = 0.95^60 -- If the game runs at 20fps, the correct friction is the value of x
+        */
     }
     
     update(deltatime) {
@@ -40,6 +49,11 @@ class ZombieKiller extends Entity {
             return;
         }
         
+        if (this.friction === 0) {
+            var fps = 1 / deltatime;
+            this.friction = Math.pow(this.frictionRatio, 1 / fps);
+        }
+            
         this.damageTime += deltatime;
         this.shootTime += deltatime;
         this.walkAnimation.update(deltatime);
