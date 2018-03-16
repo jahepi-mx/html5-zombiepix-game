@@ -7,7 +7,7 @@ class ZombieBodyPart extends Entity {
         var angle = Math.random() * Math.PI * 2;
         this.xRatio = Math.cos(angle);
         this.yRatio = Math.sin(angle);
-        this.friction = 0.8 + (0.12 * Math.random());
+        this.friction = 0;
         this.velocityX = Math.random() * 200 + 300;
         this.velocityY = Math.random() * 200 + 300;
         this.atlas = Atlas.getInstance();
@@ -16,9 +16,18 @@ class ZombieBodyPart extends Entity {
         this.camera = Camera.getInstance();
         this.map = map;
         this.image = image;
+        
+        var friction = 0.8 + (0.12 * Math.random());
+        this.frictionRatio = Math.pow(friction, 60);
     }
     
     update(deltatime) {
+        
+        if (this.friction === 0) {
+            var fps = 1 / deltatime;
+            this.friction = Math.pow(this.frictionRatio, 1 / fps);
+        }
+        
         var tmpX = this.x;
         this.x += this.xRatio * this.velocityX * deltatime;
         var x = Math.floor((this.left() + this.width / 2) / this.map.tileWidth);

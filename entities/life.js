@@ -9,16 +9,25 @@ class Life extends Entity {
         this.yRatio = Math.sin(this.radians);
         this.velocityX = 600;
         this.velocityY = 600;
-        this.friction = 0.91;
+        this.friction = 0;
         this.dispose = false;
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
         this.camera = Camera.getInstance();
         this.map = map;
+        
+        // Friction of 0.91 if the game runs at 60 fps
+        var friction = 0.91;
+        this.frictionRatio = Math.pow(friction, 60);
     }
     
     update(deltatime) {
         
+        if (this.friction === 0) {
+            var fps = 1 / deltatime;
+            this.friction = Math.pow(this.frictionRatio, 1 / fps);
+        }
+            
         if (this.map.zombieKiller.collide(this)) {
             this.dispose = true;
             this.map.zombieKiller.life++;
