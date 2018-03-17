@@ -13,7 +13,7 @@ class Tile extends Entity {
     }
     
     isWalkable() {
-        return this.type >= 1 && this.type <= 12;
+        return this.type >= 1 && this.type <= 12 || (this.type === 47 || this.type === 48);
     }
     
     left() {
