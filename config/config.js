@@ -7,6 +7,8 @@ class Config {
         this.tileHeight = 80;
         this.canvasWidth = 800;
         this.canvasHeight = 450;
+        this.musicVolume = 0.5;
+        this.soundEffectsVolume = 0.5;
     }
     
     static getInstance() {

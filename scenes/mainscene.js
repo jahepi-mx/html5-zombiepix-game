@@ -4,7 +4,8 @@ class MainScene extends Scene {
         super(canvas, context, onChangeSceneCallback);
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
-        this.playButton = new Button(200, 50, "play game", this.canvas.width * 0.1, this.canvas.height * 0.8, 60, "#fff", "#ff0000", "#ff00ff");
+        this.playButton = new Button(200, 20, "play game", this.canvas.width * 0.1, this.canvas.height * 0.8, 60, "#fff", "#ff0000", "#ff00ff");
+        this.settingsButton = new Button(100, 20, "settings", this.canvas.width * 0.1, this.canvas.height * 0.95, 40, "#ffff00", "#ffff00", "#fff");
         this.introText = [
             {text: "The zombie apocalypse has begun. ", color: "#dab600"},
             {text: "Your mission, reach the safe zone", color: "#e9d700"},
@@ -27,6 +28,7 @@ class MainScene extends Scene {
     
     update(deltatime) {
         this.playButton.update(deltatime);
+        this.settingsButton.update(deltatime);
         
         if (this.playButton.isClicked) {
             if (!this.startIntro) {
@@ -52,6 +54,10 @@ class MainScene extends Scene {
         if (this.startIntroTime >= this.startIntroTimeLimit) {
             this.onChangeSceneCallback("gamescene");
         }
+        
+        if (this.settingsButton.isClicked) {
+            this.onChangeSceneCallback("settingscene");
+        }
     }
     
     render() {
@@ -66,6 +72,7 @@ class MainScene extends Scene {
         
         if (!this.startIntro) {
             this.playButton.render(this.context);
+            this.settingsButton.render(this.context);
         } else {
             this.context.font = "40px joystix";
             this.context.textAlign = "left";
