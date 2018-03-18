@@ -12,9 +12,11 @@ and open the template in the editor.
         <style type="text/css">
             @font-face { font-family: 'joystix'; src: url('assets/fonts/PixelMYZ.ttf'); }
         </style>
+        <script src="maps/map.js"></script>
+        <script src="maps/map1.js"></script>
+        <script src="maps/map2.js"></script>
         <script src="entities/entity.js"></script>
         <script src="entities/tile.js"></script>
-        <script src="maps/map.js"></script>
         <script src="entities/cursor.js"></script>
         <script src="entities/camera.js"></script>
         <script src="entities/zombiekiller.js"></script>
@@ -40,6 +42,7 @@ and open the template in the editor.
         <script src="scenes/scene.js"></script>
         <script src="scenes/gamescene.js"></script>
         <script src="scenes/mainscene.js"></script>
+        <script src="scenes/endscene.js"></script>
         <script src="ui/button.js"></script>
         <script type="text/javascript">
             var canvas = null;
@@ -94,7 +97,7 @@ and open the template in the editor.
                     cursor.isPressed = false;
                 });
                 
-                scene = new MainScene(canvas, context, changeScene);
+                scene = new EndScene(canvas, context, changeScene);
                 var requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
                 window.requestAnimationFrame = requestAnimationFrame;
                 window.requestAnimationFrame(update);
@@ -105,6 +108,8 @@ and open the template in the editor.
                     scene = new MainScene(canvas, context, changeScene);
                 } else if (sceneName === "gamescene") {
                     scene = new GameScene(canvas, context, changeScene);
+                } else if (sceneName === "endscene") {
+                    scene = new EndScene(canvas, context, changeScene);
                 }
             }
         </script>

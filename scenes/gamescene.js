@@ -35,6 +35,14 @@ class GameScene extends Scene {
         if (this.tryAgainButton.isClicked) {
             this.controller.reset();
         }
+        
+        if (this.continueButton.isClicked) {
+            this.controller.nextMap();
+        }
+        
+        if (this.controller.isCurrentMapCompleted() && this.controller.isLastMap()) {
+             this.onChangeSceneCallback("endscene");
+        }
     }
     
     render() {
@@ -65,7 +73,7 @@ class GameScene extends Scene {
             this.exitButton.visible = this.tryAgainButton.visible = false;
         }
         
-        if (this.controller.map.isCompleted) {
+        if (this.controller.isCurrentMapCompleted() && this.controller.isLastMap() === false) {
             var image = "popup_safe";
             this.continueButton.visible = true;
             this.context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.popUpX, this.popUpY, this.popUpWidth, this.popUpHeight);

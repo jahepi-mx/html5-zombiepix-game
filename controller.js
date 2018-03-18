@@ -3,7 +3,10 @@ class Controller {
     constructor() {
         document.onkeydown = this.onKeyDown.bind(this);
         document.onkeyup = this.onKeyUp.bind(this);
-        this.map = new Map();
+        this.currentMap = 0;
+        this.maps = [new Map1(20, 20), new Map2(10, 10)];
+        this.map = this.maps[this.currentMap];
+        this.map.init();
         this.zombieKiller = this.map.zombieKiller;
     }
     
@@ -44,8 +47,22 @@ class Controller {
         }
     }
     
+    isCurrentMapCompleted() {
+        return this.map.isCompleted;
+    }
+    
+    nextMap() {
+        this.map.dispose();
+        this.map = this.maps[++this.currentMap];
+        this.reset();
+    }
+    
+    isLastMap() {
+        return this.currentMap === this.maps.length - 1;
+    }
+    
     reset() {
-        this.map = new Map();
+        this.map.reset();
         this.zombieKiller = this.map.zombieKiller;
     }
 }

@@ -4,7 +4,7 @@ class MainScene extends Scene {
         super(canvas, context, onChangeSceneCallback);
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
-        this.playButton = new Button(200, 50, "play game", Config.getInstance().canvasWidth * 0.1, Config.getInstance().canvasHeight * 0.8, 60, "#fff", "#ff0000", "#ff00ff");
+        this.playButton = new Button(200, 50, "play game", this.canvas.width * 0.1, this.canvas.height * 0.8, 60, "#fff", "#ff0000", "#ff00ff");
         this.introText = [
             {text: "The zombie apocalypse has begun. ", color: "#dab600"},
             {text: "Your mission, reach the safe zone", color: "#e9d700"},
@@ -58,7 +58,7 @@ class MainScene extends Scene {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.context.imageSmoothingEnabled = false;
         var image = "main";
-        this.context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, 0, 0, Config.getInstance().canvasWidth, Config.getInstance().canvasHeight);
+        this.context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, 0, 0, this.canvas.width, this.canvas.height);
         var image = "main_zombie";
         for (let zombie of this.zombies) {
             this.context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, zombie.x + zombie.xFrom, zombie.y + zombie.yFrom, zombie.width, zombie.height);
