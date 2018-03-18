@@ -29,6 +29,7 @@ class Life extends Entity {
         }
             
         if (this.map.zombieKiller.collide(this)) {
+            this.assets.playAudio(this.assets.life, false, Config.getInstance().soundEffectsVolume);
             this.dispose = true;
             this.map.zombieKiller.life++;
         }

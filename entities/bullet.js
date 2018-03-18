@@ -17,6 +17,7 @@ class Bullet extends Entity {
         this.dispose = false;
         this.animation = new Animation(2, 6);
         this.animation.stopAtSequenceNumber(1, null);
+        this.assets.playAudio(this.assets.shoot, false, Config.getInstance().soundEffectsVolume);
     }
     
     update(deltatime) {
@@ -37,8 +38,10 @@ class Bullet extends Entity {
         if (!this.collided && tile !== null && !tile.isWalkable() && tile.collide(this) && (tile.type === CRATE_TYPE || tile.type === BARREL_TYPE)) {
             tile.hits--;
             this.collided = true;
+            this.assets.playAudio(this.assets.bullet_explosion, false, Config.getInstance().soundEffectsVolume);
         } else if (!this.collided && tile !== null && !tile.isWalkable() && tile.collide(this)) {
             this.collided = true;
+            this.assets.playAudio(this.assets.bullet_explosion, false, Config.getInstance().soundEffectsVolume);
         }
     }
     

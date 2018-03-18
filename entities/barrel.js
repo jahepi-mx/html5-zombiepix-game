@@ -36,6 +36,7 @@ class Barrel extends Tile {
     update(deltatime) {
         if (this.hits <= 0) {
             if (!this.walkable) {
+                this.assets.playAudio(this.assets.explosion, false, Config.getInstance().soundEffectsVolume);
                 for (let enemy of this.map.enemies) {
                     if (enemy.type === ZOMBYE_TYPE) {
                         var diffX = enemy.left() - this.left();

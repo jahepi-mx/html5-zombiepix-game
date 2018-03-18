@@ -9,8 +9,8 @@ class Assets {
         this.srcs = ["assets/sprites/sprites.png"];
         this.keys = ["spritesAtlas"];
         this.audio = {};
-        this.audio.srcs = [];
-        this.audio.keys = [];
+        this.audio.srcs = ["assets/audios/shoot.mp3", "assets/audios/explosion.mp3", "assets/audios/bullet_explosion.mp3", "assets/audios/life.mp3"];
+        this.audio.keys = ["shoot", "explosion", "bullet_explosion", "life"];
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
         this.audioContext = new AudioContext();
     }
