@@ -15,6 +15,9 @@ class Life extends Entity {
         this.assets = Assets.getInstance();
         this.camera = Camera.getInstance();
         this.map = map;
+        this.zombieKiller = this.map.zombieKiller;
+        this.visibilityRatio = Config.getInstance().canvasWidth * Config.getInstance().canvasWidth + Config.getInstance().canvasHeight * Config.getInstance().canvasHeight;
+        this.distanceFromZombieKiller = 0;
         
         // Friction of 0.91 if the game runs at 60 fps
         var friction = 0.91;
@@ -23,15 +26,22 @@ class Life extends Entity {
     
     update(deltatime) {
         
+        var diffX = this.left() - this.zombieKiller.left();
+        var diffY = this.top() - this.zombieKiller.top();
+        this.distanceFromZombieKiller = diffX * diffX + diffY * diffY;
+        if (this.distanceFromZombieKiller > this.visibilityRatio) {
+            return;
+        }
+        
         if (this.friction === 0) {
             var fps = 1 / deltatime;
             this.friction = Math.pow(this.frictionRatio, 1 / fps);
         }
             
-        if (this.map.zombieKiller.collide(this)) {
+        if (this.zombieKiller.collide(this)) {
             this.assets.playAudio(this.assets.life, false, Config.getInstance().soundEffectsVolume);
             this.dispose = true;
-            this.map.zombieKiller.life++;
+            this.zombieKiller.life++;
         }
         
         var tmpX = this.x;
@@ -59,6 +69,11 @@ class Life extends Entity {
     }
     
     render(context) {
+        
+        if (this.distanceFromZombieKiller > this.visibilityRatio) {
+            return;
+        }
+        
         var image = "life";
         context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.x + this.camera.offsetX, this.y + this.camera.offsetY, this.width, this.height);
     }

@@ -30,14 +30,22 @@ class Zombie extends Entity {
         this.blood = [];
         this.availableVectors = new Set();
         this.foundZombieKiller = true;
+        this.visibilityRatio = Config.getInstance().canvasWidth * Config.getInstance().canvasWidth + Config.getInstance().canvasHeight * Config.getInstance().canvasHeight;
+        this.distanceFromZombieKiller = 0;
         this.searchAvailableVectors(Math.floor(this.x / this.map.tileWidth), Math.floor(this.y / this.map.tileHeight));
-        
         this.queue = new PriorityQueue(function (a, b) {
             return a.priority > b.priority;
         });
     }
     
     update(deltatime) {
+        
+        var diffX = this.left() - this.zombieKiller.left();
+        var diffY = this.top() - this.zombieKiller.top();
+        this.distanceFromZombieKiller = diffX * diffX + diffY * diffY;
+        if (this.distanceFromZombieKiller > this.visibilityRatio) {
+            return;
+        }
         
         if (this.isDead) {
             for (let bodypart of this.bodyparts) {
@@ -63,8 +71,8 @@ class Zombie extends Entity {
             this.isNewPosition = false;
         }
         
-        var diffX = (this.toX + this.map.tileWidth / 2 - this.width / 2) - this.x;
-        var diffY = (this.toY + this.map.tileHeight / 2 - this.height / 2) - this.y;
+        diffX = (this.toX + this.map.tileWidth / 2 - this.width / 2) - this.x;
+        diffY = (this.toY + this.map.tileHeight / 2 - this.height / 2) - this.y;
         var minDistance = 5;
         
         if (Math.abs(diffX) > minDistance) {
@@ -199,6 +207,10 @@ class Zombie extends Entity {
     
     render(context) {
         
+        if (this.distanceFromZombieKiller > this.visibilityRatio) {
+            return;
+        }
+        
         for (let blood of this.blood) {
             blood.render(context);
         }
@@ -226,10 +238,8 @@ class Zombie extends Entity {
             this.rotation = diffY >= 0 ? 270 : 90;
         }
         if (Math.abs(diffX) <= minRange && Math.abs(diffY) <= minRange) {
-            diffX = this.left() - this.zombieKiller.left();
-            diffY = this.top() - this.zombieKiller.top();
             var attackDistance = 8000;
-            if (diffX * diffX + diffY * diffY <= attackDistance) {
+            if (this.distanceFromZombieKiller <= attackDistance) {
                 image = "new_zombie_attack_" + this.rotation + "_" + (this.attackAnimation.getFrame() + 1);          
             } else {
                 image = "new_zombie_" + this.rotation;

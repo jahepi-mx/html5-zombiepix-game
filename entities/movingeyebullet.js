@@ -34,6 +34,12 @@ class MovingEyeBullet extends Bullet {
             this.collided = true;
         } else if (!this.collided && tile !== null && !tile.isWalkable() && tile.collide(this)) {
             this.collided = true;
-        }   
+        } else {
+            var diffX = this.origX - this.x;
+            var diffY = this.origY - this.y;
+            if (diffX * diffX + diffY * diffY >= this.maxDistance) {
+                this.collided = true;
+            }
+        }  
     }
 }

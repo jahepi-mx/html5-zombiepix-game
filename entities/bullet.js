@@ -18,9 +18,13 @@ class Bullet extends Entity {
         this.animation = new Animation(2, 6);
         this.animation.stopAtSequenceNumber(1, null);
         this.assets.playAudio(this.assets.shoot, false, Config.getInstance().soundEffectsVolume);
+        this.maxDistance = Config.getInstance().canvasWidth * Config.getInstance().canvasWidth + Config.getInstance().canvasHeight * Config.getInstance().canvasHeight;
+        this.origX = this.x;
+        this.origY = this.y;
     }
     
     update(deltatime) {
+        
         if (this.collided) {
             this.animation.update(deltatime);
         }
@@ -42,6 +46,13 @@ class Bullet extends Entity {
         } else if (!this.collided && tile !== null && !tile.isWalkable() && tile.collide(this)) {
             this.collided = true;
             this.assets.playAudio(this.assets.bullet_explosion, false, Config.getInstance().soundEffectsVolume);
+        } else {
+            var diffX = this.origX - this.x;
+            var diffY = this.origY - this.y;
+            if (diffX * diffX + diffY * diffY >= this.maxDistance) {
+                this.collided = true;
+                this.assets.playAudio(this.assets.bullet_explosion, false, Config.getInstance().soundEffectsVolume);
+            }
         }
     }
     

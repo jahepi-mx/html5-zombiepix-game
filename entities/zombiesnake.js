@@ -21,6 +21,8 @@ class ZombieSnake extends Entity {
         this.shootTimeLimit = 0.5;
         this.bullets = [];
         this.isDead = false;
+        this.visibilityRatio = Config.getInstance().canvasWidth * Config.getInstance().canvasWidth + Config.getInstance().canvasHeight * Config.getInstance().canvasHeight;
+        this.distanceFromZombieKiller = 0;
         
         for (var a = 0; a < 7; a++) {
             var bodyPart = new ZombieSnakePart(x, y, width, height, map);
@@ -30,6 +32,13 @@ class ZombieSnake extends Entity {
     }
     
     update(deltatime) {
+        
+        var diffX = this.left() - this.zombieKiller.left();
+        var diffY = this.top() - this.zombieKiller.top();
+        this.distanceFromZombieKiller = diffX * diffX + diffY * diffY;
+        if (this.distanceFromZombieKiller > this.visibilityRatio) {
+            return;
+        }
         
         this.shootTime += deltatime;
         
@@ -51,8 +60,8 @@ class ZombieSnake extends Entity {
             this.length = Math.random() * this.maxLength;
         }
         
-        var diffX = this.zombieKiller.left() - this.left();
-        var diffY = this.zombieKiller.top() - this.top();
+        diffX = this.zombieKiller.left() - this.left();
+        diffY = this.zombieKiller.top() - this.top();
         var radians = Math.atan2(diffY, diffX);
         
         var radiansDiff = radians - this.radians;
@@ -119,6 +128,11 @@ class ZombieSnake extends Entity {
     }
     
     render(context) {
+        
+        if (this.distanceFromZombieKiller > this.visibilityRatio) {
+            return;
+        }
+        
         context.fillStyle = "#ff0000";
         var width = this.health / this.maxHealth * this.width * 0.7;
         context.fillRect(this.left() + this.camera.offsetX + this.width / 2 - width / 2, this.top() + this.camera.offsetY - 10, width, 10);

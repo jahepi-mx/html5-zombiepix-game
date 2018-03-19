@@ -7,11 +7,11 @@ class MainScene extends Scene {
         this.playButton = new Button(200, 20, "play game", this.canvas.width * 0.1, this.canvas.height * 0.8, 60, "#fff", "#ff0000", "#ff00ff");
         this.settingsButton = new Button(100, 20, "settings", this.canvas.width * 0.1, this.canvas.height * 0.95, 40, "#ffff00", "#ffff00", "#fff");
         this.introText = [
-            {text: "The zombie apocalypse has begun. ", color: "#dab600"},
-            {text: "Your mission, reach the safe zone", color: "#e9d700"},
-            {text: "from the city and survive. ", color: "#f8ed62"},
-            {text: "Follow your instincts and", color: "#fff9ae"},
-            {text: "good luck on your adventure.", color: "#fffde6"},
+            {text: "The zombie apocalypse has begun. ", color: "#ffffff"},
+            {text: "Your mission, reach the safe zone", color: "#ffffff"},
+            {text: "from the city and survive. ", color: "#ffffff"},
+            {text: "Follow your instincts and", color: "#ffffff"},
+            {text: "good luck on your adventure.", color: "#ffffff"},
         ];
         
         var zombieWidth = 72 * 4;

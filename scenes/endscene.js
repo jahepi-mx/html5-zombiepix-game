@@ -5,9 +5,19 @@ class EndScene extends Scene {
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
         this.time = 0;
-        this.timeLimit = 30;
+        this.timeLimit = 45;
         this.heroToDist = this.canvas.width * 0.01;
         this.heroFromDist = 0;
+        this.texts = [
+            {text: "Well done, you survived", x: this.canvas.width * 0.05, y: this.canvas.height * 0.52, z: 500, size: 65, isLast: false},
+            {text: "the dangers of the city", x: this.canvas.width * 0.05, y: this.canvas.height * 0.52, z: 700, size: 65, isLast: false},
+            {text: "Time to keep fighting", x: this.canvas.width * 0.05, y: this.canvas.height * 0.52, z: 800, size: 65, isLast: false},
+            {text: "against other creatures", x: this.canvas.width * 0.05, y: this.canvas.height * 0.52, z: 950, size: 65, isLast: false},
+            {text: "you might encounter, good luck", x: this.canvas.width * 0.05, y: this.canvas.height * 0.52, z: 1100, size: 65, isLast: false},
+            {text: "The END", x: this.canvas.width * 0.05, y: this.canvas.height * 0.52, z: 1300, size: 65, isLast: true},
+        ];
+        this.focalLength = 200;
+        this.isTextPlaying = true;
     }
     
     update(deltatime) {
@@ -21,6 +31,21 @@ class EndScene extends Scene {
         if (Math.abs(this.heroToDist - this.heroFromDist) <= 5) {
             this.heroToDist *= -1;
         }
+        
+        if (this.isTextPlaying) {
+            for (let text of this.texts) {
+                var ratio = this.focalLength / (this.focalLength + text.z);
+                text.z -= 50 * deltatime;
+                if (ratio >= 1) {
+                    if (text.isLast) {
+                        this.isTextPlaying = false;
+                        return;
+                    }
+                    text.x += (this.canvas.width - text.x) * deltatime;
+                    text.y += (- 250 - text.y) * deltatime;
+                }
+            }
+        }
     } 
     
     render() {
@@ -29,6 +54,18 @@ class EndScene extends Scene {
         var image = "end";
         this.context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, 0, 0, this.canvas.width, this.canvas.height);
         
+        this.context.textAlign = "left";
+        for (let text of this.texts) {
+            var ratio = this.focalLength / (this.focalLength + text.z);
+            if (ratio < 3) {
+                this.context.fillStyle = "rgba(255, 255, 255, " + ratio + ")";
+                var offsetX = 0;
+                var offsetY = 200 * ratio;
+                this.context.font = (text.size * ratio) + "px joystix";
+                this.context.fillText(text.text, text.x + offsetX, text.y + offsetY);
+            }
+        }
+        
         var image = "end_hero";
         var width = 80 * 4.5;
         var height = 99 * 4.5;
@@ -36,13 +73,6 @@ class EndScene extends Scene {
         var y = this.canvas.height - height + 30;
 
         this.context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, x, y + this.heroFromDist, width, height);
-        
-        this.context.font = "80px joystix";
-        this.context.textAlign = "left";
-        var x = this.canvas.width * 0.04;
-        var y = this.canvas.height * 0.8;
-        this.context.fillStyle = "#fff";
-        this.context.fillText("THE END", x, y);
     }
 }
 

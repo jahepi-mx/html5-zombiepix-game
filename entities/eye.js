@@ -17,9 +17,19 @@ class Eye extends Entity {
         this.blinkTime = 0;
         this.blinkTimeLimit = 3;
         this.isDead = false;
+        this.visibilityRatio = Config.getInstance().canvasWidth * Config.getInstance().canvasWidth + Config.getInstance().canvasHeight * Config.getInstance().canvasHeight;
+        this.distanceFromZombieKiller = 0;
     }
     
     update(deltatime) {
+        
+        var diffX = this.left() - this.zombieKiller.left();
+        var diffY = this.top() - this.zombieKiller.top();
+        this.distanceFromZombieKiller = diffX * diffX + diffY * diffY;
+        if (this.distanceFromZombieKiller > this.visibilityRatio) {
+            return;
+        }
+        
         this.blinkTime += deltatime;
         this.shootTime += deltatime;
         
@@ -54,6 +64,10 @@ class Eye extends Entity {
     }
     
     render(context) {
+        
+        if (this.distanceFromZombieKiller > this.visibilityRatio) {
+            return;
+        }
         
         var image = "new_eye_back";
         context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.left() + this.camera.offsetX, this.top() + this.camera.offsetY, this.width, this.height);
