@@ -8,6 +8,7 @@ class Map {
         this.enemies = null;
         this.deadZombies = null;
         this.items = null;
+        this.events = null;
         this.isCompleted = false;
         this.tileWidth = Config.getInstance().tileWidth;
         this.tileHeight = Config.getInstance().tileHeight;
@@ -38,6 +39,10 @@ class Map {
             for (var y = yFrom; y <= yTo; y++) {
                 this.tileMap[y * this.cols + x].render(context);
             }
+        }
+        
+        for (let event of this.events) {
+            event.render(context);
         }
         
         for (let zombie of this.deadZombies) {
@@ -109,6 +114,13 @@ class Map {
                 this.items.splice(a--, 1);
             }
         }
+        
+        for (var a = 0; a < this.events.length; a++) {
+            this.events[a].update(deltatime);
+            if (this.events[a].dispose) {
+                this.events.splice(a--, 1);
+            }
+        }
     }
     
     getTile(x, y) {
@@ -129,6 +141,7 @@ class Map {
         this.enemies = null;
         this.deadZombies = null;
         this.items = null;
+        this.events = null;
     }
 }
 

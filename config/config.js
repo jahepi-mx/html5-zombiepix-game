@@ -9,6 +9,9 @@ class Config {
         this.canvasHeight = 450;
         this.musicVolume = 0.5;
         this.soundEffectsVolume = 0.5;
+        this.music = null;
+        this.musicGain = null;
+        this.musicName = "";
     }
     
     static getInstance() {

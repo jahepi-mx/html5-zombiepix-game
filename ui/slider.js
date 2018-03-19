@@ -48,7 +48,6 @@ class Slider {
     getRatio() {
         var diff = this.buttonXMax - this.buttonX;
         diff = diff / (this.buttonXMax - this.buttonXMin) * 100;
-        console.log(Math.floor(diff) / 100);
         return 1 - Math.floor(diff) / 100;
     }
     

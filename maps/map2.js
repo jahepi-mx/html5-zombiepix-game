@@ -46,6 +46,8 @@ class Map2 extends Map {
         this.camera.init(7, 5, newOffsetX, newOffsetY);
         
         var zombieSize = this.tileWidth * 0.8;
+        
+        this.events = [new EnemyEvent(this), new TileEvent(this)];
     }
 }
 

@@ -24,6 +24,17 @@ class MainScene extends Scene {
         this.startIntro = false;
         this.startIntroTime = 0;
         this.startIntroTimeLimit = 5;
+        
+        var config = Config.getInstance();
+        if (config.music === null || config.musicName !== config.musicName) {
+            if (config.music !== null) {
+                config.music.stop();
+            }
+            var musicData = this.assets.playAudioWithGainInfo(this.assets.main_music, true, config.musicVolume);
+            config.music = musicData.source;
+            config.musicGain = musicData.gain;
+            config.musicName = "main_music";
+        }
     }
     
     update(deltatime) {

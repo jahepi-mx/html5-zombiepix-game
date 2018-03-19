@@ -5,11 +5,11 @@ class Tile extends Entity {
         this.camera = Camera.getInstance();
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
+        this.image = "tile" + this.type;
     }
     
     render(context) {
-        var image = "tile" + this.type;
-        context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.left() + this.camera.offsetX, this.top() + this.camera.offsetY, this.width, this.height);
+        context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[this.image].x, this.atlas.sprites[this.image].y, this.atlas.sprites[this.image].width, this.atlas.sprites[this.image].height, this.left() + this.camera.offsetX, this.top() + this.camera.offsetY, this.width, this.height);
     }
     
     isWalkable() {

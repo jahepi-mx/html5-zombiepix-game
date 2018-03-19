@@ -9,8 +9,8 @@ class Assets {
         this.srcs = ["assets/sprites/sprites.png"];
         this.keys = ["spritesAtlas"];
         this.audio = {};
-        this.audio.srcs = ["assets/audios/shoot.mp3", "assets/audios/explosion.mp3", "assets/audios/bullet_explosion.mp3", "assets/audios/life.mp3"];
-        this.audio.keys = ["shoot", "explosion", "bullet_explosion", "life"];
+        this.audio.srcs = ["assets/audios/shoot.mp3", "assets/audios/explosion.mp3", "assets/audios/bullet_explosion.mp3", "assets/audios/life.mp3", "assets/audios/main_music.mp3"];
+        this.audio.keys = ["shoot", "explosion", "bullet_explosion", "life", "main_music"];
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
         this.audioContext = new AudioContext();
     }
@@ -102,5 +102,18 @@ class Assets {
         gainNode.gain.value = volume;
         source.start(0);
         return source;
+    }
+    
+    playAudioWithGainInfo(buffer, loop, volume) {
+        var source = this.audioContext.createBufferSource();
+        source.buffer = buffer;
+        source.loop = loop;
+        //source.connect(this.audioContext.destination);
+        var gainNode = this.audioContext.createGain();
+        source.connect(gainNode);
+        gainNode.connect(this.audioContext.destination);
+        gainNode.gain.value = volume;
+        source.start(0);
+        return {source: source, gain: gainNode.gain};
     }
 };

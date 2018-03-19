@@ -7,6 +7,17 @@ class SettingScene extends Scene {
         this.musicSlider = new Slider(this.canvas.width * 0.1, this.canvas.height * 0.3, this.canvas.width * 0.3, this.canvas.height * 0.03, this.canvas.height * 0.03, Config.getInstance().musicVolume);
         this.effectsSlider = new Slider(this.canvas.width * 0.57, this.canvas.height * 0.3, this.canvas.width * 0.3, this.canvas.height * 0.03, this.canvas.height * 0.03, Config.getInstance().soundEffectsVolume);
         this.backButton = new Button(100, 20, "Back", this.canvas.width * 0.8, this.canvas.height * 0.85, 60, "#fff", "#ff0000", "#ff00ff");
+        
+        var config = Config.getInstance();
+        if (config.music === null || config.musicName !== config.musicName) {
+            if (config.music !== null) {
+                config.music.stop();
+            }
+            var musicData = this.assets.playAudioWithGainInfo(this.assets.main_music, true, config.musicVolume);
+            config.music = musicData.source;
+            config.musicGain = musicData.gain;
+            config.musicName = "main_music";
+        }
     }
     
     update(deltatime) {
@@ -20,6 +31,7 @@ class SettingScene extends Scene {
         
         Config.getInstance().musicVolume = this.musicSlider.getRatio();
         Config.getInstance().soundEffectsVolume = this.effectsSlider.getRatio();
+        Config.getInstance().musicGain.value = Config.getInstance().musicVolume;
     }
     
     render() {
