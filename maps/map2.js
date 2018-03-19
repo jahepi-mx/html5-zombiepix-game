@@ -43,7 +43,7 @@ class Map2 extends Map {
         var newOffsetY = yOffset - origY - this.tileHeight / 2 + zombieKillerHeight / 2;
         
         this.zombieKiller = new ZombieKiller(xOffset, yOffset, zombieKillerWidth, zombieKillerHeight, this);
-        this.camera.init(7, 5, newOffsetX, newOffsetY);
+        this.camera.init(6, 4, newOffsetX, newOffsetY);
         
         var zombieSize = this.tileWidth * 0.8;
         

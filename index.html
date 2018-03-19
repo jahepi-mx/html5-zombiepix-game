@@ -55,8 +55,9 @@ and open the template in the editor.
             var prevTime = 0;
             var scene = null;
             var cursor = Cursor.getInstance();
-            var targetFps = 1 / 60;
+            var targetFps = 1 / 30;
             var targetDeltatime = 0;
+            var lockFps = false;
             
             window.onload = function() {
                 canvas = document.getElementById("canvas");
@@ -72,10 +73,15 @@ and open the template in the editor.
                 var deltatime = diff / 1000;
                 prevTime = currTime;
                 if (1 / deltatime >= 3) {
-                    targetDeltatime += deltatime;
-                    if (targetDeltatime >= targetFps) {
-                        deltatime = targetDeltatime;
-                        targetDeltatime = 0;
+                    if (lockFps) {
+                        targetDeltatime += deltatime;
+                        if (targetDeltatime >= targetFps) {
+                            deltatime = targetDeltatime;
+                            targetDeltatime = 0;
+                            scene.update(deltatime);
+                            scene.render();
+                        }
+                    } else {
                         scene.update(deltatime);
                         scene.render();
                     }
