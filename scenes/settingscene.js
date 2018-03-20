@@ -9,14 +9,15 @@ class SettingScene extends Scene {
         this.backButton = new Button(100, 20, "Back", this.canvas.width * 0.8, this.canvas.height * 0.85, 60, "#fff", "#ff0000", "#ff00ff");
         
         var config = Config.getInstance();
-        if (config.music === null || config.musicName !== config.musicName) {
+        var sceneMusic = "main_music";
+        if (config.music === null || sceneMusic !== config.musicName) {
             if (config.music !== null) {
                 config.music.stop();
             }
             var musicData = this.assets.playAudioWithGainInfo(this.assets.main_music, true, config.musicVolume);
             config.music = musicData.source;
             config.musicGain = musicData.gain;
-            config.musicName = "main_music";
+            config.musicName = sceneMusic;
         }
     }
     

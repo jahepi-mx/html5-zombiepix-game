@@ -2,7 +2,7 @@ let BULLET_TYPE = 4;
 
 class Bullet extends Entity {
     
-    constructor(x, y, width, height, radians, map) {
+    constructor(x, y, width, height, radians, map, sound) {
         super(x, y, width, height, BULLET_TYPE);
         this.camera = Camera.getInstance();
         this.xRatio = Math.cos(radians);
@@ -17,7 +17,7 @@ class Bullet extends Entity {
         this.dispose = false;
         this.animation = new Animation(2, 6);
         this.animation.stopAtSequenceNumber(1, null);
-        this.assets.playAudio(this.assets.shoot, false, Config.getInstance().soundEffectsVolume);
+        this.assets.playAudio(sound, false, Config.getInstance().soundEffectsVolume);
         this.maxDistance = Config.getInstance().canvasWidth * Config.getInstance().canvasWidth + Config.getInstance().canvasHeight * Config.getInstance().canvasHeight;
         this.origX = this.x;
         this.origY = this.y;
@@ -41,19 +41,21 @@ class Bullet extends Entity {
         var tile = this.map.getTile(currentX, currentY);
         if (!this.collided && tile !== null && !tile.isWalkable() && tile.collide(this) && (tile.type === CRATE_TYPE || tile.type === BARREL_TYPE)) {
             tile.hits--;
-            this.collided = true;
-            this.assets.playAudio(this.assets.bullet_explosion, false, Config.getInstance().soundEffectsVolume);
+            this.setAsCollided();
         } else if (!this.collided && tile !== null && !tile.isWalkable() && tile.collide(this)) {
-            this.collided = true;
-            this.assets.playAudio(this.assets.bullet_explosion, false, Config.getInstance().soundEffectsVolume);
+            this.setAsCollided();
         } else {
             var diffX = this.origX - this.x;
             var diffY = this.origY - this.y;
             if (diffX * diffX + diffY * diffY >= this.maxDistance) {
-                this.collided = true;
-                this.assets.playAudio(this.assets.bullet_explosion, false, Config.getInstance().soundEffectsVolume);
+                this.setAsCollided();
             }
         }
+    }
+    
+    setAsCollided() {
+        this.collided = true;
+        this.assets.playAudio(this.assets.bullet_explosion, false, Config.getInstance().soundEffectsVolume);
     }
     
     render(context) {

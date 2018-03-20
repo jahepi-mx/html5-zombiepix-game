@@ -18,6 +18,18 @@ class EndScene extends Scene {
         ];
         this.focalLength = 200;
         this.isTextPlaying = true;
+        
+        var config = Config.getInstance();
+        var sceneMusic = "ending_music";
+        if (config.music === null || sceneMusic !== config.musicName) {
+            if (config.music !== null) {
+                config.music.stop();
+            }
+            var musicData = this.assets.playAudioWithGainInfo(this.assets.ending_music, true, config.musicVolume);
+            config.music = musicData.source;
+            config.musicGain = musicData.gain;
+            config.musicName = sceneMusic;
+        }
     }
     
     update(deltatime) {

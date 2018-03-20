@@ -16,6 +16,18 @@ class GameScene extends Scene {
         this.exitButton = new Button(200, 50, "exit", this.popUpX + 60, this.popUpY + this.popUpHeight * 0.6, 60, "#fff", "#ff0000", "#ff00ff");
         this.tryAgainButton = new Button(200, 50, "try again", this.popUpX + this.popUpWidth - 250, this.popUpY + this.popUpHeight * 0.6, 60, "#fff", "#ff0000", "#ff00ff");
         this.continueButton = new Button(200, 50, "continue", this.popUpX + this.popUpWidth - 250, this.popUpY + this.popUpHeight * 0.6, 60, "#fff", "#ff0000", "#ff00ff");
+        
+        var config = Config.getInstance();
+        var sceneMusic = "game_music";
+        if (config.music === null || sceneMusic !== config.musicName) {
+            if (config.music !== null) {
+                config.music.stop();
+            }
+            var musicData = this.assets.playAudioWithGainInfo(this.assets.game_music, true, config.musicVolume);
+            config.music = musicData.source;
+            config.musicGain = musicData.gain;
+            config.musicName = sceneMusic;
+        }
     }
     
     

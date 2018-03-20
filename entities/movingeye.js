@@ -84,7 +84,7 @@ class MovingEye extends Entity {
             var x = this.left() + this.width / 2 - bulletSize / 2;
             var y = this.top() + this.height / 2 - bulletSize / 2;
             var radians = Math.atan2(this.zombieKiller.top() - y, this.zombieKiller.left() - x);
-            this.bullets.push(new MovingEyeBullet(x, y, bulletSize, bulletSize, radians, this.map));
+            this.bullets.push(new MovingEyeBullet(x, y, bulletSize, bulletSize, radians, this.map, this.assets.enemy_shoot));
         }
         
         for (var a = 0; a < this.bullets.length; a++) {

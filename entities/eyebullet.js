@@ -1,7 +1,7 @@
 class EyeBullet extends Bullet {
     
-    constructor(x, y, width, height, radians, map) {
-        super(x, y, width, height, radians, map);
+    constructor(x, y, width, height, radians, map, sound) {
+        super(x, y, width, height, radians, map, sound);
     }
     
     render(context) {

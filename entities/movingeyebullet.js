@@ -1,7 +1,7 @@
 class MovingEyeBullet extends Bullet {
     
-    constructor(x, y, width, height, radians, map) {
-        super(x, y, width, height, radians, map);
+    constructor(x, y, width, height, radians, map, sound) {
+        super(x, y, width, height, radians, map, sound);
         this.radianStep = Math.PI * 2 / 3;
         this.radians = 0;
         this.rotationDistance = this.map.tileWidth / 2;
@@ -31,14 +31,14 @@ class MovingEyeBullet extends Bullet {
         var tile = this.map.getTile(currentX, currentY);
         if (!this.collided && tile !== null && !tile.isWalkable() && tile.collide(this) && (tile.type === CRATE_TYPE || tile.type === BARREL_TYPE)) {
             tile.hits--;
-            this.collided = true;
+            this.setAsCollided();
         } else if (!this.collided && tile !== null && !tile.isWalkable() && tile.collide(this)) {
-            this.collided = true;
+            this.setAsCollided();
         } else {
             var diffX = this.origX - this.x;
             var diffY = this.origY - this.y;
             if (diffX * diffX + diffY * diffY >= this.maxDistance) {
-                this.collided = true;
+                this.setAsCollided();
             }
         }  
     }

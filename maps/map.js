@@ -84,7 +84,7 @@ class Map {
         for (let bullet of this.zombieKiller.bullets) {
             for (let enemy of this.enemies) {
                 if (!bullet.collided && enemy.collide(bullet)) {
-                    bullet.collided = true;
+                    bullet.setAsCollided();
                     enemy.damage();
                 }
             }

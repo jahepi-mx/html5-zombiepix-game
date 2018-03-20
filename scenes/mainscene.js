@@ -26,14 +26,15 @@ class MainScene extends Scene {
         this.startIntroTimeLimit = 5;
         
         var config = Config.getInstance();
-        if (config.music === null || config.musicName !== config.musicName) {
+        var sceneMusic = "main_music";
+        if (config.music === null || sceneMusic !== config.musicName) {
             if (config.music !== null) {
                 config.music.stop();
             }
             var musicData = this.assets.playAudioWithGainInfo(this.assets.main_music, true, config.musicVolume);
             config.music = musicData.source;
             config.musicGain = musicData.gain;
-            config.musicName = "main_music";
+            config.musicName = sceneMusic;
         }
     }
     

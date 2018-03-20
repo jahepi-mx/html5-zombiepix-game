@@ -7,7 +7,7 @@ class Config {
         this.tileHeight = 80;
         this.canvasWidth = 800;
         this.canvasHeight = 450;
-        this.musicVolume = 0.5;
+        this.musicVolume = 0.3;
         this.soundEffectsVolume = 0.5;
         this.music = null;
         this.musicGain = null;
