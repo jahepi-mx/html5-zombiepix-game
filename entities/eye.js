@@ -76,8 +76,8 @@ class Eye extends Entity {
         image = "new_eye_pupil";
         var width = this.width * 0.1;
         var height = this.height * 0.1;
-        var x = this.left() + this.width / 2 - width / 2 + (10 * Math.cos(radians));
-        var y = this.top() + this.height / 2 - height / 2 + (10 * Math.sin(radians));
+        var x = this.left() + this.width / 2 - width / 2 + (width * Math.cos(radians));
+        var y = this.top() + this.height / 2 - height / 2 + (height * Math.sin(radians));
         
         context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, x + this.camera.offsetX, y + this.camera.offsetY, width, height);
         

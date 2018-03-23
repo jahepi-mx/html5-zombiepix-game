@@ -12,7 +12,7 @@ class ZombieKiller extends Entity {
         this.friction = 0;
         this.xVelocity = 0;
         this.yVelocity = 0;
-        this.speed = 200;
+        this.speed = Config.getInstance().tileWidth * 2.5;
         this.camera = Camera.getInstance();
         this.vectors = [[0, 0], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1]];
         this.bullets = [];
@@ -199,12 +199,12 @@ class ZombieKiller extends Entity {
     damage() {
         if (!this.isDead && this.damageTime >= this.damageTimeLimit) {
             this.damageTime = 0;
-            this.life--;
+            //this.life--;
             if (this.life <= 0) {
                 for (var a = 1; a <= 4; a++) {
                     var bodypart = new ZombieBodyPart(this.left(), this.top(), this.width, this.height, this.map, "human_bodypart_" + a);
-                    bodypart.velocityX = 900;
-                    bodypart.velocityY = 900;
+                    bodypart.velocityX = Config.getInstance().tileWidth * 11.25;
+                    bodypart.velocityY = Config.getInstance().tileWidth * 11.25;
                     this.bodyparts.push(bodypart);
                 }
                 this.life = 0;

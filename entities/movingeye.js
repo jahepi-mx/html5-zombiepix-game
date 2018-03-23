@@ -9,7 +9,7 @@ class MovingEye extends Entity {
         var radians = Math.PI * 2 * Math.random();
         this.xRatio = Math.cos(radians);
         this.yRatio = Math.sin(radians);
-        this.velocity = 200;
+        this.velocity = Config.getInstance().tileWidth * 2.5;
         this.vectors = [[0, 0], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1]];
         this.health = 10;
         this.maxHealth = this.health;
@@ -116,8 +116,8 @@ class MovingEye extends Entity {
             image = "new_eye_pupil";
             var width = this.width * 0.1;
             var height = this.height * 0.1;
-            var x = this.left() + this.width / 2 - width / 2 + (10 * Math.cos(radians));
-            var y = this.top() + this.height / 2 - height / 2 + (10 * Math.sin(radians));
+            var x = this.left() + this.width / 2 - width / 2 + (width * Math.cos(radians));
+            var y = this.top() + this.height / 2 - height / 2 + (height * Math.sin(radians));
 
             context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, x + this.camera.offsetX, y + this.camera.offsetY, width, height);
 
@@ -126,7 +126,8 @@ class MovingEye extends Entity {
 
             context.fillStyle = "#ff0000";
             width = this.health / this.maxHealth * this.width * 0.7;
-            context.fillRect(this.left() + this.camera.offsetX + this.width / 2 - width / 2, this.top() + this.camera.offsetY - 10, width, 10);
+            var margin = Config.getInstance().tileHeight * 0.125;
+            context.fillRect(this.left() + this.camera.offsetX + this.width / 2 - width / 2, this.top() + this.camera.offsetY - margin, width, margin);
         }
         
         for (let bullet of this.bullets) {

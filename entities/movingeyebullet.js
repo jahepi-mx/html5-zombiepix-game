@@ -5,7 +5,7 @@ class MovingEyeBullet extends Bullet {
         this.radianStep = Math.PI * 2 / 3;
         this.radians = 0;
         this.rotationDistance = this.map.tileWidth / 2;
-        this.speed = 100;
+        this.speed = Config.getInstance().tileWidth * 1.25;
         this.tmpX = x;
         this.tmpY = y;
     }

@@ -9,7 +9,7 @@ class Barrel extends Tile {
         this.walkable = false;
         this.animation = new Animation(6, 2);
         this.animation.stopAtSequenceNumber(1, null);
-        this.hitRatio = 11000;
+        this.hitRatio = Math.pow(Config.getInstance().tileWidth, 2) + Math.pow(Config.getInstance().tileHeight, 2);
         this.image = "metal_background";
     }
     

@@ -14,8 +14,8 @@ class MainScene extends Scene {
             {text: "good luck on your adventure.", color: "#ffffff"},
         ];
         
-        var zombieWidth = 72 * 4;
-        var zombieHeight = 92 * 4;
+        var zombieWidth = Config.getInstance().canvasWidth * 0.4;
+        var zombieHeight = zombieWidth * 1.277;
         this.zombies = [
             {x: canvas.width * 0.8, y: canvas.height - zombieHeight * 0.8, width: zombieWidth, height: zombieHeight, yFrom: 0, yTo: 20, xFrom: 0, xTo: 0, xToTmp: this.canvas.width * 0.03},
             {x: canvas.width * 0.4, y: canvas.height - zombieHeight, width: zombieWidth, height: zombieHeight, yFrom: 0, yTo: -10, xFrom: 0, xTo: 0, xToTmp: this.canvas.width * 0.1},

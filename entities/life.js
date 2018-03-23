@@ -7,8 +7,8 @@ class Life extends Entity {
         this.radians = Math.PI * 2 * Math.random();
         this.xRatio = Math.cos(this.radians);
         this.yRatio = Math.sin(this.radians);
-        this.velocityX = 600;
-        this.velocityY = 600;
+        this.velocityX = Config.getInstance().tileWidth * 7.5;
+        this.velocityY = Config.getInstance().tileWidth * 7.5;
         this.friction = 0;
         this.dispose = false;
         this.atlas = Atlas.getInstance();

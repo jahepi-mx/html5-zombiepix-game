@@ -5,8 +5,9 @@ class Blood extends Entity {
     constructor(x, y, width, height) {
         super(x, y, width, height, BLOOD_TYPE);
         var angle = Math.random() * Math.PI * 2;
-        this.xRatio = Math.cos(angle) * (Math.random() * 40 + 40);
-        this.yRatio = Math.sin(angle) * (Math.random() * 40 + 40);
+        var distance = Config.getInstance().tileWidth * 0.5;
+        this.xRatio = Math.cos(angle) * (Math.random() * distance + distance);
+        this.yRatio = Math.sin(angle) * (Math.random() * distance + distance);
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
         this.type = Math.floor(Math.random() * 4) + 1;

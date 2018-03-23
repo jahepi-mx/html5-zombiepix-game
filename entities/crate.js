@@ -2,7 +2,7 @@ let CRATE_TYPE = 44;
 
 class Crate extends Tile {
     
-    constructor(x, y, width, height, map) {
+    constructor(x, y, width, height, map, hasItem) {
         super(x, y, width, height, CRATE_TYPE);
         this.hits = 5;
         this.walkable = false;
@@ -10,6 +10,7 @@ class Crate extends Tile {
         this.animation.stopAtSequenceNumber(1, null);
         this.map = map;
         this.image = "tile7";
+        this.hasItem = hasItem;
     }
     
     render(context) {
@@ -32,7 +33,9 @@ class Crate extends Tile {
     update(deltatime) {
         if (!this.walkable && this.hits <= 0) {
             this.walkable = true;
-            this.map.items.push(new Life(this.left(), this.top(), Config.getInstance().tileWidth * 0.6, Config.getInstance().tileHeight * 0.6, this.map));
+            if (this.hasItem) {
+                this.map.items.push(new Life(this.left(), this.top(), Config.getInstance().tileWidth * 0.6, Config.getInstance().tileHeight * 0.6, this.map));
+            }
         }
         if (this.walkable) {
             this.animation.update(deltatime);

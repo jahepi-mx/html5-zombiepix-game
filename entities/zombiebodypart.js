@@ -8,8 +8,8 @@ class ZombieBodyPart extends Entity {
         this.xRatio = Math.cos(angle);
         this.yRatio = Math.sin(angle);
         this.friction = 0;
-        this.velocityX = Math.random() * 200 + 300;
-        this.velocityY = Math.random() * 200 + 300;
+        this.velocityX = Math.random() * Config.getInstance().tileWidth * 2.5 + (Config.getInstance().tileWidth * 3.75);
+        this.velocityY = Math.random() * Config.getInstance().tileWidth * 2.5 + (Config.getInstance().tileWidth * 3.75);
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
         this.type = Math.floor(Math.random() * 17) + 1;

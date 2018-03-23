@@ -9,7 +9,7 @@ class Bullet extends Entity {
         this.yRatio = Math.sin(radians);
         this.x += (this.width + 20) * this.xRatio;
         this.y += (this.height + 20) * this.yRatio;
-        this.speed = 300;
+        this.speed = Config.getInstance().tileWidth * 3.75;
         this.map = map;
         this.collided = false;
         this.atlas = Atlas.getInstance();

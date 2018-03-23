@@ -33,6 +33,10 @@ class Zombie extends Entity {
         this.visibilityRatio = Config.getInstance().canvasWidth * Config.getInstance().canvasWidth + Config.getInstance().canvasHeight * Config.getInstance().canvasHeight;
         this.distanceFromZombieKiller = 0;
         this.searchAvailableVectors(Math.floor(this.x / this.map.tileWidth), Math.floor(this.y / this.map.tileHeight));
+        this.minDistance = Config.getInstance().tileWidth * .05;
+        this.attackDistance = (Math.pow(Config.getInstance().tileWidth, 2) + Math.pow(Config.getInstance().tileHeight, 2)) / 2;
+        this.minRange = Config.getInstance().tileWidth * 0.125;
+        this.range = this.minRange * 3;
         this.queue = new PriorityQueue(function (a, b) {
             return a.priority > b.priority;
         });
@@ -73,9 +77,8 @@ class Zombie extends Entity {
         
         diffX = (this.toX + this.map.tileWidth / 2 - this.width / 2) - this.x;
         diffY = (this.toY + this.map.tileHeight / 2 - this.height / 2) - this.y;
-        var minDistance = 5;
         
-        if (Math.abs(diffX) > minDistance) {
+        if (Math.abs(diffX) > this.minDistance) {
             if (diffX >= 0) {
                 this.x += this.speed * deltatime;
             } else {
@@ -83,7 +86,7 @@ class Zombie extends Entity {
             }
         }
         
-        if (Math.abs(diffY) > minDistance) {
+        if (Math.abs(diffY) > this.minDistance) {
             if (diffY >= 0) {
                 this.y += this.speed * deltatime;
             } else {
@@ -91,7 +94,7 @@ class Zombie extends Entity {
             }
         }
         
-        if (Math.abs(diffX) <= minDistance && Math.abs(diffY) <= minDistance) {
+        if (Math.abs(diffX) <= this.minDistance && Math.abs(diffY) <= this.minDistance) {
             this.isNewPosition = true;
         }
         
@@ -115,8 +118,8 @@ class Zombie extends Entity {
         for (var a = 0; a < 4; a++) {
             var bodypart = new ZombieBodyPart(this.left(), this.top(), this.width, this.height, this.map, null);
             if (fromExplosion) {
-                bodypart.velocityX = 900;
-                bodypart.velocityY = 900;
+                bodypart.velocityX = Config.getInstance().tileWidth * 11.25;
+                bodypart.velocityY = Config.getInstance().tileWidth * 11.25;
             }
             this.bodyparts.push(bodypart);
         }
@@ -224,22 +227,21 @@ class Zombie extends Entity {
         
         context.fillStyle = "#ff0000";
         var width = this.health / this.maxHealth * this.width * 0.7;
-        context.fillRect(this.left() + this.camera.offsetX + this.width / 2 - width / 2, this.top() + this.camera.offsetY - 10, width, 10);
+        
+        context.fillRect(this.left() + this.camera.offsetX + this.width / 2 - width / 2, this.top() + this.camera.offsetY - this.minRange, width, this.minRange);
         
         var diffX = (this.toX + this.map.tileWidth / 2 - this.width / 2) - this.x;
         var diffY = (this.toY + this.map.tileHeight / 2 - this.height / 2) - this.y;
-        var range = 30;
-        var minRange = 10;
+        
         var image = "";
-        if (Math.abs(diffY) <= range && Math.abs(diffX) >= range) {
+        if (Math.abs(diffY) <= this.range && Math.abs(diffX) >= this.range) {
             this.rotation = diffX >= 0 ? 0 : 180;
         }
-        if (Math.abs(diffX) <= range && Math.abs(diffY) >= range) {
+        if (Math.abs(diffX) <= this.range && Math.abs(diffY) >= this.range) {
             this.rotation = diffY >= 0 ? 270 : 90;
         }
-        if (Math.abs(diffX) <= minRange && Math.abs(diffY) <= minRange) {
-            var attackDistance = 8000;
-            if (this.distanceFromZombieKiller <= attackDistance) {
+        if (Math.abs(diffX) <= this.minRange && Math.abs(diffY) <= this.minRange) {
+            if (this.distanceFromZombieKiller <= this.attackDistance) {
                 image = "new_zombie_attack_" + this.rotation + "_" + (this.attackAnimation.getFrame() + 1);          
             } else {
                 image = "new_zombie_" + this.rotation;
