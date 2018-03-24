@@ -4,8 +4,8 @@ class MainScene extends Scene {
         super(canvas, context, onChangeSceneCallback);
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
-        this.playButton = new Button(200, 20, "play game", this.canvas.width * 0.1, this.canvas.height * 0.8, 60, "#fff", "#ff0000", "#ff00ff");
-        this.settingsButton = new Button(100, 20, "settings", this.canvas.width * 0.1, this.canvas.height * 0.95, 40, "#ffff00", "#ffff00", "#fff");
+        this.playButton = new Button(Config.getInstance().canvasWidth * .25, Config.getInstance().canvasHeight * .04, "play game", this.canvas.width * 0.1, this.canvas.height * 0.8, Config.getInstance().canvasHeight * .13, "#fff", "#ff0000", "#ff00ff");
+        this.settingsButton = new Button(Config.getInstance().canvasWidth * .125, Config.getInstance().canvasHeight * .04, "settings", this.canvas.width * 0.1, this.canvas.height * 0.95, Config.getInstance().canvasHeight * .08, "#ffff00", "#ffff00", "#fff");
         this.introText = [
             {text: "The zombie apocalypse has begun. ", color: "#ffffff"},
             {text: "Your mission, reach the safe zone", color: "#ffffff"},
@@ -17,8 +17,8 @@ class MainScene extends Scene {
         var zombieWidth = Config.getInstance().canvasWidth * 0.4;
         var zombieHeight = zombieWidth * 1.277;
         this.zombies = [
-            {x: canvas.width * 0.8, y: canvas.height - zombieHeight * 0.8, width: zombieWidth, height: zombieHeight, yFrom: 0, yTo: 20, xFrom: 0, xTo: 0, xToTmp: this.canvas.width * 0.03},
-            {x: canvas.width * 0.4, y: canvas.height - zombieHeight, width: zombieWidth, height: zombieHeight, yFrom: 0, yTo: -10, xFrom: 0, xTo: 0, xToTmp: this.canvas.width * 0.1},
+            {x: canvas.width * 0.8, y: canvas.height - zombieHeight * 0.8, width: zombieWidth, height: zombieHeight, yFrom: 0, yTo: Config.getInstance().canvasHeight * .04, xFrom: 0, xTo: 0, xToTmp: this.canvas.width * 0.03},
+            {x: canvas.width * 0.4, y: canvas.height - zombieHeight, width: zombieWidth, height: zombieHeight, yFrom: 0, yTo: -Config.getInstance().canvasHeight * .02, xFrom: 0, xTo: 0, xToTmp: this.canvas.width * 0.1},
         ];
         
         this.startIntro = false;
@@ -86,14 +86,14 @@ class MainScene extends Scene {
             this.playButton.render(this.context);
             this.settingsButton.render(this.context);
         } else {
-            this.context.font = "40px joystix";
+            this.context.font = Math.floor(Config.getInstance().canvasHeight * .08) + "px joystix";
             this.context.textAlign = "left";
             var x = this.canvas.width * 0.04;
             var y = this.canvas.height * 0.08;
             for (let text of this.introText) {
                 this.context.fillStyle = text.color;
                 this.context.fillText(text.text, x, y);
-                y += 45;
+                y += Config.getInstance().canvasHeight * 0.1;
             }
         }
     }

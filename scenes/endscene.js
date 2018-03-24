@@ -9,12 +9,12 @@ class EndScene extends Scene {
         this.heroToDist = this.canvas.width * 0.01;
         this.heroFromDist = 0;
         this.texts = [
-            {text: "Well done, you survived", x: this.canvas.width * 0.05, y: this.canvas.height * 0.52, z: 500, size: 65, isLast: false},
-            {text: "the dangers of the city", x: this.canvas.width * 0.05, y: this.canvas.height * 0.52, z: 700, size: 65, isLast: false},
-            {text: "Time to keep fighting", x: this.canvas.width * 0.05, y: this.canvas.height * 0.52, z: 800, size: 65, isLast: false},
-            {text: "against other creatures", x: this.canvas.width * 0.05, y: this.canvas.height * 0.52, z: 950, size: 65, isLast: false},
-            {text: "you might encounter, good luck", x: this.canvas.width * 0.05, y: this.canvas.height * 0.52, z: 1100, size: 65, isLast: false},
-            {text: "The END", x: this.canvas.width * 0.05, y: this.canvas.height * 0.52, z: 1300, size: 65, isLast: true},
+            {text: "Well done, you survived", x: this.canvas.width * 0.05, y: this.canvas.height * 0.52, z: 500, size: Config.getInstance().canvasHeight * .14, isLast: false},
+            {text: "the dangers of the city", x: this.canvas.width * 0.05, y: this.canvas.height * 0.52, z: 700, size: Config.getInstance().canvasHeight * .14, isLast: false},
+            {text: "Time to keep fighting", x: this.canvas.width * 0.05, y: this.canvas.height * 0.52, z: 800, size: Config.getInstance().canvasHeight * .14, isLast: false},
+            {text: "against other creatures", x: this.canvas.width * 0.05, y: this.canvas.height * 0.52, z: 950, size: Config.getInstance().canvasHeight * .14, isLast: false},
+            {text: "you might encounter, good luck", x: this.canvas.width * 0.05, y: this.canvas.height * 0.52, z: 1100, size: Config.getInstance().canvasHeight * .14, isLast: false},
+            {text: "The END", x: this.canvas.width * 0.05, y: this.canvas.height * 0.52, z: 1300, size: Config.getInstance().canvasHeight * .14, isLast: true},
         ];
         this.focalLength = 200;
         this.isTextPlaying = true;
@@ -54,7 +54,7 @@ class EndScene extends Scene {
                         return;
                     }
                     text.x += (this.canvas.width - text.x) * deltatime;
-                    text.y += (- 250 - text.y) * deltatime;
+                    text.y += (-(Config.getInstance().canvasHeight * .55) - text.y) * deltatime;
                 }
             }
         }
@@ -72,17 +72,17 @@ class EndScene extends Scene {
             if (ratio < 3) {
                 this.context.fillStyle = "rgba(255, 255, 255, " + ratio + ")";
                 var offsetX = 0;
-                var offsetY = 200 * ratio;
+                var offsetY = Config.getInstance().canvasHeight * .44 * ratio;
                 this.context.font = (text.size * ratio) + "px joystix";
                 this.context.fillText(text.text, text.x + offsetX, text.y + offsetY);
             }
         }
         
         var image = "end_hero";
-        var width = 80 * 4.5;
-        var height = 99 * 4.5;
+        var width = Config.getInstance().canvasWidth * .45; 
+        var height = width * 1.2375;
         var x = this.canvas.width * 0.5;
-        var y = this.canvas.height - height + 30;
+        var y = this.canvas.height - height + Config.getInstance().canvasHeight * .06;
 
         this.context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, x, y + this.heroFromDist, width, height);
     }

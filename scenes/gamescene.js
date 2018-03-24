@@ -6,16 +6,20 @@ class GameScene extends Scene {
         this.assets = Assets.getInstance();
         this.controller = new Controller();
         this.fps = 0;
+        this.fpsFontSize = Math.floor(Config.getInstance().canvasHeight * .14) + "px joystix";
+        this.fpsMarginLeft = Math.floor(Config.getInstance().canvasWidth * .0625);
+        this.fpsMarginTop = Math.floor(Config.getInstance().canvasHeight * .08);
         
         var ratio = 88 / 150;
         this.popUpWidth = Config.getInstance().canvasWidth * 0.8;
         this.popUpHeight = Config.getInstance().canvasWidth * 0.8 * ratio;
         this.popUpX = Config.getInstance().canvasWidth / 2 - this.popUpWidth / 2;
         this.popUpY = Config.getInstance().canvasHeight / 2 - this.popUpHeight / 2;
-        
-        this.exitButton = new Button(200, 50, "exit", this.popUpX + 60, this.popUpY + this.popUpHeight * 0.6, 60, "#fff", "#ff0000", "#ff00ff");
-        this.tryAgainButton = new Button(200, 50, "try again", this.popUpX + this.popUpWidth - 250, this.popUpY + this.popUpHeight * 0.6, 60, "#fff", "#ff0000", "#ff00ff");
-        this.continueButton = new Button(200, 50, "continue", this.popUpX + this.popUpWidth - 250, this.popUpY + this.popUpHeight * 0.6, 60, "#fff", "#ff0000", "#ff00ff");
+        this.margin = Config.getInstance().canvasWidth * .0125;
+        this.yFrom = Config.getInstance().canvasHeight * .04;
+        this.exitButton = new Button(Config.getInstance().canvasWidth * .25, Config.getInstance().canvasHeight * .11, "exit", this.popUpX + (Config.getInstance().canvasWidth * .075), this.popUpY + this.popUpHeight * 0.6, Config.getInstance().canvasHeight * .13, "#fff", "#ff0000", "#ff00ff");
+        this.tryAgainButton = new Button(Config.getInstance().canvasWidth * .25, Config.getInstance().canvasHeight * .11, "try again", this.popUpX + this.popUpWidth - (Config.getInstance().canvasWidth * .3125), this.popUpY + this.popUpHeight * 0.6, Config.getInstance().canvasHeight * .13, "#fff", "#ff0000", "#ff00ff");
+        this.continueButton = new Button(Config.getInstance().canvasWidth * .25, Config.getInstance().canvasHeight * .11, "continue", this.popUpX + this.popUpWidth - (Config.getInstance().canvasWidth * .3125), this.popUpY + this.popUpHeight * 0.6, Config.getInstance().canvasHeight * .13, "#fff", "#ff0000", "#ff00ff");
         
         var config = Config.getInstance();
         var sceneMusic = "game_music";
@@ -61,20 +65,19 @@ class GameScene extends Scene {
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.context.imageSmoothingEnabled = false;
         this.controller.map.render(this.context);
-        this.context.font = "65px joystix";
+        this.context.font = this.fpsFontSize;
         this.context.fillStyle = "rgba(255, 0, 255, 255)";
         this.context.textAlign = "center";
-        this.context.fillText(this.fps, 50, 40);
+        this.context.fillText(this.fps, this.fpsMarginLeft, this.fpsMarginTop);
         
         var life = this.controller.map.zombieKiller.life;
-        var y = 20;
+        var y = this.yFrom;
         var size = this.canvas.height * 0.1;
-        var margin = 10;
-        var x = this.canvas.width - size - margin;
+        var x = this.canvas.width - size - this.margin;
         for (var a = 0; a < life; a++) {
             var image = "lifebar";
             this.context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, x, y, size, size);
-            x -= size + margin;
+            x -= size + this.margin;
         }
         
         if (this.controller.map.zombieKiller.isDeadForAWhile()) {

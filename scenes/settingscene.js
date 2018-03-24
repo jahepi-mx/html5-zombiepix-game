@@ -6,7 +6,7 @@ class SettingScene extends Scene {
         this.assets = Assets.getInstance();
         this.musicSlider = new Slider(this.canvas.width * 0.1, this.canvas.height * 0.3, this.canvas.width * 0.3, this.canvas.height * 0.03, this.canvas.height * 0.03, Config.getInstance().musicVolume);
         this.effectsSlider = new Slider(this.canvas.width * 0.57, this.canvas.height * 0.3, this.canvas.width * 0.3, this.canvas.height * 0.03, this.canvas.height * 0.03, Config.getInstance().soundEffectsVolume);
-        this.backButton = new Button(100, 20, "Back", this.canvas.width * 0.8, this.canvas.height * 0.85, 60, "#fff", "#ff0000", "#ff00ff");
+        this.backButton = new Button(Config.getInstance().canvasWidth * .125, Config.getInstance().canvasHeight * .04, "Back", this.canvas.width * 0.8, this.canvas.height * 0.85, Math.floor(Config.getInstance().canvasHeight * .13), "#fff", "#ff0000", "#ff00ff");
         
         var config = Config.getInstance();
         var sceneMusic = "main_music";
@@ -45,14 +45,14 @@ class SettingScene extends Scene {
         this.musicSlider.render(this.context);
         this.effectsSlider.render(this.context);
         
-        this.context.font = "30px joystix";
+        this.context.font = Math.floor(Config.getInstance().canvasHeight * .06) + "px joystix";
         this.context.textAlign = "left";
         var x = this.canvas.width * 0.1;
         var y = this.canvas.height * 0.26;
         this.context.fillStyle = "#d0f2ff";
         this.context.fillText("music volume " + Math.floor(this.musicSlider.getRatio() * 100) + "%", x, y);
         
-        this.context.font = "30px joystix";
+        this.context.font = Math.floor(Config.getInstance().canvasHeight * .06) + "px joystix";
         this.context.textAlign = "left";
         var x = this.canvas.width * 0.57;
         var y = this.canvas.height * 0.26;

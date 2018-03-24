@@ -1,7 +1,153 @@
 <TextureAtlas imagePath="sprites.png">
-	<SubTexture name="crate_broken_1.png" x="186" y="372" width="32" height="32"/>
-	<SubTexture name="crate_broken_2.png" x="306" y="882" width="32" height="32"/>
-	<SubTexture name="crate_broken_3.png" x="306" y="848" width="32" height="32"/>
+	<SubTexture name="2_new_bodypart_1.png" x="272" y="780" width="32" height="32"/>
+	<SubTexture name="2_new_bodypart_10.png" x="439" y="204" width="32" height="32"/>
+	<SubTexture name="2_new_bodypart_11.png" x="439" y="170" width="32" height="32"/>
+	<SubTexture name="2_new_bodypart_12.png" x="439" y="136" width="32" height="32"/>
+	<SubTexture name="2_new_bodypart_13.png" x="439" y="102" width="32" height="32"/>
+	<SubTexture name="2_new_bodypart_14.png" x="439" y="68" width="32" height="32"/>
+	<SubTexture name="2_new_bodypart_15.png" x="439" y="34" width="32" height="32"/>
+	<SubTexture name="2_new_bodypart_16.png" x="439" y="0" width="32" height="32"/>
+	<SubTexture name="2_new_bodypart_17.png" x="424" y="408" width="32" height="32"/>
+	<SubTexture name="2_new_bodypart_2.png" x="408" y="850" width="32" height="32"/>
+	<SubTexture name="2_new_bodypart_3.png" x="442" y="714" width="32" height="32"/>
+	<SubTexture name="2_new_bodypart_4.png" x="408" y="816" width="32" height="32"/>
+	<SubTexture name="2_new_bodypart_5.png" x="442" y="680" width="32" height="32"/>
+	<SubTexture name="2_new_bodypart_6.png" x="442" y="646" width="32" height="32"/>
+	<SubTexture name="2_new_bodypart_7.png" x="442" y="612" width="32" height="32"/>
+	<SubTexture name="2_new_bodypart_8.png" x="442" y="578" width="32" height="32"/>
+	<SubTexture name="2_new_bodypart_9.png" x="439" y="238" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_0.png" x="424" y="374" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_180.png" x="424" y="306" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_270.png" x="424" y="272" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_90.png" x="424" y="340" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_attack_0_1.png" x="422" y="476" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_attack_0_2.png" x="422" y="442" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_attack_0_3.png" x="414" y="544" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_attack_0_4.png" x="414" y="510" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_attack_0_5.png" x="408" y="986" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_attack_180_1.png" x="408" y="782" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_attack_180_2.png" x="408" y="748" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_attack_180_3.png" x="408" y="714" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_attack_180_4.png" x="408" y="680" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_attack_180_5.png" x="408" y="646" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_attack_270_1.png" x="408" y="612" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_attack_270_2.png" x="408" y="578" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_attack_270_3.png" x="405" y="238" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_attack_270_4.png" x="405" y="204" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_attack_270_5.png" x="405" y="170" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_attack_90_1.png" x="408" y="952" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_attack_90_2.png" x="408" y="918" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_attack_90_3.png" x="408" y="884" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_attack_90_4.png" x="374" y="884" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_attack_90_5.png" x="374" y="850" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_0_1.png" x="424" y="374" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_0_2.png" x="405" y="136" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_0_3.png" x="405" y="102" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_0_4.png" x="405" y="136" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_0_5.png" x="424" y="374" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_0_6.png" x="405" y="68" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_0_7.png" x="405" y="34" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_0_8.png" x="405" y="68" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_180_1.png" x="424" y="306" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_180_2.png" x="390" y="306" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_180_3.png" x="390" y="272" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_180_4.png" x="390" y="306" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_180_5.png" x="424" y="306" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_180_6.png" x="388" y="476" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_180_7.png" x="388" y="442" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_180_8.png" x="388" y="476" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_270_1.png" x="424" y="272" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_270_2.png" x="380" y="544" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_270_3.png" x="380" y="510" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_270_4.png" x="380" y="544" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_270_5.png" x="424" y="272" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_270_6.png" x="374" y="986" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_270_7.png" x="374" y="952" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_270_8.png" x="374" y="986" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_90_1.png" x="424" y="340" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_90_2.png" x="405" y="0" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_90_3.png" x="390" y="408" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_90_4.png" x="405" y="0" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_90_5.png" x="424" y="340" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_90_6.png" x="390" y="374" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_90_7.png" x="390" y="340" width="32" height="32"/>
+	<SubTexture name="2_new_zombie_walk_90_8.png" x="390" y="374" width="32" height="32"/>
+	<SubTexture name="3_new_bodypart_1.png" x="374" y="918" width="32" height="32"/>
+	<SubTexture name="3_new_bodypart_10.png" x="374" y="612" width="32" height="32"/>
+	<SubTexture name="3_new_bodypart_11.png" x="374" y="578" width="32" height="32"/>
+	<SubTexture name="3_new_bodypart_12.png" x="371" y="238" width="32" height="32"/>
+	<SubTexture name="3_new_bodypart_13.png" x="371" y="204" width="32" height="32"/>
+	<SubTexture name="3_new_bodypart_14.png" x="371" y="170" width="32" height="32"/>
+	<SubTexture name="3_new_bodypart_15.png" x="371" y="136" width="32" height="32"/>
+	<SubTexture name="3_new_bodypart_16.png" x="371" y="102" width="32" height="32"/>
+	<SubTexture name="3_new_bodypart_17.png" x="371" y="68" width="32" height="32"/>
+	<SubTexture name="3_new_bodypart_2.png" x="374" y="816" width="32" height="32"/>
+	<SubTexture name="3_new_bodypart_3.png" x="306" y="882" width="32" height="32"/>
+	<SubTexture name="3_new_bodypart_4.png" x="306" y="848" width="32" height="32"/>
+	<SubTexture name="3_new_bodypart_5.png" x="374" y="782" width="32" height="32"/>
+	<SubTexture name="3_new_bodypart_6.png" x="374" y="748" width="32" height="32"/>
+	<SubTexture name="3_new_bodypart_7.png" x="374" y="714" width="32" height="32"/>
+	<SubTexture name="3_new_bodypart_8.png" x="374" y="680" width="32" height="32"/>
+	<SubTexture name="3_new_bodypart_9.png" x="374" y="646" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_0.png" x="371" y="34" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_180.png" x="356" y="408" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_270.png" x="356" y="374" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_90.png" x="371" y="0" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_attack_0_1.png" x="356" y="340" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_attack_0_2.png" x="356" y="306" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_attack_0_3.png" x="356" y="272" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_attack_0_4.png" x="354" y="476" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_attack_0_5.png" x="354" y="442" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_attack_180_1.png" x="340" y="882" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_attack_180_2.png" x="340" y="848" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_attack_180_3.png" x="340" y="814" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_attack_180_4.png" x="340" y="780" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_attack_180_5.png" x="340" y="746" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_attack_270_1.png" x="340" y="712" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_attack_270_2.png" x="340" y="678" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_attack_270_3.png" x="340" y="644" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_attack_270_4.png" x="340" y="610" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_attack_270_5.png" x="337" y="238" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_attack_90_1.png" x="346" y="544" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_attack_90_2.png" x="346" y="510" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_attack_90_3.png" x="340" y="984" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_attack_90_4.png" x="340" y="950" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_attack_90_5.png" x="340" y="916" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_0_1.png" x="371" y="34" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_0_2.png" x="337" y="204" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_0_3.png" x="337" y="170" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_0_4.png" x="337" y="204" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_0_5.png" x="371" y="34" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_0_6.png" x="337" y="136" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_0_7.png" x="337" y="102" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_0_8.png" x="337" y="136" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_180_1.png" x="356" y="408" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_180_2.png" x="322" y="374" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_180_3.png" x="322" y="340" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_180_4.png" x="322" y="374" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_180_5.png" x="356" y="408" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_180_6.png" x="322" y="306" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_180_7.png" x="322" y="272" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_180_8.png" x="322" y="306" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_270_1.png" x="356" y="374" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_270_2.png" x="320" y="476" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_270_3.png" x="320" y="442" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_270_4.png" x="320" y="476" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_270_5.png" x="356" y="374" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_270_6.png" x="312" y="576" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_270_7.png" x="312" y="542" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_270_8.png" x="312" y="576" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_90_1.png" x="371" y="0" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_90_2.png" x="337" y="68" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_90_3.png" x="337" y="34" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_90_4.png" x="337" y="68" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_90_5.png" x="371" y="0" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_90_6.png" x="337" y="0" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_90_7.png" x="322" y="408" width="32" height="32"/>
+	<SubTexture name="3_new_zombie_walk_90_8.png" x="337" y="0" width="32" height="32"/>
+	<SubTexture name="crate_broken_1.png" x="306" y="984" width="32" height="32"/>
+	<SubTexture name="crate_broken_2.png" x="306" y="950" width="32" height="32"/>
+	<SubTexture name="crate_broken_3.png" x="306" y="916" width="32" height="32"/>
 	<SubTexture name="end.png" x="0" y="0" width="267" height="150"/>
 	<SubTexture name="end_hero.png" x="0" y="484" width="80" height="99"/>
 	<SubTexture name="enemy_bullet.png" x="74" y="653" width="4" height="4"/>
@@ -42,7 +188,7 @@
 	<SubTexture name="new_bodypart_6.png" x="272" y="882" width="32" height="32"/>
 	<SubTexture name="new_bodypart_7.png" x="272" y="848" width="32" height="32"/>
 	<SubTexture name="new_bodypart_8.png" x="272" y="814" width="32" height="32"/>
-	<SubTexture name="new_bodypart_9.png" x="272" y="780" width="32" height="32"/>
+	<SubTexture name="new_bodypart_9.png" x="306" y="746" width="32" height="32"/>
 	<SubTexture name="new_bullet.png" x="74" y="659" width="4" height="4"/>
 	<SubTexture name="new_bullet_explo_1.png" x="269" y="136" width="32" height="32"/>
 	<SubTexture name="new_bullet_explo_2.png" x="269" y="102" width="32" height="32"/>
@@ -92,7 +238,7 @@
 	<SubTexture name="new_zombie_attack_180_1.png" x="204" y="620" width="32" height="32"/>
 	<SubTexture name="new_zombie_attack_180_2.png" x="186" y="440" width="32" height="32"/>
 	<SubTexture name="new_zombie_attack_180_3.png" x="186" y="406" width="32" height="32"/>
-	<SubTexture name="new_zombie_attack_180_4.png" x="306" y="746" width="32" height="32"/>
+	<SubTexture name="new_zombie_attack_180_4.png" x="186" y="372" width="32" height="32"/>
 	<SubTexture name="new_zombie_attack_180_5.png" x="186" y="338" width="32" height="32"/>
 	<SubTexture name="new_zombie_attack_270_1.png" x="186" y="304" width="32" height="32"/>
 	<SubTexture name="new_zombie_attack_270_2.png" x="184" y="508" width="32" height="32"/>
