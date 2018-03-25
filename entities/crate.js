@@ -1,4 +1,5 @@
 let CRATE_TYPE = 44;
+let CRATE_TYPE_NO_ITEM = 58;
 
 class Crate extends Tile {
     
@@ -40,5 +41,9 @@ class Crate extends Tile {
         if (this.walkable) {
             this.animation.update(deltatime);
         }
-    }  
+    }
+    
+    destroy() {
+        this.hits = 0;
+    }
 }

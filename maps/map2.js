@@ -7,7 +7,7 @@ class Map2 extends Map {
     init() {
         
         this.map = [
-            17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 7, 7, 7, 7, 7, 7, 7, 7, 17, 17, 7, 7, 7, 7, 7, 7, 7, 7, 17, 17, 7, 7, 7, 7, 7, 7, 7, 7, 17, 17, 7, 7, 7, 7, 7, 7, 7, 7, 17, 17, 7, 7, 7, 7, 7, 7, 7, 7, 17, 17, 7, 7, 7, 7, 7, 7, 7, 7, 17, 17, 7, 7, 7, 7, 7, 7, 7, 7, 17, 17, 7, 7, 7, 7, 7, 7, 7, 48, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17
+            17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 7, 7, 7, 7, 7, 7, 7, 7, 17, 17, 7, 7, 7, 7, 7, 7, 7, 7, 17, 17, 7, 7, 7, 7, 7, 7, 7, 7, 17, 17, 7, 7, 7, 7, 7, 7, 7, 7, 17, 17, 7, 7, 7, 7, 7, 7, 7, 7, 17, 17, 7, 7, 7, 7, 7, 7, 7, 7, 17, 17, 7, 7, 7, 7, 7, 7, 7, 7, 17, 17, 7, 7, 7, 7, 7, 7, 7, 57, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17, 17
         ];
         
         this.tileMap = [];
@@ -19,8 +19,8 @@ class Map2 extends Map {
         for (var a = 0; a < this.rows * this.cols; a++) {
             var x = a % this.cols;
             var y = Math.floor(a / this.cols);
-            if (this.map[a] === CRATE_TYPE) {
-                this.tileMap[a] = new Crate(x, y, this.tileWidth, this.tileHeight, this);
+            if (this.map[a] === CRATE_TYPE || this.map[a] === CRATE_TYPE_NO_ITEM) {
+                this.tileMap[a] = new Crate(x, y, this.tileWidth, this.tileHeight, this.map[a] === CRATE_TYPE);
             } else if (this.map[a] === BARREL_TYPE) {
                 this.tileMap[a] = new Barrel(x, y, this.tileWidth, this.tileHeight, this);
             } else if (this.map[a] === EXIT_TYPE) {

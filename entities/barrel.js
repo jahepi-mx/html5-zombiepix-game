@@ -11,6 +11,7 @@ class Barrel extends Tile {
         this.animation.stopAtSequenceNumber(1, null);
         this.hitRatio = Math.pow(Config.getInstance().tileWidth, 2) + Math.pow(Config.getInstance().tileHeight, 2);
         this.image = "metal_background";
+        this.vectors = [[1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1]];
     }
     
     render(context) {
@@ -44,11 +45,26 @@ class Barrel extends Tile {
                         }
                     }
                 }
+                for (let vector of this.vectors) {
+                    var x = this.x + vector[0];
+                    var y = this.y + vector[1];
+                    var tile = this.map.getTile(x, y);
+                    if (tile !== null && (tile.type === BARREL_TYPE || tile.type === CRATE_TYPE || tile.type === CRATE_TYPE_NO_ITEM)) {
+                        tile.destroy();
+                    }
+                }
+                if (this.collide(this.map.zombieKiller)) {
+                    this.map.zombieKiller.damage();
+                }
+                this.walkable = true;
             }
-            this.walkable = true;
         }
         if (this.walkable && !this.animation.isStopped()) {
             this.animation.update(deltatime);
         }
-    }  
+    }
+    
+    destroy() {
+        this.hits = 0;
+    }
 }

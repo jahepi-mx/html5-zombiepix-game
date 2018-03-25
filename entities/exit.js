@@ -1,4 +1,4 @@
-let EXIT_TYPE = 48;
+let EXIT_TYPE = 57;
 
 class Exit extends Tile {
     
