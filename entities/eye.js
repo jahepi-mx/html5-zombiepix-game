@@ -2,12 +2,12 @@ let EYE_TYPE = 8;
 
 class Eye extends Entity {
     
-    constructor(x, y, width, height, map) {
+    constructor(x, y, width, height, map, shootTime) {
         super(x, y, width, height, EYE_TYPE);
         this.map = map;
         this.zombieKiller = this.map.zombieKiller;
         this.shootTime = 0;
-        this.shootTimeLimit = 0.5;
+        this.shootTimeLimit = shootTime;
         this.bullets = [];
         this.camera = Camera.getInstance();
         this.atlas = Atlas.getInstance();
