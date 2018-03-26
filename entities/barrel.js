@@ -12,6 +12,9 @@ class Barrel extends Tile {
         this.hitRatio = Math.pow(Config.getInstance().tileWidth, 2) + Math.pow(Config.getInstance().tileHeight, 2);
         this.image = "metal_background";
         this.vectors = [[1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1]];
+        this.isIgniting = false;
+        this.ignitingTime = 0;
+        this.ignitingTimeLimit = 0.4;
     }
     
     render(context) {
@@ -33,6 +36,12 @@ class Barrel extends Tile {
     }
     
     update(deltatime) {
+        if (this.isIgniting) {
+            this.ignitingTime += deltatime;
+            if (this.ignitingTime >= this.ignitingTimeLimit) {
+                this.hits = 0;
+            }
+        }
         if (this.hits <= 0) {
             if (!this.walkable) {
                 this.assets.playAudio(this.assets.explosion, false, Config.getInstance().soundEffectsVolume);
@@ -65,6 +74,6 @@ class Barrel extends Tile {
     }
     
     destroy() {
-        this.hits = 0;
+        this.isIgniting = true;
     }
 }

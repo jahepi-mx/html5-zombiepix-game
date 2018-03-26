@@ -2,14 +2,14 @@ let ZOMBYE_TYPE = 1;
 
 class Zombie extends Entity {  
     
-    constructor(x, y, width, height, map, speed) {
+    constructor(x, y, width, height, map, speed, health, awarenessTime, colorType) {
         super(x, y, width, height, ZOMBYE_TYPE);
         this.map = map;
         this.zombieKiller = this.map.zombieKiller;
         this.camera = Camera.getInstance();
         
         this.pathfindingTime = 0;
-        this.pathfindingTimeLimit = 5;
+        this.pathfindingTimeLimit = awarenessTime;
         this.visited = [];
         this.parents = [];
         this.vectors = [[1, 0], [0, 1], [-1, 0], [0, -1]];
@@ -23,7 +23,7 @@ class Zombie extends Entity {
         this.walkAnimation = new Animation(8, 2);
         this.attackAnimation = new Animation(5, 2);
         this.rotation = 0;
-        this.health = 10;
+        this.health = health;
         this.maxHealth = this.health;
         this.isDead = false;
         this.bodyparts = [];
@@ -32,11 +32,16 @@ class Zombie extends Entity {
         this.foundZombieKiller = true;
         this.visibilityRatio = Config.getInstance().canvasWidth * Config.getInstance().canvasWidth + Config.getInstance().canvasHeight * Config.getInstance().canvasHeight;
         this.distanceFromZombieKiller = 0;
-        this.searchAvailableVectors(Math.floor(this.x / this.map.tileWidth), Math.floor(this.y / this.map.tileHeight));
+        //this.searchAvailableVectors(Math.floor(this.x / this.map.tileWidth), Math.floor(this.y / this.map.tileHeight));
         this.minDistance = Config.getInstance().tileWidth * .05;
         this.attackDistance = (Math.pow(Config.getInstance().tileWidth, 2) + Math.pow(Config.getInstance().tileHeight, 2)) / 2;
         this.minRange = Config.getInstance().tileWidth * 0.125;
         this.range = this.minRange * 3;
+        this.sprite = "new_zombie";
+        this.colorType = colorType;
+        if (colorType > 1) {
+            this.sprite = colorType + "_new_zombie";
+        }
         this.queue = new PriorityQueue(function (a, b) {
             return a.priority > b.priority;
         });
@@ -116,7 +121,12 @@ class Zombie extends Entity {
         this.health = 0;
         this.isDead = true;
         for (var a = 0; a < 4; a++) {
-            var bodypart = new ZombieBodyPart(this.left(), this.top(), this.width, this.height, this.map, null);
+            var type = Math.floor(Math.random() * 17) + 1;
+            var image = "new_bodypart_" + type;
+            if (this.colorType > 1) {
+                image = this.colorType + "_" + image;
+            }
+            var bodypart = new ZombieBodyPart(this.left(), this.top(), this.width, this.height, this.map, image);
             if (fromExplosion) {
                 bodypart.velocityX = Config.getInstance().tileWidth * 11.25;
                 bodypart.velocityY = Config.getInstance().tileWidth * 11.25;
@@ -134,6 +144,7 @@ class Zombie extends Entity {
         var targetY = this.zombieKiller.currentY();
         
         if (!this.foundZombieKiller) {
+            this.searchAvailableVectors(Math.floor(this.x / this.map.tileWidth), Math.floor(this.y / this.map.tileHeight));
             var rand = Math.floor(this.availableVectors.size * Math.random());
             var index = 0;
             for (let vector of this.availableVectors){
@@ -242,12 +253,12 @@ class Zombie extends Entity {
         }
         if (Math.abs(diffX) <= this.minRange && Math.abs(diffY) <= this.minRange) {
             if (this.distanceFromZombieKiller <= this.attackDistance) {
-                image = "new_zombie_attack_" + this.rotation + "_" + (this.attackAnimation.getFrame() + 1);          
+                image = this.sprite + "_attack_" + this.rotation + "_" + (this.attackAnimation.getFrame() + 1);          
             } else {
-                image = "new_zombie_" + this.rotation;
+                image = this.sprite + "_" + this.rotation;
             }
         } else {         
-            image = "new_zombie_walk_" + this.rotation + "_" + (this.walkAnimation.getFrame() + 1);
+            image = this.sprite + "_walk_" + this.rotation + "_" + (this.walkAnimation.getFrame() + 1);
         }      
         context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.x + this.camera.offsetX, this.y + this.camera.offsetY, this.width, this.height);
     }

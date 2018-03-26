@@ -199,7 +199,7 @@ class ZombieKiller extends Entity {
     damage() {
         if (!this.isDead && this.damageTime >= this.damageTimeLimit) {
             this.damageTime = 0;
-            this.life--;
+            //this.life--;
             if (this.life <= 0) {
                 for (var a = 1; a <= 4; a++) {
                     var bodypart = new ZombieBodyPart(this.left(), this.top(), this.width, this.height, this.map, "human_bodypart_" + a);

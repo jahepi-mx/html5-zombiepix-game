@@ -6,6 +6,7 @@ class Tile extends Entity {
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
         this.image = "tile" + this.type;
+        this.walkable = this.type >= 1 && this.type <= 12 || (this.type === 56 || this.type === 57);
     }
     
     render(context) {
@@ -13,7 +14,7 @@ class Tile extends Entity {
     }
     
     isWalkable() {
-        return this.type >= 1 && this.type <= 12 || (this.type === 56 || this.type === 57);
+        return this.walkable;
     }
     
     left() {
