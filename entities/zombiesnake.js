@@ -2,31 +2,34 @@ let ZOMBIE_SNAKE_TYPE = 256;
 
 class ZombieSnake extends Entity {
     
-    constructor(x, y, width, height, map) {
+    constructor(x, y, width, height, map, health, shootTime, changeLengthTime, numberOfBodyParts) {
         super(x, y, width, height, ZOMBIE_SNAKE_TYPE);
         this.map = map;
         this.zombieKiller = this.map.zombieKiller;
+        
+        this.distanceBetweenParts = Math.sqrt(width * width + height * height) / 2;
+        
         this.bodyParts = [];
-        this.length = 400;
+        this.length = this.distanceBetweenParts * numberOfBodyParts;
         this.maxLength = this.length;
         this.radians = Math.PI * 2 * Math.random();
         this.camera = Camera.getInstance();
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
         this.changeLengthTime = 0;
-        this.changeLengthTimeLimit = 3;
+        this.changeLengthTimeLimit = changeLengthTime;
         this.maxHealth = 0;
         this.health = 0;
         this.shootTime = 0;
-        this.shootTimeLimit = 0.5;
+        this.shootTimeLimit = shootTime;
         this.bullets = [];
         this.isDead = false;
         this.visibilityRatio = Config.getInstance().canvasWidth * Config.getInstance().canvasWidth + Config.getInstance().canvasHeight * Config.getInstance().canvasHeight;
         this.distanceFromZombieKiller = 0;
         this.tau = Math.PI * 2;
         
-        for (var a = 0; a < 7; a++) {
-            var bodyPart = new ZombieSnakePart(x, y, width, height, map);
+        for (var a = 0; a < numberOfBodyParts; a++) {
+            var bodyPart = new ZombieSnakePart(x, y, width, height, map, health);
             this.bodyParts.push(bodyPart);
             this.maxHealth += bodyPart.health;
         }
@@ -83,6 +86,7 @@ class ZombieSnake extends Entity {
             bodyPart.update(deltatime);
             if (bodyPart.dispose) {
                 this.bodyParts.splice(a--, 1);
+                this.maxLength = this.distanceBetweenParts * this.bodyParts.length;
             } else {
                 bodyPart.xRatio = cos;
                 bodyPart.yRatio = sin;
@@ -99,8 +103,12 @@ class ZombieSnake extends Entity {
             }
         }
         
-        for (var a = this.bodyParts.length - 1, b = 1; a >= 0 ; a--, b++) {
-            this.bodyParts[a].image = "snake_" + b;
+        for (var a = this.bodyParts.length - 1, b = 0; a >= 0 ; a--, b++) {
+            var id = b % 7;
+            if (b > 0 && id === 0) {
+                id = 1;
+            }
+            this.bodyParts[a].image = "snake_" + (id + 1);
             if (reachLengthMovement) {
                 this.bodyParts[a].lengthMovementTo *= -1;
                 this.bodyParts[a].reachLengthMovement = false;
@@ -163,7 +171,7 @@ let ZOMBIE_SNAKE_PART_TYPE = 512;
 
 class ZombieSnakePart extends Entity {
     
-    constructor(x, y, width, height, map) {
+    constructor(x, y, width, height, map, health) {
         super(x, y, width, height, ZOMBIE_SNAKE_PART_TYPE);
         this.map = map;
         this.xRatio = 0,
@@ -179,7 +187,7 @@ class ZombieSnakePart extends Entity {
         this.lengthMovementTo = this.map.tileWidth;
         this.lengthMovementFrom = 0;
         this.lengthMovementSpeed = 0;
-        this.health = 4;
+        this.health = health;
         this.isDead = false;
         this.dispose = false;
         this.image = null;

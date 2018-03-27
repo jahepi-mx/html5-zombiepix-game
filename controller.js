@@ -4,7 +4,7 @@ class Controller {
         document.onkeydown = this.onKeyDown.bind(this);
         document.onkeyup = this.onKeyUp.bind(this);
         this.currentMap = 0;
-        this.maps = [new Map1(50, 65), new Map2(10, 10)];
+        this.maps = [new Map1(50, 65, 5, 7), new Map2(10, 10, 1, 1)];
         this.map = this.maps[this.currentMap];
         this.map.init();
         this.zombieKiller = this.map.zombieKiller;
@@ -64,5 +64,9 @@ class Controller {
     reset() {
         this.map.reset();
         this.zombieKiller = this.map.zombieKiller;
+    }
+    
+    resetStartUbication() {
+        this.map.resetStartUbication();
     }
 }

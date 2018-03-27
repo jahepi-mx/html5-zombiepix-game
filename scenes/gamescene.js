@@ -45,6 +45,7 @@ class GameScene extends Scene {
         this.fps = Math.round(1 / deltatime);
         
         if (this.exitButton.isClicked) {
+            this.controller.resetStartUbication();
             this.onChangeSceneCallback("mainscene");
         }
         
@@ -53,6 +54,7 @@ class GameScene extends Scene {
         }
         
         if (this.continueButton.isClicked) {
+            this.controller.resetStartUbication();
             this.controller.nextMap();
         }
         

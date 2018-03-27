@@ -1,7 +1,7 @@
 class Map2 extends Map {
     
-    constructor(rows, cols) {
-        super(rows, cols);
+    constructor(rows, cols, startX, startY) {
+        super(rows, cols, startX, startY);
     }
     
     init() {

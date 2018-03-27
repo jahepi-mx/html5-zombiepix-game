@@ -1,6 +1,6 @@
 class Map {
     
-    constructor(rows, cols) {
+    constructor(rows, cols, startX, startY) {
         this.rows = rows;
         this.cols = cols;
         this.map = null;
@@ -16,6 +16,10 @@ class Map {
         this.height = this.tileHeight * this.rows;
         this.camera = Camera.getInstance();
         this.maxCorpses = 0;
+        this.startX = startX;
+        this.startY = startY;
+        this.startXTmp = startX;
+        this.startYTmp = startY;
     }
     
     init() {
@@ -142,6 +146,11 @@ class Map {
         this.deadZombies = null;
         this.items = null;
         this.events = null;
+    }
+    
+    resetStartUbication() {
+        this.startX = this.startXTmp;
+        this.startY = this.startYTmp;
     }
 }
 

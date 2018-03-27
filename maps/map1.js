@@ -1,7 +1,7 @@
 class Map1 extends Map {
     
-    constructor(rows, cols) {
-        super(rows, cols);
+    constructor(rows, cols, startX, startY) {
+        super(rows, cols, startX, startY);
     }
     
     init() {
@@ -37,8 +37,8 @@ class Map1 extends Map {
         var canvasHeight = Config.getInstance().canvasHeight;
         var xOffset = canvasWidth / 2 - zombieKillerWidth / 2;
         var yOffset = canvasHeight / 2 - zombieKillerHeight / 2;
-        var origX = 52 * this.tileWidth;
-        var origY = 29 * this.tileHeight;
+        var origX = this.startX * this.tileWidth;
+        var origY = this.startY * this.tileHeight;
         var newOffsetX = xOffset - origX - this.tileWidth / 2 + zombieKillerWidth / 2;
         var newOffsetY = yOffset - origY - this.tileHeight / 2 + zombieKillerHeight / 2;
         
@@ -92,26 +92,6 @@ class Map1 extends Map {
         
         
         /*
-        this.enemies.push(new Zombie(7 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 11 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 120));
-        this.enemies.push(new Zombie(8 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 12 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 150));
-        this.enemies.push(new Zombie(9 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 12 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 140));
-        this.enemies.push(new Zombie(9 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 9 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 130));
-        
-        this.enemies.push(new Zombie(6 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 4 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 130));
-        this.enemies.push(new Zombie(7 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 8 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 170));
-        this.enemies.push(new Zombie(7 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 9 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 100));
-        
-        this.enemies.push(new Zombie(12 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 16 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 180));
-        this.enemies.push(new Zombie(13 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 16 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 190));
-        
-        this.enemies.push(new Zombie(14 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 11 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 150));
-        this.enemies.push(new Zombie(15 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 11 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 80));
-        this.enemies.push(new Zombie(15 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 12 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 130));
-        this.enemies.push(new Zombie(15 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 13 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 170));
-        this.enemies.push(new Zombie(16 * this.tileWidth + this.tileWidth / 2 - zombieSize / 2, 13 * this.tileHeight + this.tileHeight / 2 - zombieSize / 2, zombieSize, zombieSize, this, 150));
-        
-        var eyeSize = this.tileWidth * 1.2;
-        this.enemies.push(new Eye(9 * this.tileWidth + this.tileWidth / 2 - eyeSize / 2, 13 * this.tileHeight + this.tileHeight / 2 - eyeSize / 2, eyeSize, eyeSize, this));
         
         eyeSize = this.tileWidth;
         this.enemies.push(new MovingEye(16 * this.tileWidth + this.tileWidth / 2 - eyeSize / 2, 16 * this.tileHeight + this.tileHeight / 2 - eyeSize / 2, eyeSize, eyeSize, this));
