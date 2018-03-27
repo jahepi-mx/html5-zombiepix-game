@@ -181,7 +181,7 @@ class Zombie extends Entity {
                             this.foundZombieKiller = true;
                             return this.path(newY * this.map.cols + newX);
                         }
-                        heuristic = Math.abs(this.zombieKiller.left() - newX * this.map.tileWidth) + Math.abs(this.zombieKiller.top() - newY * this.map.tileHeight);
+                        heuristic = Math.abs(this.zombieKiller.left() - (newX * this.map.tileWidth + this.map.tileWidth / 2)) + Math.abs(this.zombieKiller.top() - (newY * this.map.tileHeight + this.map.tileHeight / 2));
                         this.queue.add(newY * this.map.cols + newX, heuristic);
                     }
                 }

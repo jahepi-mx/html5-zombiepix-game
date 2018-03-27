@@ -84,10 +84,10 @@ class Map1 extends Map {
         
         zombieSize = this.tileWidth * 1.5;
         
-        this.enemies.push(new Zombie(46 * this.tileWidth + this.tileWidth / 2, 36 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 2, 30, 2, 2));
+        this.enemies.push(new Zombie(46 * this.tileWidth + this.tileWidth / 2, 36 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 1, 30, 2, 2));
         this.enemies.push(new Zombie(46 * this.tileWidth + this.tileWidth / 2, 36 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 2, 30, 2, 2));
         this.enemies.push(new Zombie(42 * this.tileWidth + this.tileWidth / 2, 34 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 1.5, 30, 2, 2));
-        this.enemies.push(new Zombie(42 * this.tileWidth + this.tileWidth / 2, 34 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 2, 30, 2, 2));
+        this.enemies.push(new Zombie(42 * this.tileWidth + this.tileWidth / 2, 34 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 1.2, 30, 2, 2));
         this.enemies.push(new Zombie(42 * this.tileWidth + this.tileWidth / 2, 34 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 1.5, 30, 2, 2));
         
         
