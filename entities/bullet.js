@@ -47,7 +47,7 @@ class Bullet extends Entity {
         } else {
             var diffX = this.origX - this.x;
             var diffY = this.origY - this.y;
-            if (diffX * diffX + diffY * diffY >= this.maxDistance) {
+            if (!this.collided && diffX * diffX + diffY * diffY >= this.maxDistance) {
                 this.setAsCollided();
             }
         }
