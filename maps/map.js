@@ -41,10 +41,6 @@ class Map {
             }
         }
         
-        for (let event of this.events) {
-            event.render(context);
-        }
-        
         for (let zombie of this.deadZombies) {
             zombie.render(context);
         }
@@ -56,6 +52,10 @@ class Map {
         
         for (let item of this.items) {
             item.render(context);
+        }
+        
+        for (let event of this.events) {
+            event.render(context);
         }
     }
     
