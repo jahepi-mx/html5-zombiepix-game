@@ -74,14 +74,14 @@ class Zombie extends Entity {
 
         if (this.vectorsPath.length > 0 && this.isNewPosition) {
             var vector = this.vectorsPath.pop();
-            this.toX = (vector % this.map.cols) * this.map.tileWidth;
-            this.toY = Math.floor(vector / this.map.cols) * this.map.tileHeight;
+            this.toX = (vector % this.map.cols) * this.map.tileWidth + this.map.tileWidth / 2;
+            this.toY = Math.floor(vector / this.map.cols) * this.map.tileHeight + this.map.tileHeight / 2;
             //console.log((vector % this.map.cols) + ", " + Math.floor(vector / this.map.cols));
             this.isNewPosition = false;
         }
         
-        diffX = (this.toX + this.map.tileWidth / 2 - this.width / 2) - this.x;
-        diffY = (this.toY + this.map.tileHeight / 2 - this.height / 2) - this.y;
+        diffX = this.toX - this.x;
+        diffY = this.toY - this.y;
         
         if (Math.abs(diffX) > this.minDistance) {
             if (diffX >= 0) {
@@ -239,10 +239,10 @@ class Zombie extends Entity {
         context.fillStyle = "#ff0000";
         var width = this.health / this.maxHealth * this.width * 0.7;
         
-        context.fillRect(this.left() + this.camera.offsetX + this.width / 2 - width / 2, this.top() + this.camera.offsetY - this.minRange, width, this.minRange);
+        context.fillRect(this.x + this.camera.offsetX - width / 2, this.top() + this.camera.offsetY  - this.minRange, width, this.minRange);
         
-        var diffX = (this.toX + this.map.tileWidth / 2 - this.width / 2) - this.x;
-        var diffY = (this.toY + this.map.tileHeight / 2 - this.height / 2) - this.y;
+        var diffX = this.toX - this.x;
+        var diffY = this.toY - this.y;
         
         var image = "";
         if (Math.abs(diffY) <= this.range && Math.abs(diffX) >= this.range) {
@@ -260,7 +260,15 @@ class Zombie extends Entity {
         } else {         
             image = this.sprite + "_walk_" + this.rotation + "_" + (this.walkAnimation.getFrame() + 1);
         }      
-        context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.x + this.camera.offsetX, this.y + this.camera.offsetY, this.width, this.height);
+        context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.x + this.camera.offsetX - this.width / 2, this.y + this.camera.offsetY - this.height / 2, this.width, this.height);
+    }
+    
+    left() {
+        return this.x - this.width / 2;
+    }
+    
+    top() {
+        return this.y - this.height / 2;
     }
 }
 
