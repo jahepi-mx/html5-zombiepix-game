@@ -45,7 +45,7 @@ class BossFightEvent extends Event {
         
         if (this.executed && this.newMusic === false) {
             if (this.config.music !== null) {
-                this.config.musicGain.value -= 1 * deltatime / 2;
+                this.config.musicGain.value -= deltatime / 2;
                 if (this.config.musicGain.value <= 0) {
                     this.config.musicGain.value = 0;
                     this.newMusic = true;
@@ -65,7 +65,7 @@ class BossFightEvent extends Event {
         }
         
         if (this.executed && this.newMusicUpVolume && !this.newMusicUpVolumeFinish) {
-            this.config.musicGain.value += 1 * deltatime / 2;
+            this.config.musicGain.value += deltatime / 2;
             if (this.config.musicGain.value >= this.config.musicVolume) {
                 this.config.musicGain.value = this.config.musicVolume;
                 this.newMusicUpVolumeFinish = true;
