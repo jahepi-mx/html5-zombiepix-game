@@ -74,7 +74,7 @@ class GameScene extends Scene {
         
         var life = this.controller.map.zombieKiller.life;
         var y = this.yFrom;
-        var size = this.canvas.height * 0.1;
+        var size = this.canvas.height * 0.08;
         var x = this.canvas.width - size - this.margin;
         for (var a = 0; a < life; a++) {
             var image = "lifebar";

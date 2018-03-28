@@ -35,6 +35,11 @@ class BossFightEvent extends Event {
                 this.map.enemies.push(this.zombieSnake1);
                 this.map.enemies.push(this.zombieSnake2);
                 this.map.enemies.push(this.zombieSnake3);
+                
+                this.map.items.push(new Life(47 * this.map.tileWidth, 24 * this.map.tileHeight, this.map.tileWidth * 0.6, this.map.tileHeight * 0.6, this.map));
+                this.map.items.push(new Life(57 * this.map.tileWidth, 24 * this.map.tileHeight, this.map.tileWidth * 0.6, this.map.tileHeight * 0.6, this.map));
+                this.map.items.push(new Life(47 * this.map.tileWidth, 13 * this.map.tileHeight, this.map.tileWidth * 0.6, this.map.tileHeight * 0.6, this.map));
+                this.map.items.push(new Life(57 * this.map.tileWidth, 13 * this.map.tileHeight, this.map.tileWidth * 0.6, this.map.tileHeight * 0.6, this.map));
             }
         }
         
@@ -68,7 +73,7 @@ class BossFightEvent extends Event {
         }
         
         if (this.executed && this.zombieSnake1.isDead && this.zombieSnake2.isDead && this.zombieSnake3.isDead) {
-            this.dispose = true;
+            //this.dispose = true;
             this.exit.image = "tile7";
             this.exit.type = 7;
             this.exit.walkable = true;
@@ -76,11 +81,30 @@ class BossFightEvent extends Event {
     }
     
     render(context) {
-        if (this.executed) {
+        if (this.executed && this.zombieSnake1.isDead && this.zombieSnake2.isDead && this.zombieSnake3.isDead) {
             context.font = this.fontSize;
             context.fillStyle = "rgba(255, 0, 255, 255)";
             context.textAlign = "center";
-            context.fillText("Defeat the zombie snakes to unlock the exit", this.config.canvasWidth / 2, this.config.canvasHeight * 0.2);
+            context.fillText("Exit was unlocked!", this.config.canvasWidth / 2, this.config.canvasHeight * 0.17);
+        }
+        
+        if (this.executed && (!this.zombieSnake1.isDead || !this.zombieSnake2.isDead || !this.zombieSnake3.isDead)) {
+            context.font = this.fontSize;
+            context.fillStyle = "rgba(255, 0, 255, 255)";
+            context.textAlign = "center";
+            context.fillText("Boss Fight, Defeat Zombie Snakes", this.config.canvasWidth / 2, this.config.canvasHeight * 0.17);
+            
+            var health = this.zombieSnake1.health + this.zombieSnake2.health + this.zombieSnake3.health;
+            var maxHealth = this.zombieSnake1.maxHealth + this.zombieSnake2.maxHealth + this.zombieSnake3.maxHealth;
+            var width = this.config.canvasWidth * 0.5;
+            var height = this.config.canvasHeight * 0.03;
+            var offset = this.config.canvasHeight * 0.01;
+            var x = this.config.canvasWidth / 2 - width / 2;
+            var y = this.config.canvasHeight * 0.19;
+            context.fillStyle = "black";
+            context.fillRect(x, y, width, height);
+            context.fillStyle = "red";
+            context.fillRect(x + offset, y + offset, (width - offset * 2) * health / maxHealth, height - offset * 2);
         }
     }
 }
