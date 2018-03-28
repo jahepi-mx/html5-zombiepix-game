@@ -66,8 +66,40 @@ and open the template in the editor.
                 canvas.height = Config.getInstance().canvasHeight;
                 context = canvas.getContext("2d");
                 var assets = Assets.getInstance();
-                assets.loadAll(onLoadAssets);
+                assets.loadAll(onLoadAssets, onDownloadAssets);
             };
+            
+            function onDownloadAssets() {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.imageSmoothingEnabled = false;
+                var percentage = Math.floor(Assets.getInstance().getLoadedRatio() * 100);
+                context.font = Math.floor(canvas.height * .14) + "px joystix";;
+                context.fillStyle = "#fff";
+                context.textAlign = "center";
+                context.fillText("Downloading Assets " + percentage + "%", canvas.width / 2, canvas.height * 0.3);
+                context.beginPath();
+                var radius = canvas.width * 0.07;
+                context.arc(canvas.width / 2, canvas.height / 2, radius, 0, Math.PI * 2 * Assets.getInstance().getLoadedRatio(), false);
+                context.lineWidth = canvas.width * 0.01;
+                context.strokeStyle = 'red';
+                context.stroke();
+            }
+            
+            function onDownloadAtlas() {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                context.imageSmoothingEnabled = false;
+                var percentage = Math.floor(Atlas.getInstance().getLoadedRatio() * 100);
+                context.font = Math.floor(canvas.height * .14) + "px joystix";;
+                context.fillStyle = "#fff";
+                context.textAlign = "center";
+                context.fillText("Downloading Atlas " + percentage + "%", canvas.width / 2, canvas.height * 0.3);
+                context.beginPath();
+                var radius = canvas.width * 0.07;
+                context.arc(canvas.width / 2, canvas.height / 2, radius, 0, Math.PI * 2 * Atlas.getInstance().getLoadedRatio(), false);
+                context.lineWidth = canvas.width * 0.01;
+                context.strokeStyle = 'blue';
+                context.stroke();
+            }
             
             function update(currTime) {
                 var diff = currTime - prevTime;
@@ -92,7 +124,7 @@ and open the template in the editor.
             
             function onLoadAssets() {
                 var atlas = Atlas.getInstance();
-                atlas.loadAll(onLoadAtlas);
+                atlas.loadAll(onLoadAtlas, onDownloadAtlas);
             }
             
             function onLoadAtlas() {

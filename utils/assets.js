@@ -6,6 +6,7 @@ class Assets {
         this.loaded = false;
         this.loadedCount = 0;
         this.callback = null;
+        this.downloadCallback = null
         this.srcs = ["assets/sprites/sprites.png"];
         this.keys = ["spritesAtlas"];
         this.audio = {};
@@ -26,9 +27,10 @@ class Assets {
         return this.loadedCount / (this.srcs.length + this.audio.srcs.length);
     }
     
-    loadAll(callback) {
+    loadAll(callback, downloadCallback) {
         if (this.loaded) return;
         this.callback = callback;
+        this.downloadCallback = downloadCallback;
         for (var i = 0; i < this.keys.length; i++) {
             this[this.keys[i]] = new Image();
         }
@@ -41,12 +43,14 @@ class Assets {
             if (index + 1 >= self.srcs.length) {
                 self.loadedCount++;
                 if (self.audio.srcs.length === 0) {
+                    self.downloadCallback();
                     self.callback();
                 } else {
                     self.loadAllAudios();
                 }
             } else {
                 self.loadedCount++;
+                self.downloadCallback();
                 self.load(index + 1);
             }
         };
@@ -69,10 +73,12 @@ class Assets {
                     self.loadedCount++;
                     self.loaded = true;
                     if (self.callback !== null) {
+                        self.downloadCallback();
                         self.callback();
                     }
                 } else {
                     self.loadedCount++;
+                    self.downloadCallback();
                     self.loadAudio(index + 1);
                 }
             }, function() {

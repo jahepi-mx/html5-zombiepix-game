@@ -20,17 +20,17 @@ class Atlas {
         return this.loadedCount / this.xmls.length;
     }
 
-    loadAll(callback) {
+    loadAll(callback, downloadCallback) {
         
         if (this.loaded) return;
         
         for (var i = 0; i < this.keys.length; i++) {
             this[this.keys[i]] = {};
         }
-        this.load(0, callback);
+        this.load(0, callback, downloadCallback);
     }
 
-    load(index, callback) {        
+    load(index, callback, downloadCallback) {        
         var xmlRequest = new XMLHttpRequest();
         xmlRequest.open("GET", this.xmls[index], true);
         var self = this;
@@ -50,12 +50,18 @@ class Atlas {
                if (index + 1 >= self.xmls.length) {
                     self.loadedCount++;
                     self.loaded = true;
+                    if (downloadCallback !== null) {
+                        downloadCallback();
+                    }
                     if (callback !== null) {
                         callback();
                     }
                 } else {
                     self.loadedCount++;
-                    self.load(index + 1, callback);
+                    if (downloadCallback !== null) {
+                        downloadCallback();
+                    }
+                    self.load(index + 1, callback, downloadCallback);
                 }
             }
         };
