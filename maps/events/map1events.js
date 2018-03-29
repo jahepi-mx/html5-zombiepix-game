@@ -40,6 +40,8 @@ class BossFightEvent extends Event {
                 this.map.items.push(new Life(57 * this.map.tileWidth, 24 * this.map.tileHeight, this.map.tileWidth * 0.6, this.map.tileHeight * 0.6, this.map));
                 this.map.items.push(new Life(47 * this.map.tileWidth, 13 * this.map.tileHeight, this.map.tileWidth * 0.6, this.map.tileHeight * 0.6, this.map));
                 this.map.items.push(new Life(57 * this.map.tileWidth, 13 * this.map.tileHeight, this.map.tileWidth * 0.6, this.map.tileHeight * 0.6, this.map));
+                
+                //this.map.enemies.push(new SpawnZombie(52 * this.map.tileWidth + this.map.tileWidth / 2, 23 * this.map.tileHeight + this.map.tileHeight / 2, this.map.tileWidth, this.map.tileHeight, this.map, this.map.tileWidth * 1.3, 30, 2));
             }
         }
         
