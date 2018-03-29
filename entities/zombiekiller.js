@@ -28,6 +28,8 @@ class ZombieKiller extends Entity {
         this.damageTimeLimit = 1;
         this.deadTime = 0;
         this.bodyparts = [];
+        this.renderWidth = width * 1.33;
+        this.renderHeight = height * 1.33;
         
         // Friction of 0.95 if the game runs at 60 fps
         var friction = 0.95;
@@ -78,7 +80,7 @@ class ZombieKiller extends Entity {
             if (this.shootTime >= this.shootTimeLimit) {
                 this.shootTime = 0;
                 var radians = Math.atan2(this.cursor.y - (this.y + this.height / 2), this.cursor.x - (this.x + this.width / 2));
-                var bulletSize = this.width * 0.25;
+                var bulletSize = this.renderWidth * 0.25;
                 var bulletX = this.left() + this.width / 2 - bulletSize / 2;
                 var bulletY = this.top() + this.height / 2 - bulletSize / 2;
                 this.bullets.push(new Bullet(bulletX, bulletY, bulletSize, bulletSize, radians, this.map, this.assets.shoot, Config.getInstance().tileWidth * 3.75));
@@ -141,13 +143,13 @@ class ZombieKiller extends Entity {
             if (this.cursor.isPressed) {
                 image = "new_zk_walk_shoot_1";
             }
-            context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, -this.width / 2, -this.height / 2, this.width, this.height);
+            context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, -this.renderWidth / 2, -this.renderHeight / 2, this.renderWidth, this.renderHeight);
         } else {
             var frame = "new_zk_walk_" + (this.walkAnimation.getFrame() + 1);
             if (this.cursor.isPressed) {
                 frame = "new_zk_walk_shoot_" + (this.walkAnimation.getFrame() + 1);
             }
-            context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[frame].x, this.atlas.sprites[frame].y, this.atlas.sprites[frame].width, this.atlas.sprites[frame].height, -this.width / 2, -this.height / 2, this.width, this.height);
+            context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[frame].x, this.atlas.sprites[frame].y, this.atlas.sprites[frame].width, this.atlas.sprites[frame].height, -this.renderWidth / 2, -this.renderHeight / 2, this.renderWidth, this.renderHeight);
         }
         context.restore();
         
@@ -199,10 +201,10 @@ class ZombieKiller extends Entity {
     damage() {
         if (!this.isDead && this.damageTime >= this.damageTimeLimit) {
             this.damageTime = 0;
-            //this.life--;
+            this.life--;
             if (this.life <= 0) {
                 for (var a = 1; a <= 4; a++) {
-                    var bodypart = new ZombieBodyPart(this.left(), this.top(), this.width, this.height, this.map, "human_bodypart_" + a);
+                    var bodypart = new ZombieBodyPart(this.left(), this.top(), this.renderWidth, this.renderHeight, this.map, "human_bodypart_" + a);
                     bodypart.velocityX = Config.getInstance().tileWidth * 11.25;
                     bodypart.velocityY = Config.getInstance().tileWidth * 11.25;
                     this.bodyparts.push(bodypart);

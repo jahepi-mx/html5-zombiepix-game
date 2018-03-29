@@ -30,8 +30,8 @@ class Map2 extends Map {
             }
         }
         
-        var zombieKillerWidth = this.tileWidth * 0.8;
-        var zombieKillerHeight = this.tileHeight * 0.8;
+        var zombieKillerWidth = this.tileWidth * 0.6;
+        var zombieKillerHeight = this.tileHeight * 0.6;
         
         var canvasWidth = Config.getInstance().canvasWidth;
         var canvasHeight = Config.getInstance().canvasHeight;
