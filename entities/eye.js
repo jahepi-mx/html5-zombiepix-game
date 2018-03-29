@@ -2,7 +2,7 @@ let EYE_TYPE = 8;
 
 class Eye extends Entity {
     
-    constructor(x, y, width, height, map, shootTime) {
+    constructor(x, y, width, height, map, shootTime, bulletSpeed) {
         super(x, y, width, height, EYE_TYPE);
         this.map = map;
         this.zombieKiller = this.map.zombieKiller;
@@ -19,6 +19,7 @@ class Eye extends Entity {
         this.isDead = false;
         this.visibilityRatio = Config.getInstance().canvasWidth * Config.getInstance().canvasWidth + Config.getInstance().canvasHeight * Config.getInstance().canvasHeight;
         this.distanceFromZombieKiller = 0;
+        this.bulletSpeed = bulletSpeed;
     }
     
     update(deltatime) {

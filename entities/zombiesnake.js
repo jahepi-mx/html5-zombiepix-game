@@ -2,7 +2,7 @@ let ZOMBIE_SNAKE_TYPE = 256;
 
 class ZombieSnake extends Entity {
     
-    constructor(x, y, width, height, map, health, shootTime, changeLengthTime, numberOfBodyParts) {
+    constructor(x, y, width, height, map, health, shootTime, changeLengthTime, numberOfBodyParts, bulletSpeed) {
         super(x, y, width, height, ZOMBIE_SNAKE_TYPE);
         this.map = map;
         this.zombieKiller = this.map.zombieKiller;
@@ -27,6 +27,7 @@ class ZombieSnake extends Entity {
         this.visibilityRatio = Config.getInstance().canvasWidth * Config.getInstance().canvasWidth + Config.getInstance().canvasHeight * Config.getInstance().canvasHeight;
         this.distanceFromZombieKiller = 0;
         this.tau = Math.PI * 2;
+        this.bulletSpeed = bulletSpeed;
         
         for (var a = 0; a < numberOfBodyParts; a++) {
             var bodyPart = new ZombieSnakePart(x, y, width, height, map, health);
@@ -54,7 +55,7 @@ class ZombieSnake extends Entity {
                 var x = bodyPart.left() + bodyPart.width / 2 - bulletSize / 2;
                 var y = bodyPart.top() + bodyPart.height / 2 - bulletSize / 2;
                 var radians = Math.atan2(this.zombieKiller.top() - y, this.zombieKiller.left() - x);
-                this.bullets.push(new EyeBullet(x, y, bulletSize, bulletSize, radians, this.map));
+                this.bullets.push(new EyeBullet(x, y, bulletSize, bulletSize, radians, this.map, this.assets.enemy_shoot, this.bulletSpeed));
             }
         }
         

@@ -1,11 +1,11 @@
 class MovingEyeBullet extends Bullet {
     
-    constructor(x, y, width, height, radians, map, sound) {
+    constructor(x, y, width, height, radians, map, sound, speed) {
         super(x, y, width, height, radians, map, sound);
         this.radianStep = Math.PI * 2 / 3;
         this.radians = 0;
         this.rotationDistance = this.map.tileWidth / 2;
-        this.speed = Config.getInstance().tileWidth * 1.25;
+        this.speed = speed; //Config.getInstance().tileWidth * 1.25;
         this.tmpX = x;
         this.tmpY = y;
     }

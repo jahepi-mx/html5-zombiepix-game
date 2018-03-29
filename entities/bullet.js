@@ -2,14 +2,14 @@ let BULLET_TYPE = 4;
 
 class Bullet extends Entity {
     
-    constructor(x, y, width, height, radians, map, sound) {
+    constructor(x, y, width, height, radians, map, sound, speed) {
         super(x, y, width, height, BULLET_TYPE);
         this.camera = Camera.getInstance();
         this.xRatio = Math.cos(radians);
         this.yRatio = Math.sin(radians);
         this.x += (this.width + 20) * this.xRatio;
         this.y += (this.height + 20) * this.yRatio;
-        this.speed = Config.getInstance().tileWidth * 3.75;
+        this.speed = speed; // Config.getInstance().tileWidth * 3.75;
         this.map = map;
         this.collided = false;
         this.atlas = Atlas.getInstance();

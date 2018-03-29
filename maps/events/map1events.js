@@ -29,9 +29,9 @@ class BossFightEvent extends Event {
                 var size1 = this.map.tileWidth * 1.2;
                 var size2 = this.map.tileWidth * 0.5;
                 var size3 = this.map.tileWidth * 0.9;
-                this.zombieSnake1 = new ZombieSnake(52 * this.map.tileWidth + this.map.tileWidth / 2 - size1 / 2, 20 * this.map.tileHeight + this.map.tileHeight / 2 - size1 / 2, size1, size1, this.map, 12, 2, 2, 7);
-                this.zombieSnake2 = new ZombieSnake(48 * this.map.tileWidth + this.map.tileWidth / 2 - size2 / 2, 16 * this.map.tileHeight + this.map.tileHeight / 2 - size2 / 2, size2, size2, this.map, 10, 2, 2, 10);
-                this.zombieSnake3 = new ZombieSnake(56 * this.map.tileWidth + this.map.tileWidth / 2 - size3 / 2, 16 * this.map.tileHeight + this.map.tileHeight / 2 - size3 / 2, size3, size3, this.map, 15, 2, 2, 5);
+                this.zombieSnake1 = new ZombieSnake(52 * this.map.tileWidth + this.map.tileWidth / 2 - size1 / 2, 20 * this.map.tileHeight + this.map.tileHeight / 2 - size1 / 2, size1, size1, this.map, 12, 2, 2, 7, this.map.tileWidth * 3.75);
+                this.zombieSnake2 = new ZombieSnake(48 * this.map.tileWidth + this.map.tileWidth / 2 - size2 / 2, 16 * this.map.tileHeight + this.map.tileHeight / 2 - size2 / 2, size2, size2, this.map, 10, 2, 2, 10, this.map.tileWidth * 1.75);
+                this.zombieSnake3 = new ZombieSnake(56 * this.map.tileWidth + this.map.tileWidth / 2 - size3 / 2, 16 * this.map.tileHeight + this.map.tileHeight / 2 - size3 / 2, size3, size3, this.map, 15, 2, 2, 5, this.map.tileWidth * 2.75);
                 this.map.enemies.push(this.zombieSnake1);
                 this.map.enemies.push(this.zombieSnake2);
                 this.map.enemies.push(this.zombieSnake3);

@@ -81,7 +81,7 @@ class ZombieKiller extends Entity {
                 var bulletSize = this.width * 0.25;
                 var bulletX = this.left() + this.width / 2 - bulletSize / 2;
                 var bulletY = this.top() + this.height / 2 - bulletSize / 2;
-                this.bullets.push(new Bullet(bulletX, bulletY, bulletSize, bulletSize, radians, this.map, this.assets.shoot));
+                this.bullets.push(new Bullet(bulletX, bulletY, bulletSize, bulletSize, radians, this.map, this.assets.shoot, Config.getInstance().tileWidth * 3.75));
             }
         }
         

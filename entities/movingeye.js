@@ -2,7 +2,7 @@ let MOVING_EYE_TYPE = 32;
 
 class MovingEye extends Entity {
     
-    constructor(x, y, width, height, map) {
+    constructor(x, y, width, height, map, bulletSpeed) {
         super(x, y, width, height, MOVING_EYE_TYPE);
         this.map = map;
         this.zombieKiller = this.map.zombieKiller;
@@ -25,6 +25,7 @@ class MovingEye extends Entity {
         this.animation.stopAtSequenceNumber(1, null);
         this.visibilityRatio = Config.getInstance().canvasWidth * Config.getInstance().canvasWidth + Config.getInstance().canvasHeight * Config.getInstance().canvasHeight;
         this.distanceFromZombieKiller = 0;
+        this.bulletSpeed = bulletSpeed;
     }
     
     update(deltatime) {
@@ -84,7 +85,7 @@ class MovingEye extends Entity {
             var x = this.left() + this.width / 2 - bulletSize / 2;
             var y = this.top() + this.height / 2 - bulletSize / 2;
             var radians = Math.atan2(this.zombieKiller.top() - y, this.zombieKiller.left() - x);
-            this.bullets.push(new MovingEyeBullet(x, y, bulletSize, bulletSize, radians, this.map, this.assets.enemy_shoot));
+            this.bullets.push(new MovingEyeBullet(x, y, bulletSize, bulletSize, radians, this.map, this.assets.enemy_shoot, this.bulletSpeed));
         }
         
         for (var a = 0; a < this.bullets.length; a++) {
