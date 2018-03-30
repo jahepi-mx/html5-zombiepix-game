@@ -49,12 +49,12 @@ class Eye extends Entity {
             var x = this.left() + this.width / 2 - bulletSize / 2;
             var y = this.top() + this.height / 2 - bulletSize / 2;
             var radians = Math.atan2(this.zombieKiller.top() - y, this.zombieKiller.left() - x);
-            this.bullets.push(new EyeBullet(x, y, bulletSize, bulletSize, radians, this.map, this.assets.enemy_shoot));
+            this.bullets.push(new EyeBullet(x, y, bulletSize, bulletSize, radians, this.map, this.assets.enemy_shoot, this.bulletSpeed));
         }
         
         for (var a = 0; a < this.bullets.length; a++) {
             this.bullets[a].update(deltatime);
-            if (this.bullets[a].collide(this.zombieKiller)) {
+            if (!this.bullets[a].collided && this.bullets[a].collide(this.zombieKiller)) {
                 this.bullets[a].collided = true;
                 this.zombieKiller.damage();
             }
@@ -96,6 +96,10 @@ class Eye extends Entity {
     }
     
     damage() {
+        
+    }
+    
+    kill(fromExplosion) {
         
     }
 }

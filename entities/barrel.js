@@ -46,12 +46,10 @@ class Barrel extends Tile {
             if (!this.walkable) {
                 this.assets.playAudio(this.assets.explosion, false, Config.getInstance().soundEffectsVolume);
                 for (let enemy of this.map.enemies) {
-                    if (enemy.type === ZOMBYE_TYPE) {
-                        var diffX = enemy.left() - this.left();
-                        var diffY = enemy.top() - this.top();
-                        if (diffX * diffX + diffY * diffY <= this.hitRatio) {
-                            enemy.kill(true);
-                        }
+                    var diffX = enemy.left() - this.left();
+                    var diffY = enemy.top() - this.top();
+                    if (diffX * diffX + diffY * diffY <= this.hitRatio) {
+                        enemy.kill(true);
                     }
                 }
                 for (let vector of this.vectors) {

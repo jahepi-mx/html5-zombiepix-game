@@ -2,10 +2,11 @@ class SpawnZombie extends Zombie {
     
     constructor(x, y, width, height, map, speed, health, awarenessTime) {
         super(x, y, width, height, map, speed, health, awarenessTime, 1);
-        var types = ["new_zombie", "1_new_zombie", "2_new_zombie"];
-        this.sprite = types[Math.floor(Math.random() * 3)];
+        var types = ["new_zombie", "2_new_zombie", "3_new_zombie"];
+        this.colorType = Math.floor(Math.random() * 3) + 1;
+        this.sprite = types[this.colorType - 1];
         this.damageTime = 0;
-        this.damageTimeLimit = 3;
+        this.damageTimeLimit = 1;
         this.isDamageable = false;
     }
     

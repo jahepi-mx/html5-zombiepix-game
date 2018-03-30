@@ -109,7 +109,7 @@ class ZombieSnake extends Entity {
         
         for (var a = 0; a < this.bullets.length; a++) {
             this.bullets[a].update(deltatime);
-            if (this.bullets[a].collide(this.zombieKiller)) {
+            if (!this.bullets[a].collided && this.bullets[a].collide(this.zombieKiller)) {
                 this.bullets[a].collided = true;
                 this.zombieKiller.damage();
             }
@@ -156,6 +156,13 @@ class ZombieSnake extends Entity {
     
     damage() {
         
+    }
+    
+    kill(fromExplosion) {
+        for (let bodyPart of this.bodyParts) {
+            bodyPart.health = 0;
+            bodyPart.isDead = true;
+        }
     }
 }
 

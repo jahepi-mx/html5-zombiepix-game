@@ -2,23 +2,23 @@ let MOVING_EYE_TYPE = 32;
 
 class MovingEye extends Entity {
     
-    constructor(x, y, width, height, map, bulletSpeed) {
+    constructor(x, y, width, height, map, bulletSpeed, velocity) {
         super(x, y, width, height, MOVING_EYE_TYPE);
         this.map = map;
         this.zombieKiller = this.map.zombieKiller;
         var radians = Math.PI * 2 * Math.random();
         this.xRatio = Math.cos(radians);
         this.yRatio = Math.sin(radians);
-        this.velocity = Config.getInstance().tileWidth * 2.5;
+        this.velocity = velocity;
         this.vectors = [[0, 0], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1]];
-        this.health = 10;
+        this.health = 30;
         this.maxHealth = this.health;
         this.camera = Camera.getInstance();
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
         this.bullets = [];
         this.shootTime = 0;
-        this.shootTimeLimit = 0.5;
+        this.shootTimeLimit = 2;
         this.isDead = false;
         this.dispose = false;
         this.animation = new Animation(3, 4);
@@ -34,7 +34,7 @@ class MovingEye extends Entity {
         var diffY = this.top() - this.zombieKiller.top();
         this.distanceFromZombieKiller = diffX * diffX + diffY * diffY;
         if (this.distanceFromZombieKiller > this.visibilityRatio) {
-            return;
+            //return;
         }
         
         if (this.dispose) {
@@ -90,7 +90,7 @@ class MovingEye extends Entity {
         
         for (var a = 0; a < this.bullets.length; a++) {
             this.bullets[a].update(deltatime);
-            if (this.bullets[a].collide(this.zombieKiller)) {
+            if (!this.bullets[a].collided && this.bullets[a].collide(this.zombieKiller)) {
                 this.bullets[a].collided = true;
                 this.zombieKiller.damage();
             }
@@ -103,7 +103,7 @@ class MovingEye extends Entity {
     render(context) {      
         
         if (this.distanceFromZombieKiller > this.visibilityRatio) {
-            return;
+            //return;
         }
         
         if (this.dispose) {
@@ -140,5 +140,9 @@ class MovingEye extends Entity {
         if (this.dispose === false && --this.health <= 0) {
             this.dispose = true;
         }
+    }
+    
+    kill(fromExplosion) {
+        
     }
 }
