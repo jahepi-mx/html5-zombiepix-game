@@ -80,7 +80,6 @@ class ZombieSnake extends Entity {
         var n = 1;
         var delta = deltatime / 3;
         
-        var reachLengthMovement = true;
         for (var a = 0; a < this.bodyParts.length; a++) {
             var bodyPart = this.bodyParts[a];
             this.health += bodyPart.health;
@@ -91,15 +90,11 @@ class ZombieSnake extends Entity {
             } else {
                 bodyPart.xRatio = cos;
                 bodyPart.yRatio = sin;
-                bodyPart.lengthMovementSpeed = delta;
                 bodyPart.toLength = this.length / this.bodyParts.length * n++;
                 bodyPart.update(deltatime);
                 delta *= 1.5;
                 if (bodyPart.isDead === false && bodyPart.collide(this.zombieKiller)) {
                     this.zombieKiller.damage();
-                }
-                if (bodyPart.reachLengthMovement === false) {
-                    reachLengthMovement = false;
                 }
             }
         }
@@ -110,10 +105,6 @@ class ZombieSnake extends Entity {
                 id = 1;
             }
             this.bodyParts[a].image = "snake_" + (id + 1);
-            if (reachLengthMovement) {
-                this.bodyParts[a].lengthMovementTo *= -1;
-                this.bodyParts[a].reachLengthMovement = false;
-            }
         }
         
         for (var a = 0; a < this.bullets.length; a++) {
@@ -186,13 +177,10 @@ class ZombieSnakePart extends Entity {
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
         this.lengthMovementTo = this.map.tileWidth;
-        this.lengthMovementFrom = 0;
-        this.lengthMovementSpeed = 0;
         this.health = health;
         this.isDead = false;
         this.dispose = false;
         this.image = null;
-        this.reachLengthMovement = false;
         this.friction = 0;
         
         // Friction of 0.95 if the game runs at 60 fps
@@ -226,16 +214,11 @@ class ZombieSnakePart extends Entity {
         
         this.length += (this.toLength - this.length) * deltatime;
         
-        if (Math.abs(this.lengthMovementTo - this.lengthMovementFrom) <= 1) {
-            this.reachLengthMovement = true;
-        }
-        
-        this.lengthMovementFrom += (this.lengthMovementTo - this.lengthMovementFrom) * this.lengthMovementSpeed;
     }
     
     render(context) {
         var x = this.x + this.length * this.xRatio;
-        var y = this.y + this.length * this.yRatio + this.lengthMovementFrom;
+        var y = this.y + this.length * this.yRatio;
         var image = this.image;
         if (image !== null) {
             context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, x + this.camera.offsetX, y + this.camera.offsetY, this.width, this.height);
@@ -247,12 +230,13 @@ class ZombieSnakePart extends Entity {
     }
     
     top() {
-        return this.y + this.length * this.yRatio + this.lengthMovementFrom;
+        return this.y + this.length * this.yRatio;
     }
     
     damage() {
         this.health--;
         if (this.health <= 0) {
+            this.health = 0;
             this.isDead = true;
         }
     }

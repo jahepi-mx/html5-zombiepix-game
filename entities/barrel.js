@@ -62,7 +62,9 @@ class Barrel extends Tile {
                         tile.destroy();
                     }
                 }
-                if (this.collide(this.map.zombieKiller)) {
+                var diffX = this.map.zombieKiller.left() - this.left();
+                var diffY = this.map.zombieKiller.top() - this.top();
+                if (diffX * diffX + diffY * diffY <= this.hitRatio) {
                     this.map.zombieKiller.damage();
                 }
                 this.walkable = true;

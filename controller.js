@@ -52,9 +52,11 @@ class Controller {
     }
     
     nextMap() {
+        var life = this.zombieKiller.life;
         this.map.dispose();
         this.map = this.maps[++this.currentMap];
         this.reset();
+        this.zombieKiller.life = life;
     }
     
     isLastMap() {

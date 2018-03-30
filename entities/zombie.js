@@ -33,9 +33,9 @@ class Zombie extends Entity {
         this.visibilityRatio = Config.getInstance().canvasWidth * Config.getInstance().canvasWidth + Config.getInstance().canvasHeight * Config.getInstance().canvasHeight;
         this.distanceFromZombieKiller = 0;
         //this.searchAvailableVectors(Math.floor(this.x / this.map.tileWidth), Math.floor(this.y / this.map.tileHeight));
-        this.minDistance = Config.getInstance().tileWidth * .05;
+        this.minDistance = speed * .05;
         this.attackDistance = (Math.pow(Config.getInstance().tileWidth, 2) + Math.pow(Config.getInstance().tileHeight, 2)) / 2;
-        this.minRange = Config.getInstance().tileWidth * 0.125;
+        this.minRange = speed * 0.05;
         this.range = this.minRange * 3;
         this.sprite = "new_zombie";
         this.colorType = colorType;
@@ -238,8 +238,8 @@ class Zombie extends Entity {
         
         context.fillStyle = "#ff0000";
         var width = this.health / this.maxHealth * this.width * 0.7;
-        
-        context.fillRect(this.x + this.camera.offsetX - width / 2, this.top() + this.camera.offsetY  - this.minRange, width, this.minRange);
+        var height = this.height * .05;
+        context.fillRect(this.x + this.camera.offsetX - width / 2, this.top() + this.camera.offsetY - height, width, height);
         
         var diffX = this.toX - this.x;
         var diffY = this.toY - this.y;
