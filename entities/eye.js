@@ -75,8 +75,8 @@ class Eye extends Entity {
         
         var radians = Math.atan2(this.zombieKiller.top() - this.top(), this.zombieKiller.left() - this.left());
         image = "new_eye_pupil";
-        var width = this.width * 0.1;
-        var height = this.height * 0.1;
+        var width = this.width * 0.06;
+        var height = this.height * 0.06;
         var x = this.left() + this.width / 2 - width / 2 + (width * Math.cos(radians));
         var y = this.top() + this.height / 2 - height / 2 + (height * Math.sin(radians));
         

@@ -66,7 +66,7 @@ class BossFight2Event extends Event {
         if (this.executed === false) {
             if (this.tile.collide(this.map.zombieKiller)) {
                 this.executed = true;
-                this.map.startX = 38;
+                this.map.startX = 34;
                 this.map.startY = 71;
                 this.entry.image = "tile46";
                 this.entry.type = 46;
