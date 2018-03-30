@@ -66,6 +66,7 @@ and open the template in the editor.
                 canvas = document.getElementById("canvas");
                 
                 if (resize) {
+                    var ratio = 0.92;
                     var maxWidth = 1920;
                     var maxHeight = 1080;
                     var width = window.screen.width;
@@ -73,11 +74,14 @@ and open the template in the editor.
                     var screenRatio = config.canvasWidth / config.canvasHeight;
                     var tileRatio = config.tileWidth / config.canvasWidth;
                     if (width > maxWidth) {
+                        maxWidth = Math.floor(maxWidth * ratio);
+                        maxHeight = Math.floor(maxHeight * ratio);
                         config.canvasWidth = maxWidth;
                         config.canvasHeight = maxHeight;
                         config.tileWidth = Math.floor(maxWidth * tileRatio);
                         config.tileHeight = Math.floor(maxWidth * tileRatio);
                     } else {
+                        width = Math.floor(width * ratio);
                         config.canvasWidth = width;
                         config.canvasHeight = Math.floor(width / screenRatio);
                         config.tileWidth = Math.floor(width * tileRatio);

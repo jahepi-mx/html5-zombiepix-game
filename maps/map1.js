@@ -51,14 +51,14 @@ class Map1 extends Map {
         var zombieSize = this.tileWidth * 0.8;
         this.enemies.push(new Zombie(18 * this.tileWidth + this.tileWidth / 2, 6 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth, 10, 10, 1));
         
-        this.enemies.push(new Zombie(15 * this.tileWidth + this.tileWidth / 2, 19 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 2, 10, 2, 1));
+        this.enemies.push(new Zombie(15 * this.tileWidth + this.tileWidth / 2, 19 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 2.2, 10, 2, 1));
         this.enemies.push(new Zombie(16 * this.tileWidth + this.tileWidth / 2, 21 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 2, 10, 2, 1));
-        this.enemies.push(new Zombie(21 * this.tileWidth + this.tileWidth / 2, 21 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 2, 10, 2, 1));
-        this.enemies.push(new Zombie(19 * this.tileWidth + this.tileWidth / 2, 19 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 2, 10, 2, 1));
-        this.enemies.push(new Zombie(22 * this.tileWidth + this.tileWidth / 2, 16 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 2, 10, 2, 1));
-        this.enemies.push(new Zombie(14 * this.tileWidth + this.tileWidth / 2, 21 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 2, 10, 2, 1));
+        this.enemies.push(new Zombie(21 * this.tileWidth + this.tileWidth / 2, 21 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 2.1, 10, 2, 1));
+        this.enemies.push(new Zombie(19 * this.tileWidth + this.tileWidth / 2, 19 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 1.8, 10, 2, 1));
+        this.enemies.push(new Zombie(22 * this.tileWidth + this.tileWidth / 2, 16 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 1.6, 10, 2, 1));
+        this.enemies.push(new Zombie(14 * this.tileWidth + this.tileWidth / 2, 21 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 1.9, 10, 2, 1));
         this.enemies.push(new Zombie(14 * this.tileWidth + this.tileWidth / 2, 16 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 2, 10, 2, 1));
-        this.enemies.push(new Zombie(20 * this.tileWidth + this.tileWidth / 2, 20 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 2, 10, 2, 1));
+        this.enemies.push(new Zombie(20 * this.tileWidth + this.tileWidth / 2, 20 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 1.7, 10, 2, 1));
         
         this.enemies.push(new Zombie(22 * this.tileWidth + this.tileWidth / 2, 30 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth, 10, 2, 1));
         this.enemies.push(new Zombie(22 * this.tileWidth + this.tileWidth / 2, 30 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 1.5, 10, 2, 1));
