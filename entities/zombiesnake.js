@@ -7,7 +7,7 @@ class ZombieSnake extends Entity {
         this.map = map;
         this.zombieKiller = this.map.zombieKiller;
         
-        this.distanceBetweenParts = Math.sqrt(width * width + height * height) / 2;
+        this.distanceBetweenParts = Math.sqrt(width * width + height * height) * 0.4;
         
         this.bodyParts = [];
         this.length = this.distanceBetweenParts * numberOfBodyParts;
@@ -31,12 +31,24 @@ class ZombieSnake extends Entity {
         
         for (var a = 0; a < numberOfBodyParts; a++) {
             var bodyPart = new ZombieSnakePart(x, y, width, height, map, health);
+            bodyPart.yOffsetTo = a === 0 ? 0 : height * 0.6;
             this.bodyParts.push(bodyPart);
             this.maxHealth += bodyPart.health;
         }
     }
     
     update(deltatime) {
+        
+        for (var a = 0; a < this.bullets.length; a++) {
+            this.bullets[a].update(deltatime);
+            if (!this.bullets[a].collided && this.bullets[a].collide(this.zombieKiller)) {
+                this.bullets[a].collided = true;
+                this.zombieKiller.damage();
+            }
+            if (this.bullets[a].dispose) {
+                this.bullets.splice(a--, 1);
+            }
+        }
         
         var diffX = this.left() - this.zombieKiller.left();
         var diffY = this.top() - this.zombieKiller.top();
@@ -80,6 +92,7 @@ class ZombieSnake extends Entity {
         var n = 1;
         var delta = deltatime / 3;
         
+        var yOffsetDone = true;
         for (var a = 0; a < this.bodyParts.length; a++) {
             var bodyPart = this.bodyParts[a];
             this.health += bodyPart.health;
@@ -91,8 +104,13 @@ class ZombieSnake extends Entity {
                 bodyPart.xRatio = cos;
                 bodyPart.yRatio = sin;
                 bodyPart.toLength = this.length / this.bodyParts.length * n++;
+                delta *= 1.3;
+                bodyPart.yOffsetDelta = delta;
+                if (!bodyPart.yOffsetDone) {
+                    yOffsetDone = false;
+                }
                 bodyPart.update(deltatime);
-                delta *= 1.5;
+                
                 if (bodyPart.isDead === false && bodyPart.collide(this.zombieKiller)) {
                     this.zombieKiller.damage();
                 }
@@ -105,25 +123,22 @@ class ZombieSnake extends Entity {
                 id = 1;
             }
             this.bodyParts[a].image = "snake_" + (id + 1);
-        }
-        
-        for (var a = 0; a < this.bullets.length; a++) {
-            this.bullets[a].update(deltatime);
-            if (!this.bullets[a].collided && this.bullets[a].collide(this.zombieKiller)) {
-                this.bullets[a].collided = true;
-                this.zombieKiller.damage();
-            }
-            if (this.bullets[a].dispose) {
-                this.bullets.splice(a--, 1);
+            if (yOffsetDone) {
+                this.bodyParts[a].yOffsetTo *= -1;
+                this.bodyParts[a].yOffsetDone = false;
             }
         }
-        
+
         if (this.bodyParts.length === 0) {
             this.isDead = true;
         }
     }
     
     render(context) {
+        
+        for (let bullet of this.bullets) {
+            bullet.render(context);
+        }
         
         if (this.distanceFromZombieKiller > this.visibilityRatio) {
             return;
@@ -136,11 +151,7 @@ class ZombieSnake extends Entity {
         
         for (let bodyPart of this.bodyParts) {
             bodyPart.render(context);
-        }
-        
-        for (let bullet of this.bullets) {
-            bullet.render(context);
-        }
+        } 
     }
     
     collide(entity) {
@@ -189,6 +200,11 @@ class ZombieSnakePart extends Entity {
         this.dispose = false;
         this.image = null;
         this.friction = 0;
+        this.yOffsetTo = 0;
+        this.yOffsetFrom = 0;
+        this.yOffsetDelta = 0;
+        this.yOffsetDone = false;
+        this.flag = false;
         
         // Friction of 0.95 if the game runs at 60 fps
         var friction = 0.95;
@@ -220,12 +236,16 @@ class ZombieSnakePart extends Entity {
         }
         
         this.length += (this.toLength - this.length) * deltatime;
+        this.yOffsetFrom += (this.yOffsetTo - this.yOffsetFrom) * this.yOffsetDelta;
         
+        if (Math.abs(this.yOffsetTo - this.yOffsetFrom) <= this.height * 0.15) {
+            this.yOffsetDone = true;
+        } 
     }
     
     render(context) {
         var x = this.x + this.length * this.xRatio;
-        var y = this.y + this.length * this.yRatio;
+        var y = this.y + this.length * this.yRatio + this.yOffsetFrom;
         var image = this.image;
         if (image !== null) {
             context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, x + this.camera.offsetX, y + this.camera.offsetY, this.width, this.height);
@@ -237,7 +257,7 @@ class ZombieSnakePart extends Entity {
     }
     
     top() {
-        return this.y + this.length * this.yRatio;
+        return this.y + this.length * this.yRatio + this.yOffsetFrom;
     }
     
     damage() {

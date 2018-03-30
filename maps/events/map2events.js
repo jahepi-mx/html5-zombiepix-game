@@ -145,7 +145,7 @@ class BossFight2Event extends Event {
         
         if (this.executed && (!this.movingEye1.isDead || !this.movingEye2.isDead || !this.movingEye3.isDead)) {
             context.font = this.fontSize;
-            context.fillStyle = "rgba(255, 0, 255, 255)";
+            context.fillStyle = "red";
             context.textAlign = "center";
             context.fillText("Boss Fight, Defeat the enemies!", this.config.canvasWidth / 2, this.config.canvasHeight * 0.17);
             

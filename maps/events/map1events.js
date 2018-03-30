@@ -27,8 +27,8 @@ class BossFightEvent extends Event {
                 this.entry.type = 23;
                 this.entry.walkable = false;
                 var size1 = this.map.tileWidth * 1.2;
-                var size2 = this.map.tileWidth * 0.5;
-                var size3 = this.map.tileWidth * 0.9;
+                var size2 = this.map.tileWidth * 0.8;
+                var size3 = this.map.tileWidth * 1;
                 this.zombieSnake1 = new ZombieSnake(52 * this.map.tileWidth + this.map.tileWidth / 2 - size1 / 2, 20 * this.map.tileHeight + this.map.tileHeight / 2 - size1 / 2, size1, size1, this.map, 12, 2, 2, 7, this.map.tileWidth * 3.75);
                 this.zombieSnake2 = new ZombieSnake(48 * this.map.tileWidth + this.map.tileWidth / 2 - size2 / 2, 16 * this.map.tileHeight + this.map.tileHeight / 2 - size2 / 2, size2, size2, this.map, 10, 2, 2, 10, this.map.tileWidth * 1.75);
                 this.zombieSnake3 = new ZombieSnake(56 * this.map.tileWidth + this.map.tileWidth / 2 - size3 / 2, 16 * this.map.tileHeight + this.map.tileHeight / 2 - size3 / 2, size3, size3, this.map, 15, 2, 2, 5, this.map.tileWidth * 2.75);
@@ -92,7 +92,7 @@ class BossFightEvent extends Event {
         
         if (this.executed && (!this.zombieSnake1.isDead || !this.zombieSnake2.isDead || !this.zombieSnake3.isDead)) {
             context.font = this.fontSize;
-            context.fillStyle = "rgba(255, 0, 255, 255)";
+            context.fillStyle = "red";
             context.textAlign = "center";
             context.fillText("Boss Fight, Defeat Zombie Snakes", this.config.canvasWidth / 2, this.config.canvasHeight * 0.17);
             

@@ -24,6 +24,17 @@ class Eye extends Entity {
     
     update(deltatime) {
         
+        for (var a = 0; a < this.bullets.length; a++) {
+            this.bullets[a].update(deltatime);
+            if (!this.bullets[a].collided && this.bullets[a].collide(this.zombieKiller)) {
+                this.bullets[a].collided = true;
+                this.zombieKiller.damage();
+            }
+            if (this.bullets[a].dispose) {
+                this.bullets.splice(a--, 1);
+            }
+        }
+        
         var diffX = this.left() - this.zombieKiller.left();
         var diffY = this.top() - this.zombieKiller.top();
         this.distanceFromZombieKiller = diffX * diffX + diffY * diffY;
@@ -51,20 +62,13 @@ class Eye extends Entity {
             var radians = Math.atan2(this.zombieKiller.top() - y, this.zombieKiller.left() - x);
             this.bullets.push(new EyeBullet(x, y, bulletSize, bulletSize, radians, this.map, this.assets.enemy_shoot, this.bulletSpeed));
         }
-        
-        for (var a = 0; a < this.bullets.length; a++) {
-            this.bullets[a].update(deltatime);
-            if (!this.bullets[a].collided && this.bullets[a].collide(this.zombieKiller)) {
-                this.bullets[a].collided = true;
-                this.zombieKiller.damage();
-            }
-            if (this.bullets[a].dispose) {
-                this.bullets.splice(a--, 1);
-            }
-        }
     }
     
     render(context) {
+        
+        for (let bullet of this.bullets) {
+            bullet.render(context);
+        }
         
         if (this.distanceFromZombieKiller > this.visibilityRatio) {
             return;
@@ -88,10 +92,6 @@ class Eye extends Entity {
         } else {
             image = "new_eye";
             context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.left() + this.camera.offsetX, this.top() + this.camera.offsetY, this.width, this.height);
-        }
-        
-        for (let bullet of this.bullets) {
-            bullet.render(context);
         }
     }
     

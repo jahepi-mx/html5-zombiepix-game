@@ -59,11 +59,34 @@ and open the template in the editor.
             var targetFps = 1 / 30;
             var targetDeltatime = 0;
             var lockFps = false;
+            var resize = true;
             
             window.onload = function() {
+                var config = Config.getInstance();
                 canvas = document.getElementById("canvas");
-                canvas.width = Config.getInstance().canvasWidth;
-                canvas.height = Config.getInstance().canvasHeight;
+                
+                if (resize) {
+                    var maxWidth = 1920;
+                    var maxHeight = 1080;
+                    var width = window.screen.width;
+                    var height = window.screen.height;
+                    var screenRatio = config.canvasWidth / config.canvasHeight;
+                    var tileRatio = config.tileWidth / config.canvasWidth;
+                    if (width > maxWidth) {
+                        config.canvasWidth = maxWidth;
+                        config.canvasHeight = maxHeight;
+                        config.tileWidth = Math.floor(maxWidth * tileRatio);
+                        config.tileHeight = Math.floor(maxWidth * tileRatio);
+                    } else {
+                        config.canvasWidth = width;
+                        config.canvasHeight = Math.floor(width / screenRatio);
+                        config.tileWidth = Math.floor(width * tileRatio);
+                        config.tileHeight = Math.floor(width * tileRatio);
+                    }
+                }
+                
+                canvas.width = config.canvasWidth;
+                canvas.height = config.canvasHeight;
                 context = canvas.getContext("2d");
                 var assets = Assets.getInstance();
                 assets.loadAll(onLoadAssets, onDownloadAssets);
