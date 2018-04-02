@@ -195,11 +195,11 @@ class ZombieKiller extends Entity {
     }
     
     currentX() {
-        return Math.floor(this.left() / this.map.tileWidth);
+        return Math.floor((this.left() + this.width / 2) / this.map.tileWidth);
     }
     
     currentY() {
-        return Math.floor(this.top() / this.map.tileHeight);
+        return Math.floor((this.top() + this.height / 2) / this.map.tileHeight);
     }
     
     damage() {
