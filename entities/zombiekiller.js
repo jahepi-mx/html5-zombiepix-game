@@ -160,8 +160,6 @@ class ZombieKiller extends Entity {
         for (let bullet of this.bullets) {
             bullet.render(context);
         }
-        var image = "aim";
-        context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.cursor.x - this.aimSize / 2, this.cursor.y - this.aimSize / 2, this.aimSize, this.aimSize);
     }
     
     moveLeft(bool) {

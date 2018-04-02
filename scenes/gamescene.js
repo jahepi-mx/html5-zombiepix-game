@@ -10,7 +10,7 @@ class GameScene extends Scene {
         this.fpsFontSize = Math.floor(Config.getInstance().canvasHeight * .14) + "px joystix";
         this.fpsMarginLeft = Math.floor(Config.getInstance().canvasWidth * .0625);
         this.fpsMarginTop = Math.floor(Config.getInstance().canvasHeight * .08);
-        
+        this.cursor = Cursor.getInstance();
         var ratio = 88 / 150;
         this.popUpWidth = Config.getInstance().canvasWidth * 0.8;
         this.popUpHeight = Config.getInstance().canvasWidth * 0.8 * ratio;
@@ -102,6 +102,10 @@ class GameScene extends Scene {
         this.exitButton.render(this.context);
         this.tryAgainButton.render(this.context);
         this.continueButton.render(this.context);
+        
+        var image = "aim";
+        var aimSize = this.controller.map.zombieKiller.aimSize;
+        this.context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.cursor.x - aimSize / 2, this.cursor.y - aimSize / 2, aimSize, aimSize);
     }
 }
 
