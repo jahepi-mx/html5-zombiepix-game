@@ -2,6 +2,7 @@ class GameScene extends Scene {
     
     constructor(canvas, context, onChangeSceneCallback) {
         super(canvas, context, onChangeSceneCallback);
+        this.canvas.style.cursor = "none";
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
         this.controller = new Controller();

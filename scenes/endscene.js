@@ -2,6 +2,7 @@ class EndScene extends Scene {
     
     constructor(canvas, context, onChangeSceneCallback) {
         super(canvas, context, onChangeSceneCallback);
+        this.canvas.style.cursor = "pointer";
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
         this.time = 0;

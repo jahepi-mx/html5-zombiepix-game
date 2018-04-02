@@ -2,6 +2,7 @@ class MainScene extends Scene {
     
     constructor(canvas, context, onChangeSceneCallback) {
         super(canvas, context, onChangeSceneCallback);
+        this.canvas.style.cursor = "pointer";
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
         this.playButton = new Button(Config.getInstance().canvasWidth * .25, Config.getInstance().canvasHeight * .04, "play game", this.canvas.width * 0.1, this.canvas.height * 0.8, Config.getInstance().canvasHeight * .13, "#fff", "#ff0000", "#ff00ff");

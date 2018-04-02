@@ -24,12 +24,14 @@ class ZombieKiller extends Entity {
         this.walkAnimation = new Animation(4, 2);
         this.life = 4;
         this.isDead = false;
-        this.damageTime = 0;
+        this.damageTime = 1;
         this.damageTimeLimit = 1;
+        this.damageSpriteTimeLimit = this.damageTimeLimit / 3;
         this.deadTime = 0;
         this.bodyparts = [];
         this.renderWidth = width * 1.33;
         this.renderHeight = height * 1.33;
+        this.aimSize = this.renderWidth * 0.3;
         
         // Friction of 0.95 if the game runs at 60 fps
         var friction = 0.95;
@@ -128,6 +130,8 @@ class ZombieKiller extends Entity {
     
     render(context) {
         
+        var isRed = this.damageTime < this.damageSpriteTimeLimit;
+        
         if (this.isDead) {
             for (let bodypart of this.bodyparts) {
                 bodypart.render(context);
@@ -139,15 +143,15 @@ class ZombieKiller extends Entity {
         context.translate(this.x + this.width / 2, this.y + this.height / 2);
         context.rotate(Math.atan2(this.y + this.height / 2 - this.cursor.y, this.x + this.width / 2 - this.cursor.x) + Math.PI);       
         if (Math.abs(this.xVelocity) <= 15 && Math.abs(this.yVelocity) <= 15) { 
-            var image = "new_zk";
+            var image = isRed ? "red_new_zk" : "new_zk";
             if (this.cursor.isPressed) {
-                image = "new_zk_walk_shoot_1";
+                image = isRed ? "red_new_zk_walk_shoot_1" : "new_zk_walk_shoot_1";
             }
             context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, -this.renderWidth / 2, -this.renderHeight / 2, this.renderWidth, this.renderHeight);
         } else {
-            var frame = "new_zk_walk_" + (this.walkAnimation.getFrame() + 1);
+            var frame = (isRed ? "red_new_zk_walk_" : "new_zk_walk_") + (this.walkAnimation.getFrame() + 1);
             if (this.cursor.isPressed) {
-                frame = "new_zk_walk_shoot_" + (this.walkAnimation.getFrame() + 1);
+                frame = (isRed ? "red_new_zk_walk_shoot_" : "new_zk_walk_shoot_") + (this.walkAnimation.getFrame() + 1);
             }
             context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[frame].x, this.atlas.sprites[frame].y, this.atlas.sprites[frame].width, this.atlas.sprites[frame].height, -this.renderWidth / 2, -this.renderHeight / 2, this.renderWidth, this.renderHeight);
         }
@@ -156,6 +160,8 @@ class ZombieKiller extends Entity {
         for (let bullet of this.bullets) {
             bullet.render(context);
         }
+        var image = "aim";
+        context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.cursor.x - this.aimSize / 2, this.cursor.y - this.aimSize / 2, this.aimSize, this.aimSize);
     }
     
     moveLeft(bool) {

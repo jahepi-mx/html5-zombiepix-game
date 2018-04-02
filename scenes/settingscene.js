@@ -2,6 +2,7 @@ class SettingScene extends Scene {
     
     constructor(canvas, context, onChangeSceneCallback) {
         super(canvas, context, onChangeSceneCallback);
+        this.canvas.style.cursor = "pointer";
         this.atlas = Atlas.getInstance();
         this.assets = Assets.getInstance();
         this.musicSlider = new Slider(this.canvas.width * 0.1, this.canvas.height * 0.3, this.canvas.width * 0.3, this.canvas.height * 0.03, this.canvas.height * 0.03, Config.getInstance().musicVolume);
