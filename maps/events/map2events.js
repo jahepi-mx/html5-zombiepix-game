@@ -75,8 +75,8 @@ class BossFight2Event extends Event {
                 var size2 = this.map.tileWidth;
                 var size3 = this.map.tileWidth;
                 this.movingEye1 = new MovingEye(40 * this.map.tileWidth + this.map.tileWidth / 2 - size1 / 2, 66 * this.map.tileHeight + this.map.tileHeight / 2 - size1 / 2, size1, size1, this.map, this.map.tileWidth * 2, this.map.tileWidth * 2);
-                this.movingEye2 = new MovingEye(46 * this.map.tileWidth + this.map.tileWidth / 2 - size1 / 2, 69 * this.map.tileHeight + this.map.tileHeight / 2 - size2 / 2, size2, size2, this.map, this.map.tileWidth * 2, this.map.tileWidth * 2);
-                this.movingEye3 = new MovingEye(43 * this.map.tileWidth + this.map.tileWidth / 2 - size1 / 2, 73 * this.map.tileHeight + this.map.tileHeight / 2 - size3 / 2, size3, size3, this.map, this.map.tileWidth * 2, this.map.tileWidth * 2);
+                this.movingEye2 = new MovingEye(46 * this.map.tileWidth + this.map.tileWidth / 2 - size1 / 2, 69 * this.map.tileHeight + this.map.tileHeight / 2 - size2 / 2, size2, size2, this.map, this.map.tileWidth * 2.5, this.map.tileWidth * 2.5);
+                this.movingEye3 = new MovingEye(43 * this.map.tileWidth + this.map.tileWidth / 2 - size1 / 2, 73 * this.map.tileHeight + this.map.tileHeight / 2 - size3 / 2, size3, size3, this.map, this.map.tileWidth * 2.8, this.map.tileWidth * 2.8);
                 this.map.enemies.push(this.movingEye1);
                 this.map.enemies.push(this.movingEye2);
                 this.map.enemies.push(this.movingEye3);
@@ -130,7 +130,7 @@ class BossFight2Event extends Event {
             this.spawnZombieTime += deltatime;
             if (this.spawnZombieTime >= this.spawnZombieTimeLimit) {
                 this.spawnZombieTime = 0;
-                this.map.enemies.push(new SpawnZombie(42 * this.map.tileWidth + this.map.tileWidth / 2, 69 * this.map.tileHeight + this.map.tileHeight / 2, this.map.tileWidth, this.map.tileWidth, this.map, this.map.tileWidth * 1.5, 10, 2));
+                this.map.enemies.push(new SpawnZombie(42 * this.map.tileWidth + this.map.tileWidth / 2, 69 * this.map.tileHeight + this.map.tileHeight / 2, this.map.tileWidth, this.map.tileWidth, this.map, this.map.tileWidth * 2, 20, 2));
             }
         }
     }

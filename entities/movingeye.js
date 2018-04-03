@@ -11,7 +11,7 @@ class MovingEye extends Entity {
         this.yRatio = Math.sin(radians);
         this.velocity = velocity;
         this.vectors = [[0, 0], [1, 0], [1, 1], [0, 1], [-1, 1], [-1, 0], [-1, -1], [0, -1], [1, -1]];
-        this.health = 30;
+        this.health = 60;
         this.maxHealth = this.health;
         this.camera = Camera.getInstance();
         this.atlas = Atlas.getInstance();
