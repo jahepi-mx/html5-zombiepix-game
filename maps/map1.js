@@ -30,8 +30,8 @@ class Map1 extends Map {
             }
         }
         
-        var zombieKillerWidth = this.tileWidth * 0.6;
-        var zombieKillerHeight = this.tileHeight * 0.6;
+        var zombieKillerWidth = this.tileWidth * 0.5;
+        var zombieKillerHeight = this.tileHeight * 0.5;
         
         var canvasWidth = Config.getInstance().canvasWidth;
         var canvasHeight = Config.getInstance().canvasHeight;
@@ -67,10 +67,10 @@ class Map1 extends Map {
         this.enemies.push(new Zombie(22 * this.tileWidth + this.tileWidth / 2, 29 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 2, 20, 1, 1));
         
         var eyeSize = this.tileWidth * 1.2;
-        this.enemies.push(new Eye(25 * this.tileWidth + this.tileWidth / 2 - eyeSize / 2, 34 * this.tileHeight + this.tileHeight / 2 - eyeSize / 2, eyeSize, eyeSize, this, 0.5, this.tileWidth * 4.75));
-        this.enemies.push(new Eye(29 * this.tileWidth + this.tileWidth / 2 - eyeSize / 2, 34 * this.tileHeight + this.tileHeight / 2 - eyeSize / 2, eyeSize, eyeSize, this, 0.4, this.tileWidth * 6.75));
-        this.enemies.push(new Eye(25 * this.tileWidth + this.tileWidth / 2 - eyeSize / 2, 37 * this.tileHeight + this.tileHeight / 2 - eyeSize / 2, eyeSize, eyeSize, this, 0.5, this.tileWidth * 4.75));
-        this.enemies.push(new Eye(29 * this.tileWidth + this.tileWidth / 2 - eyeSize / 2, 37 * this.tileHeight + this.tileHeight / 2 - eyeSize / 2, eyeSize, eyeSize, this, 0.4, this.tileWidth * 6.75));
+        this.enemies.push(new Eye(25 * this.tileWidth + this.tileWidth / 2 - eyeSize / 2, 34 * this.tileHeight + this.tileHeight / 2 - eyeSize / 2, eyeSize, eyeSize, this, 1, this.tileWidth * 4.75));
+        this.enemies.push(new Eye(29 * this.tileWidth + this.tileWidth / 2 - eyeSize / 2, 34 * this.tileHeight + this.tileHeight / 2 - eyeSize / 2, eyeSize, eyeSize, this, 0.6, this.tileWidth * 6.75));
+        this.enemies.push(new Eye(25 * this.tileWidth + this.tileWidth / 2 - eyeSize / 2, 37 * this.tileHeight + this.tileHeight / 2 - eyeSize / 2, eyeSize, eyeSize, this, 1, this.tileWidth * 4.75));
+        this.enemies.push(new Eye(29 * this.tileWidth + this.tileWidth / 2 - eyeSize / 2, 37 * this.tileHeight + this.tileHeight / 2 - eyeSize / 2, eyeSize, eyeSize, this, 0.6, this.tileWidth * 6.75));
         
         zombieSize = this.tileWidth * 1.2;
         this.enemies.push(new Zombie(22 * this.tileWidth + this.tileWidth / 2, 34 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 2.2, 25, 2, 1));

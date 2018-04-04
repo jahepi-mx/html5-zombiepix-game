@@ -14,12 +14,17 @@ class Eye extends Entity {
         this.assets = Assets.getInstance();
         this.animation = new Animation(9, 2);
         this.animation.stopAtSequenceNumber(1, null);
+        this.blindAnimation = new Animation(7, 2);
+        this.blindAnimation.stopAtSequenceNumber(1, null);
         this.blinkTime = 0;
         this.blinkTimeLimit = 3;
         this.isDead = false;
         this.visibilityRatio = Config.getInstance().canvasWidth * Config.getInstance().canvasWidth + Config.getInstance().canvasHeight * Config.getInstance().canvasHeight;
         this.distanceFromZombieKiller = 0;
         this.bulletSpeed = bulletSpeed;
+        this.health = 10;
+        this.maxHealth = this.health;
+        this.isBlind = false;
     }
     
     update(deltatime) {
@@ -42,19 +47,23 @@ class Eye extends Entity {
             return;
         }
         
-        this.blinkTime += deltatime;
         this.shootTime += deltatime;
         
-        if (this.blinkTime > this.blinkTimeLimit) {
-            this.animation.update(deltatime);
+        if (this.isBlind === false) {
+            this.blinkTime += deltatime;
+            if (this.blinkTime > this.blinkTimeLimit) {
+                this.animation.update(deltatime);
+            }
+
+            if (this.animation.isStopped()) {
+                this.blinkTime = 0;
+                this.animation.reset();
+            }
+        } else {
+            this.blindAnimation.update(deltatime);
         }
         
-        if (this.animation.isStopped()) {
-            this.blinkTime = 0;
-            this.animation.reset();
-        }
-        
-        if (this.shootTime >= this.shootTimeLimit) {
+        if (this.shootTime >= this.shootTimeLimit && this.isBlind === false) {
             this.shootTime = 0;
             var bulletSize = this.width * 0.33;
             var x = this.left() + this.width / 2 - bulletSize / 2;
@@ -86,17 +95,32 @@ class Eye extends Entity {
         
         context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, x + this.camera.offsetX, y + this.camera.offsetY, width, height);
         
-        if (this.blinkTime > this.blinkTimeLimit) {
-            image = "new_eye_" + (this.animation.getFrame() + 1);
-            context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.left() + this.camera.offsetX, this.top() + this.camera.offsetY, this.width, this.height);
+        if (this.isBlind === false) {
+            if (this.blinkTime > this.blinkTimeLimit) {
+                image = "new_eye_" + (this.animation.getFrame() + 1);
+                context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.left() + this.camera.offsetX, this.top() + this.camera.offsetY, this.width, this.height);
+            } else {
+                image = "new_eye";
+                context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.left() + this.camera.offsetX, this.top() + this.camera.offsetY, this.width, this.height);
+            }
         } else {
-            image = "new_eye";
+            image = "new_eye_" + (this.blindAnimation.getFrame() + 1);
             context.drawImage(this.assets.spritesAtlas, this.atlas.sprites[image].x, this.atlas.sprites[image].y, this.atlas.sprites[image].width, this.atlas.sprites[image].height, this.left() + this.camera.offsetX, this.top() + this.camera.offsetY, this.width, this.height);
         }
+        
+        context.fillStyle = "#ff0000";
+        width = this.health / this.maxHealth * this.width * 0.4;
+        var margin = Config.getInstance().tileHeight * 0.05;
+        context.fillRect(this.left() + this.camera.offsetX + this.width / 2 - width / 2, this.top() + this.camera.offsetY - margin, width, margin);
     }
     
     damage() {
-        
+        if (this.isBlind === false) {
+            this.health--;
+            if (this.health <= 0) {
+                this.isBlind = true;
+            }
+        }
     }
     
     kill(fromExplosion) {

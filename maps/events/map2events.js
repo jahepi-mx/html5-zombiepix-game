@@ -46,6 +46,8 @@ class BossFight2Event extends Event {
         super(map);
         this.entry = this.map.getTile(36, 71);
         this.tile = this.map.getTile(38, 71);
+        this.tile2 = this.map.getTile(34, 71);
+        this.tile3 = this.map.getTile(32, 71);
         this.exit = this.map.getTile(48, 74);
         this.config = Config.getInstance();
         this.newMusic = false;
@@ -60,9 +62,20 @@ class BossFight2Event extends Event {
         this.movingEye1 = null;
         this.movingEye2 = null;
         this.movingEye3 = null;
+        this.executed2 = false;
     }
     
     update(deltatime) {
+        
+        if (this.executed2 === false) {
+            if (this.tile2.collide(this.map.zombieKiller)) {
+                this.tile3.image = "tile46";
+                this.tile3.type = 46;
+                this.tile3.walkable = false;
+                this.executed2 = true;
+            }
+        }
+        
         if (this.executed === false) {
             if (this.tile.collide(this.map.zombieKiller)) {
                 this.executed = true;

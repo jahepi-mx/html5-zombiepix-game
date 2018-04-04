@@ -29,8 +29,8 @@ class ZombieKiller extends Entity {
         this.damageSpriteTimeLimit = this.damageTimeLimit / 3;
         this.deadTime = 0;
         this.bodyparts = [];
-        this.renderWidth = width * 1.33;
-        this.renderHeight = height * 1.33;
+        this.renderWidth = width * 1.62;
+        this.renderHeight = height * 1.62;
         this.aimSize = this.renderWidth * 0.3;
         
         // Friction of 0.95 if the game runs at 60 fps
