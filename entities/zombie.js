@@ -27,7 +27,6 @@ class Zombie extends Entity {
         this.maxHealth = this.health;
         this.isDead = false;
         this.bodyparts = [];
-        this.blood = [];
         this.availableVectors = new Set();
         this.foundZombieKiller = true;
         this.visibilityRatio = Config.getInstance().canvasWidth * Config.getInstance().canvasWidth + Config.getInstance().canvasHeight * Config.getInstance().canvasHeight;
@@ -110,7 +109,7 @@ class Zombie extends Entity {
     
     damage() {
         if (this.health % 3 === 0) {
-            this.blood.push(new Blood(this.left(), this.top(), this.width, this.height));
+            this.map.blood.push(new Blood(this.left(), this.top(), this.width, this.height, this.zombieKiller));
         }
         if (--this.health <= 0) {
             this.kill(false);
@@ -133,7 +132,7 @@ class Zombie extends Entity {
             }
             this.bodyparts.push(bodypart);
         }
-        this.blood.push(new Blood(this.left(), this.top(), this.width, this.height));
+        this.map.blood.push(new Blood(this.left(), this.top(), this.width, this.height, this.zombieKiller));
     }
     
     pathfinding() {
@@ -161,9 +160,13 @@ class Zombie extends Entity {
         var currentY = Math.floor(this.y / this.map.tileHeight);
         //console.log("curr: " + currentX + "," + currentY);
         var startVector = currentY * this.map.cols + currentX;
-        this.visited[startVector] = 1;
         var heuristic = Math.abs(this.zombieKiller.left() - this.x) + Math.abs(this.zombieKiller.top() - this.y);
-        this.queue.add(startVector, heuristic);
+        if (currentX === targetX && currentY === targetY) {
+            this.foundZombieKiller = true;
+        } else {
+            this.visited[startVector] = 1;      
+            this.queue.add(startVector, heuristic);
+        }
         
         while (!this.queue.isEmpty()) {
             var vector = this.queue.remove().object;
@@ -223,10 +226,6 @@ class Zombie extends Entity {
         
         if (this.distanceFromZombieKiller > this.visibilityRatio) {
             return;
-        }
-        
-        for (let blood of this.blood) {
-            blood.render(context);
         }
         
         if (this.isDead) {

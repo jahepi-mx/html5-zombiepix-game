@@ -6,6 +6,7 @@ class Map {
         this.map = null;
         this.tileMap = null;
         this.enemies = null;
+        this.blood = null;
         this.deadZombies = null;
         this.items = null;
         this.events = null;
@@ -16,6 +17,7 @@ class Map {
         this.height = this.tileHeight * this.rows;
         this.camera = Camera.getInstance();
         this.maxCorpses = 0;
+        this.maxBlood = 0;
         this.startX = startX;
         this.startY = startY;
         this.startXTmp = startX;
@@ -43,6 +45,10 @@ class Map {
             for (var y = yFrom; y <= yTo; y++) {
                 this.tileMap[y * this.cols + x].render(context);
             }
+        }
+        
+        for (let blood of this.blood) {
+            blood.render(context);
         }
         
         for (let zombie of this.deadZombies) {
@@ -112,6 +118,10 @@ class Map {
             this.deadZombies.shift();
         }
         
+        if (this.blood.length > this.maxBlood) {
+            this.blood.shift();
+        }
+        
         for (var a = 0; a < this.items.length; a++) {
             this.items[a].update(deltatime);
             if (this.items[a].dispose) {
@@ -146,6 +156,7 @@ class Map {
         this.deadZombies = null;
         this.items = null;
         this.events = null;
+        this.blood = null;
     }
     
     resetStartUbication() {
