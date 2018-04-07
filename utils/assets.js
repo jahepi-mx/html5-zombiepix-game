@@ -10,7 +10,7 @@ class Assets {
         this.srcs = ["assets/sprites/sprites.png"];
         this.keys = ["spritesAtlas"];
         this.audio = {};
-        this.audio.srcs = ["assets/audios/ouch.mp3", "assets/audios/enemy_shoot.mp3", "assets/audios/crate_damage.mp3", "assets/audios/shoot.mp3", "assets/audios/explosion.mp3", "assets/audios/bullet_explosion.mp3", "assets/audios/life.mp3", "assets/audios/main_music.ogg", "assets/audios/game_music.ogg", "assets/audios/boss_music.ogg", "assets/audios/ending_music.ogg"];
+        this.audio.srcs = ["assets/audios/ouch.mp3", "assets/audios/enemy_shoot.mp3", "assets/audios/crate_damage.mp3", "assets/audios/shoot.mp3", "assets/audios/explosion.mp3", "assets/audios/bullet_explosion.mp3", "assets/audios/life.mp3", "assets/audios/main_music.mp3", "assets/audios/game_music.mp3", "assets/audios/boss_music.mp3", "assets/audios/ending_music.mp3"];
         this.audio.keys = ["ouch", "enemy_shoot", "crate_damage", "shoot", "explosion", "bullet_explosion", "life", "main_music", "game_music", "boss_music", "ending_music"];
         window.AudioContext = window.AudioContext || window.webkitAudioContext;
         this.audioContext = new AudioContext();
