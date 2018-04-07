@@ -37,9 +37,11 @@ class GameScene extends Scene {
     
     
     update(deltatime) {
+         
         if (this.controller.map.isCompleted === false) {
             this.controller.update(deltatime);
         }
+        
         this.exitButton.update(deltatime);
         this.tryAgainButton.update(deltatime);
         this.continueButton.update(deltatime);
@@ -60,7 +62,7 @@ class GameScene extends Scene {
         }
         
         if (this.controller.isCurrentMapCompleted() && this.controller.isLastMap()) {
-             this.onChangeSceneCallback("endscene");
+            this.onChangeSceneCallback("endscene");
         }
     }
     
@@ -102,6 +104,15 @@ class GameScene extends Scene {
         this.exitButton.render(this.context);
         this.tryAgainButton.render(this.context);
         this.continueButton.render(this.context);
+        
+        if (this.controller.isPaused) {
+            this.context.font = Math.floor(Config.getInstance().canvasHeight * 0.2) + "px joystix";
+            this.context.textAlign = "center";
+            var x = this.canvas.width / 2;
+            var y = this.canvas.height / 2;
+            this.context.fillStyle = "#fff";
+            this.context.fillText("pause", x, y);
+        }
         
         var image = "aim";
         var aimSize = this.controller.map.zombieKiller.aimSize;

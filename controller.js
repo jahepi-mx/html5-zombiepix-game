@@ -8,10 +8,16 @@ class Controller {
         this.map = this.maps[this.currentMap];
         this.map.init();
         this.zombieKiller = this.map.zombieKiller;
+        this.isPaused = false;
+        this.pauseTime = 0;
+        this.pauseTimeLimit = 0.5;
     }
     
     update(deltatime) {
-        this.map.update(deltatime);
+        this.pauseTime += deltatime;
+        if (this.isPaused === false) {
+            this.map.update(deltatime);
+        }
     }
     
     onKeyDown(event) {
@@ -28,6 +34,12 @@ class Controller {
         }
         if (evt.keyCode === 83) {
             this.zombieKiller.moveDown(true);
+        }
+        if (evt.keyCode === 80) {
+            if (this.pauseTime >= this.pauseTimeLimit) {
+                this.pauseTime = 0;
+                this.isPaused = !this.isPaused;
+            }
         }
     }
     
@@ -64,6 +76,8 @@ class Controller {
     }
     
     reset() {
+        this.isPaused = false;
+        this.pauseTime = 0;
         this.map.reset();
         this.zombieKiller = this.map.zombieKiller;
     }
