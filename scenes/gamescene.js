@@ -73,7 +73,7 @@ class GameScene extends Scene {
         this.context.font = this.fpsFontSize;
         this.context.fillStyle = "rgba(255, 0, 255, 255)";
         this.context.textAlign = "center";
-        this.context.fillText(this.fps, this.fpsMarginLeft, this.fpsMarginTop);
+        //this.context.fillText(this.fps, this.fpsMarginLeft, this.fpsMarginTop);
         
         var life = this.controller.map.zombieKiller.life;
         var y = this.yFrom;

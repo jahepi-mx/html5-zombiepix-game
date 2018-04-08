@@ -24,7 +24,7 @@ class MainScene extends Scene {
         
         this.startIntro = false;
         this.startIntroTime = 0;
-        this.startIntroTimeLimit = 5;
+        this.startIntroTimeLimit = 8;
         
         var config = Config.getInstance();
         var sceneMusic = "main_music";
