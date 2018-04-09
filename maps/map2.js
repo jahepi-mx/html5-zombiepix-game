@@ -129,7 +129,7 @@ class Map2 extends Map {
         this.enemies.push(new Zombie(14 * this.tileWidth + this.tileWidth / 2, 67 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 1.1, 10, 2, 0));
         
         zombieSize = this.tileWidth * 2.5;
-        this.enemies.push(new Zombie(25 * this.tileWidth + this.tileWidth / 2, 67 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 2.8, 150, 4, 2));
+        this.enemies.push(new Zombie(25 * this.tileWidth + this.tileWidth / 2, 67 * this.tileHeight + this.tileHeight / 2, zombieSize, zombieSize, this, this.tileWidth * 2.8, 150, 2, 2));
         
         this.events = [new StartEvent(this), new BossFight2Event(this)];
     }

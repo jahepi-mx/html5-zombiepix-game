@@ -25,7 +25,6 @@ class ZombieSnake extends Entity {
         this.bullets = [];
         this.isDead = false;
         this.visibilityRatio = Config.getInstance().canvasWidth * Config.getInstance().canvasWidth + Config.getInstance().canvasHeight * Config.getInstance().canvasHeight;
-        this.visibilityRatio *= 1.1;
         this.distanceFromZombieKiller = 0;
         this.tau = Math.PI * 2;
         this.bulletSpeed = bulletSpeed;
