@@ -10,6 +10,10 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style type="text/css">
+            * {
+                margin: 0;
+                padding: 0;
+            }
             @font-face { font-family: 'joystix'; src: url('assets/fonts/PixelMYZ.ttf'); }
         </style>
         <script src="maps/map.js"></script>
@@ -67,26 +71,14 @@ and open the template in the editor.
                 
                 if (resize) {
                     var ratio = 1; //0.90;
-                    var maxWidth = window.screen.width; //1920;
-                    var maxHeight = window.screen.height; //1080;
-                    var width = window.screen.width;
-                    var height = window.screen.height;
                     var screenRatio = config.canvasWidth / config.canvasHeight;
+                    var width = window.screen.availHeight * screenRatio;
                     var tileRatio = config.tileWidth / config.canvasWidth;
-                    if (width > maxWidth) {
-                        maxWidth = Math.floor(maxWidth * ratio);
-                        maxHeight = Math.floor(maxHeight * ratio);
-                        config.canvasWidth = maxWidth;
-                        config.canvasHeight = maxHeight;
-                        config.tileWidth = Math.floor(maxWidth * tileRatio);
-                        config.tileHeight = Math.floor(maxWidth * tileRatio);
-                    } else {
-                        width = Math.floor(width * ratio);
-                        config.canvasWidth = width;
-                        config.canvasHeight = Math.floor(width / screenRatio);
-                        config.tileWidth = Math.floor(width * tileRatio);
-                        config.tileHeight = Math.floor(width * tileRatio);
-                    }
+                    width = Math.floor(width * ratio);
+                    config.canvasWidth = width;
+                    config.canvasHeight = Math.floor(width / screenRatio);
+                    config.tileWidth = Math.floor(width * tileRatio);
+                    config.tileHeight = Math.floor(width * tileRatio);
                 }
                 
                 canvas.width = config.canvasWidth;
