@@ -67,8 +67,8 @@ and open the template in the editor.
                 
                 if (resize) {
                     var ratio = 1; //0.90;
-                    var maxWidth = 1050; //1920;
-                    var maxHeight = 593; //1080;
+                    var maxWidth = window.screen.width; //1920;
+                    var maxHeight = window.screen.height; //1080;
                     var width = window.screen.width;
                     var height = window.screen.height;
                     var screenRatio = config.canvasWidth / config.canvasHeight;
