@@ -1,4 +1,4 @@
-# zombiepix-html5-game
+# Zombiepix
 
 Zombiepix is a short top-down zombie shooter developed from scratch in Javascript and Html5
 
